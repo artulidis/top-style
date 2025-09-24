@@ -1,0 +1,424 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Services/css/services.css' %}">
+    <title>TopStyle | Services</title>
+</head>
+<body>
+    <section class="services-page" id="cutting-page">
+
+        <div class="menu-screen" id="menu-screen">
+
+            <div class="menu-face hidden" id="menu-face">
+                <img src="{% static 'Home/images/closeicon.png' %}" class="close-icon" id="close-icon">
+                <h1 class="take-me-heading">take me...</h1>
+    
+                <h3 class="menu-chapter">home</h3>
+                <div class="menu-chapter-line"></div>
+    
+                <div class="menu-list-container">
+                    <a href="/#page-one" class="menu-list-item">Home</a>
+                    <a href="/#page-two" class="menu-list-item">About Us</a>
+                    <a href="stylists" class="menu-list-item">Meet Our Stylists</a>
+                    <a href="/#page-three" class="menu-list-item">Media</a>
+                    <a href="/#page-four" class="menu-list-item">Contact</a>
+                </div>
+    
+                <h3 class="menu-chapter">services</h3>
+                <div class="menu-chapter-line"></div>
+    
+                <div class="menu-list-container">
+                    <a href="services" class="menu-list-item">Cutting</a>
+                    <a href="services#coloring-page" class="menu-list-item">Coloring</a>
+                    <a href="services#bridal-page" class="menu-list-item">Bridal</a>
+                    <a href="services#extra-page" class="menu-list-item">Extra</a>
+                </div>
+    
+                <h3 class="menu-chapter">shop</h3>
+                <div class="menu-chapter-line"></div>
+    
+                <div class="menu-list-container">
+                    <a href="store" class="menu-list-item">Shop</a>
+                </div>
+            </div>
+    
+        </div>
+
+        <img src="{% static 'Services/images/menu.png' %}" id="d-services-menu"></img>
+
+        <div class="services-header" id="cutting-header">
+            <h1 class="services-header-text" id="cutting-header-text">cutting</h1>
+            <img src="{% static 'Services/images/menu.png' %}" alt="" id="services-menu" class="services-menu">
+        </div>
+
+        <div class="d-service-header" id="d-cutting-header">
+            <h2 class="d-service-header-text" id="d-cutting-header-text">our cutting services</h2>
+            <div class="d-service-header-underline" id="d-cutting-header-underline"></div>
+        </div>
+
+        <div class="services-container" id="cutting-container">
+            
+            {% for service in cutting_services%}
+            <div onclick="expandCutting(this)" class="container-item hidden" id="cutting-item">
+                <h4 class="service-name-price" id="cutting-name-price">{{service.service_name}}
+                    
+                    {%if service.number_of_prices == 3%}
+                    <span class="service-float-right"><span class="service-price" id="cutting-price">{{service.price_one}}</span> <span class="service-price" id="cutting-price">{{service.price_two}}</span> <span class="service-price" id="cutting-price">{{service.price_three}}</span></span></h4>
+                    {%elif service.number_of_prices == 2%}
+                    <span class="service-float-right"><span class="service-price" id="cutting-price">{{service.price_one}}</span> <span class="service-price" id="cutting-price">{{service.price_two}}</span></span>
+                    {%elif service.number_of_prices == 1%}
+                    <span class="service-float-right"><span class="service-price" id="cutting-price">{{service.price_one}}</span></span>
+                    {%endif%}
+
+                <h3 class="service-subtext" id="cutting-subtext">{{service.subtext}}</h3>
+
+                <div class="service-detail-table" id="cutting-detail-table">
+                    <h2 class="service-detail-header" id="cutting-detail-header">{{service.service_name}}</h2>
+
+                    <div class="service-text-container" id="cutting-text-container">
+
+                        {% if service.number_of_prices == 3 %}
+                        <div class="service-text-div" id="cutting-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="cutting-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="cutting-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="cutting-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="cutting-detail-price">{{service.price_two}}</h4>
+                            <p class="service-detail-text" id="cutting-detail-text">{{service.price_explanation_two}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="cutting-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="cutting-detail-price">{{service.price_three}}</h4>
+                            <p class="service-detail-text" id="cutting-detail-text">{{service.price_explanation_three}}</p>
+                        </div>
+                        {% elif service.number_of_prices == 2%}
+                        <div class="service-text-div" id="cutting-text-div" style="width: 50%;">
+                            <h4 class="service-detail-price" id="cutting-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="cutting-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="cutting-text-div" style="width: 50%;">
+                            <h4 class="service-detail-price" id="cutting-detail-price">{{service.price_two}}</h4>
+                            <p class="service-detail-text" id="cutting-detail-text">{{service.price_explanation_two}}</p>
+                        </div>
+                        {% elif service.number_of_prices == 1 %}
+                        <div class="service-text-div" id="cutting-text-div" style="width: 100%;">
+                            <h4 class="service-detail-price" id="cutting-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="cutting-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> 
+            {%endfor%}
+        </div>
+
+        <div class="service-gallery" id="cutting-gallery">
+
+                  <h1 class="service-gallery-heading-left" id="cutting-gallery-heading-left">Haircut Gallery</h1>
+                  <h1 class="service-gallery-heading-right" id="cutting-gallery-heading-right">Haircut Gallery</h1>
+  
+            {% for cutting_image in cutting_images %}
+            <div class="gallery-image-parent">
+                <img src="{{cutting_image.image.url}}" class="gallery-image" id="cutting-image">
+            </div>
+            {% endfor %}
+
+            {% for cutting_duplicate in cutting_duplicates %}
+            <div class="gallery-image-parent" id="duplicate" id="duplicate">
+                <img src="{{cutting_duplicate.image.url}}" class="gallery-image" id="cutting-image">
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+
+
+
+    <section class="services-page" id="coloring-page">
+        <div class="services-header" id="coloring-header">
+            <h1 class="services-header-text" id="coloring-header-text">coloring</h1>
+        </div>
+
+        <div class="d-service-header" id="d-coloring-header">
+            <h2 class="d-service-header-text" id="d-coloring-header-text">our coloring services</h2>
+            <div class="d-service-header-underline" id="d-coloring-header-underline"></div>
+        </div>
+
+        <div class="services-container" id="coloring-container">
+            
+            {% for service in coloring_services%}
+            <div onclick="expandCutting(this)" class="container-item hidden" id="coloring-item">
+                <h4 class="service-name-price" id="coloring-name-price">{{service.service_name}}
+                    
+                    {%if service.number_of_prices == 3%}
+                    <span class="service-float-right"><span class="service-price" id="coloring-price">{{service.price_one}}</span> <span class="service-price" id="coloring-price">{{service.price_two}}</span> <span class="service-price" id="coloring-price">{{service.price_three}}</span></span></h4>
+                    {%elif service.number_of_prices == 2%}
+                    <span class="service-float-right"><span class="service-price" id="coloring-price">{{service.price_one}}</span> <span class="service-price" id="coloring-price">{{service.price_two}}</span></span>
+                    {%elif service.number_of_prices == 1%}
+                    <span class="service-float-right"><span class="service-price" id="coloring-price">{{service.price_one}}</span></span>
+                    {%endif%}
+
+                <h3 class="service-subtext" id="coloring-subtext">{{service.subtext}}</h3>
+
+                <div class="service-detail-table" id="coloring-detail-table">
+                    <h2 class="service-detail-header" id="coloring-detail-header">{{service.service_name}}</h2>
+
+                    <div class="service-text-container" id="coloring-text-container">
+                        {% if service.number_of_prices == 3 %}
+                        <div class="service-text-div" id="coloring-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="coloring-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="coloring-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="coloring-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="coloring-detail-price">{{service.price_two}}</h4>
+                            <p class="service-detail-text" id="coloring-detail-text">{{service.price_explanation_two}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="coloring-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="coloring-detail-price">{{service.price_three}}</h4>
+                            <p class="service-detail-text" id="coloring-detail-text">{{service.price_explanation_three}}</p>
+                        </div>
+                        {% elif service.number_of_prices == 2%}
+                        <div class="service-text-div" id="coloring-text-div" style="width: 50%;">
+                            <h4 class="service-detail-price" id="coloring-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="coloring-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="coloring-text-div" style="width: 50%;">
+                            <h4 class="service-detail-price" id="coloring-detail-price">{{service.price_two}}</h4>
+                            <p class="service-detail-text" id="coloring-detail-text">{{service.price_explanation_two}}</p>
+                        </div>
+                        {% elif service.number_of_prices == 1 %}
+                        <div class="service-text-div" id="coloring-text-div" style="width: 100%;">
+                            <h4 class="service-detail-price" id="coloring-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="coloring-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> 
+            {%endfor%}
+        </div>
+
+        <div class="service-gallery" id="coloring-gallery">
+
+                  <h1 class="service-gallery-heading-left" id="coloring-gallery-heading-left">Coloring Gallery</h1>
+                  <h1 class="service-gallery-heading-right" id="coloring-gallery-heading-right">Coloring Gallery</h1>
+  
+            {% for coloring_image in coloring_images %}
+            <div class="gallery-image-parent">
+                <img src="{{coloring_image.image.url}}" class="gallery-image" id="coloring-image">
+            </div>
+            {% endfor %}
+
+            {% for coloring_duplicate in coloring_duplicates %}
+            <div class="gallery-image-parent" id="duplicate">
+                <img src="{{coloring_duplicate.image.url}}" class="gallery-image" id="coloring-image">
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+
+
+
+    <section class="services-page" id="bridal-page">
+        <div class="services-header" id="bridal-header">
+            <h1 class="services-header-text" id="bridal-header-text">bridal</h1>
+        </div>
+
+        <div class="d-service-header" id="d-bridal-header">
+            <h2 class="d-service-header-text" id="d-bridal-header-text">our bridal services</h2>
+            <div class="d-service-header-underline" id="d-bridal-header-underline"></div>
+            <a href="https://www.instagram.com/topstyle.weddings/" id="d-bridal-instagram">&#64;topstyle.weddings</a>
+        </div>
+
+        <div class="services-container" id="bridal-container">
+            
+            {% for service in bridal_services%}
+            <div onclick="expandCutting(this)" class="container-item hidden" id="bridal-item">
+                <h4 class="service-name-price" id="bridal-name-price">{{service.service_name}}
+                    
+                    {%if service.number_of_prices == 3%}
+                    <span class="service-float-right"><span class="service-price" id="bridal-price">{{service.price_one}}</span> <span class="service-price" id="bridal-price">{{service.price_two}}</span> <span class="service-price" id="bridal-price">{{service.price_three}}</span></span></h4>
+                    {%elif service.number_of_prices == 2%}
+                    <span class="service-float-right"><span class="service-price" id="bridal-price">{{service.price_one}}</span> <span class="service-price" id="bridal-price">{{service.price_two}}</span></span>
+                    {%elif service.number_of_prices == 1%}
+                    <span class="service-float-right"><span class="service-price" id="bridal-price">{{service.price_one}}</span></span>
+                    {%endif%}
+
+                <h3 class="service-subtext" id="bridal-subtext">{{service.subtext}}</h3>
+
+                <div class="service-detail-table" id="bridal-detail-table">
+                    <h2 class="service-detail-header" id="bridal-detail-header">{{service.service_name}}</h2>
+
+                    <div class="service-text-container" id="bridal-text-container">
+                        {% if service.number_of_prices == 3 %}
+                        <div class="service-text-div" id="bridal-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="bridal-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="bridal-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="bridal-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="bridal-detail-price">{{service.price_two}}</h4>
+                            <p class="service-detail-text" id="bridal-detail-text">{{service.price_explanation_two}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="bridal-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="bridal-detail-price">{{service.price_three}}</h4>
+                            <p class="service-detail-text" id="bridal-detail-text">{{service.price_explanation_three}}</p>
+                        </div>
+                        {% elif service.number_of_prices == 2%}
+                        <div class="service-text-div" id="bridal-text-div" style="width: 50%;">
+                            <h4 class="service-detail-price" id="bridal-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="bridal-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="bridal-text-div" style="width: 50%;">
+                            <h4 class="service-detail-price" id="bridal-detail-price">{{service.price_two}}</h4>
+                            <p class="service-detail-text" id="bridal-detail-text">{{service.price_explanation_two}}</p>
+                        </div>
+                        {% elif service.number_of_prices == 1 %}
+                        <div class="service-text-div" id="bridal-text-div" style="width: 100%;">
+                            <h4 class="service-detail-price" id="bridal-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="bridal-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> 
+            {%endfor%}
+        </div>
+
+        <a href="https://www.instagram.com/topstyle.weddings/" id="bridal-instagram">&#64;topstyle.weddings</a>
+
+        <div class="service-gallery" id="bridal-gallery">
+
+                  <h1 class="service-gallery-heading-left" id="bridal-gallery-heading-left">Bridal Gallery</h1>
+                  <h1 class="service-gallery-heading-right" id="bridal-gallery-heading-right">Bridal Gallery</h1>
+  
+            {% for bridal_image in bridal_images %}
+            <div class="gallery-image-parent">
+                <img src="{{bridal_image.image.url}}" class="gallery-image" id="bridal-image">
+            </div>
+            {% endfor %}
+
+            {% for bridal_duplicate in bridal_duplicates %}
+            <div class="gallery-image-parent" id="duplicate">
+                <img src="{{bridal_duplicate.image.url}}" class="gallery-image" id="bridal-image">
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+
+
+
+    <section class="services-page" id="extra-page">
+        <div class="services-header" id="extra-header">
+            <h1 class="services-header-text" id="extra-header-text">extra</h1>
+        </div>
+
+        <div class="d-service-header" id="d-bridal-header">
+            <h2 class="d-service-header-text" id="d-bridal-header-text">our extra services</h2>
+            <div class="d-service-header-underline" id="d-bridal-header-underline"></div>
+        </div>
+
+        <div class="services-container" id="extra-container">
+            
+            {% for service in extra_services%}
+            <div onclick="expandCutting(this)" class="container-item hidden" id="extra-item">
+                <h4 class="service-name-price" id="extra-name-price">{{service.service_name}}
+                    
+                    {%if service.number_of_prices == 3%}
+                    <span class="service-float-right"><span class="service-price" id="extra-price">{{service.price_one}}</span> <span class="service-price" id="extra-price">{{service.price_two}}</span> <span class="service-price" id="extra-price">{{service.price_three}}</span></span></h4>
+                    {%elif service.number_of_prices == 2%}
+                    <span class="service-float-right"><span class="service-price" id="extra-price">{{service.price_one}}</span> <span class="service-price" id="extra-price">{{service.price_two}}</span></span>
+                    {%elif service.number_of_prices == 1%}
+                    <span class="service-float-right"><span class="service-price" id="extra-price">{{service.price_one}}</span></span>
+                    {%endif%}
+
+                <h3 class="service-subtext" id="extra-subtext">{{service.subtext}}</h3>
+
+                <div class="service-detail-table" id="extra-detail-table">
+                    <h2 class="service-detail-header" id="extra-detail-header">{{service.service_name}}</h2>
+
+                    <div class="service-text-container" id="extra-text-container">
+                        {% if service.number_of_prices == 3 %}
+                        <div class="service-text-div" id="extra-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="extra-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="extra-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="extra-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="extra-detail-price">{{service.price_two}}</h4>
+                            <p class="service-detail-text" id="extra-detail-text">{{service.price_explanation_two}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="extra-text-div" style="width: 33%;">
+                            <h4 class="service-detail-price" id="extra-detail-price">{{service.price_three}}</h4>
+                            <p class="service-detail-text" id="extra-detail-text">{{service.price_explanation_three}}</p>
+                        </div>
+                        {% elif service.number_of_prices == 2%}
+                        <div class="service-text-div" id="extra-text-div" style="width: 50%;">
+                            <h4 class="service-detail-price" id="extra-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="extra-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+
+                        <div class="service-text-div" id="extra-text-div" style="width: 50%;">
+                            <h4 class="service-detail-price" id="extra-detail-price">{{service.price_two}}</h4>
+                            <p class="service-detail-text" id="extra-detail-text">{{service.price_explanation_two}}</p>
+                        </div>
+                        {% elif service.number_of_prices == 1 %}
+                        <div class="service-text-div" id="extra-text-div" style="width: 100%;">
+                            <h4 class="service-detail-price" id="extra-detail-price">{{service.price_one}}</h4>
+                            <p class="service-detail-text" id="extra-detail-text">{{service.price_explanation_one}}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> 
+            {%endfor%}
+        </div>
+
+        <div class="service-gallery" id="extra-gallery">
+
+                  <h1 class="service-gallery-heading-left" id="extra-gallery-heading-left">Extra Gallery</h1>
+                  <h1 class="service-gallery-heading-right" id="extra-gallery-heading-right">Extra Gallery</h1>
+  
+            {% for extra_image in extra_images %}
+            <div class="gallery-image-parent">
+                <img src="{{extra_image.image.url}}" class="gallery-image" id="extra-image">
+            </div>
+            {% endfor %}
+
+            {% for extra_duplicate in extra_duplicates %}
+            <div class="gallery-image-parent" id="duplicate">
+                <img src="{{extra_duplicate.image.url}}" class="gallery-image" id="extra-image">
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <script type="text/javascript" src="{% static 'Services/js/services.js' %}"></script>
+</body>
+</html>

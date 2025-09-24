@@ -1,0 +1,576 @@
+body, html {margin: 0; padding: 0;}
+
+@media only screen and (max-width: 600px) {
+
+    body {background: #272727;}
+
+    .menu-screen {
+        width: 100%;
+        height: 100vh;
+        background:rgba(234,184,196, 0.95);
+        position: fixed;
+        z-index: 10000;
+        transition: 0.2s;
+        transition-delay: 0.25s;
+        display: none;
+        opacity: 0;
+      }
+
+      @keyframes menu-face-show-mobile {
+        from {
+          top: -70vh;
+        }
+        to {
+          top: 2vh;
+        }
+      }
+
+      @keyframes menu-face-hide {
+        from {
+          right: 2vh;
+        }
+        to {
+          right: -70vh;
+        }
+      }
+
+      .menu-face {
+        background: #272727;
+        width: 90vw;
+        height: 80vh;
+        position: absolute;
+        left: 50%;
+        margin-left: -45vw;
+        top: 2vh;
+
+        animation: menu-face-show 0.2s linear forwards;
+      }
+
+      .close-icon {
+        width: 5vh;
+        position: absolute;
+        top: 1vh;
+        right: 1vh;
+        cursor: pointer;
+      }
+
+      .take-me-heading {
+        font-size: 4.5vh;
+        color: white;
+        opacity: 83%;
+        font-family: arial;
+        font-weight: 500;
+        text-transform: uppercase;
+        position: absolute;
+        top: 2vh;
+        left: 2vh;
+        margin: 0;
+      }
+
+      .menu-chapter {
+        font-family: Arial;
+        font-size: 3.5vh;
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        background: #272727;
+        margin-top: 15vh;
+        width: 20vh;
+        position: relative;
+        left: 50%;
+        margin-left: -10vh;
+        z-index: 10;
+      }
+
+      .menu-chapter-line {
+        width: 90vw;
+        background: white;
+        height: 1px;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        top: -6.5vh;
+      }
+
+      .menu-list-container {
+        background: transparent;
+        width: 100%;
+        height: 20vh;
+        position: absolute;
+        margin-top: -3.3vh;
+      }
+
+      .menu-list-container:last-of-type {
+        height: 10vh;
+        background: transparent;
+      }
+
+      .menu-list-item {
+        font-size: 2.3vh;
+        font-family: arial;
+        color: pink;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 0.7vh;
+        margin-bottom: 0.5vh;
+        transition: 0.5s;
+      }
+
+      .menu-list-item:hover {
+        margin-left: 2vh;
+      }
+
+      .instabox {
+        position: absolute;
+        bottom: 0;
+        width: 85%;
+        left: 50%;
+        margin-left: -42.5%;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0;
+        height: 7vh;
+        background: black;
+      }
+
+      .stylist-instagram {
+        color: white;
+        text-align: center;
+        margin: 0;
+        font-size: 3vh;
+        margin-top: 1.5vh;
+        text-transform: uppercase;
+        font-family: Arial;
+      }
+
+      #image-instagram {
+          position: relative;
+      }
+
+    #d-nav {display: none;}
+
+    #stylists-header {
+        width: 100%;
+        height: 10vh;
+        background: #272727;
+        position: fixed;
+        z-index: 5;
+        border-bottom: 2px solid white;
+    }
+
+    #header-logo {
+        height: 12vh;
+        position: absolute;
+        left: 4%;
+    }
+
+    #stylists-menu {
+        width: 10%;
+        position: absolute;
+        right: 3vw;
+        top: 50%;
+        margin-top: -4vw;
+    }
+
+    #stylists-subheader {
+        position: absolute;
+        top: 13%;
+        width: 80%;
+        text-align: center;
+        margin-left: -40%;
+        left: 50%;
+    }
+
+    #stylists-subheader h1 {
+        color: #B7B7B7;
+        text-transform: uppercase;
+        font-family: arial;
+        font-size: 7vw;
+        text-shadow: 2px 2px 6px black;
+        
+    }
+
+    #stylists-subheader img {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    #card-container {
+        background: transparent;
+        width: 100vw;
+        min-height: 120vh;
+        position: absolute;
+        top: 25%;
+        z-index: -5;
+    }
+
+    .card {
+        position: relative;
+        width: 100vw;
+        background: transparent;
+        z-index: -4;
+    }
+
+    .card-items {
+        position: relative;
+        z-index: -3;
+        width: 100vw;
+        min-height: 50vh;
+        background: transparent;
+        display: block;
+    }
+
+    .name {
+        position: relative;
+        width: 100%;
+        background: transparent;
+        height: auto;
+        top: 0%;
+        text-align: center;
+        z-index: -2;
+    }
+
+    .name-line {
+        height: 2px;
+        width: 100vw;
+        background: gray;
+        margin-top: 1.55vh;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .name-text {
+        text-transform: uppercase;
+        font-family: arial;
+        font-size: 3.25vh;
+        color: white;
+        background: #272727;
+        display: inline;
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
+
+    .stylist-picture {
+        width: 85%;
+        height: 45vh;
+        margin-left: -42.5%;
+        left: 50%;
+        top: 2vh;
+        position: relative;
+    }
+
+    .stylist-bio {
+        width: 85%;
+        font-family: arial;
+        color: #B1B1B1;
+        margin-left: 7.5%;
+        margin-top: 3vh;
+        text-align: center;
+    }
+
+}
+
+@media only screen and (min-width: 600px) {
+
+    body {background: #272727;}
+
+    html::-webkit-scrollbar {
+        width: 7px;
+        background: #272727;
+      }
+
+      .stylist-instagram {
+          display: none;
+    }
+
+    .menu-screen {
+        width: 100%;
+        height: 100vh;
+        background:rgba(234,184,196, 0.95);
+        position: fixed;
+        z-index: 10000;
+        transition: 0.2s;
+        transition-delay: 0.25s;
+        display: none;
+        opacity: 0;
+      }
+
+      @keyframes menu-face-show {
+        from {
+          right: -70vh;
+        }
+        to {
+          right: 2vh;
+        }
+      }
+
+      @keyframes menu-face-hide {
+        from {
+          right: 2vh;
+        }
+        to {
+          right: -70vh;
+        }
+      }
+
+      .menu-face {
+        background: #272727;
+        width: 33vw;
+        height: 96vh;
+        position: absolute;
+        right: 2vh;
+        top: 2vh;
+
+        animation: menu-face-show 0.2s linear forwards;
+      }
+
+      .close-icon {
+        width: 5vh;
+        position: absolute;
+        top: 1vh;
+        right: 1vh;
+        cursor: pointer
+      }
+
+      .take-me-heading {
+        font-size: 7vh;
+        color: white;
+        opacity: 83%;
+        font-family: arial;
+        font-weight: 500;
+        text-transform: uppercase;
+        position: absolute;
+        top: 0;
+        left: 1vh;
+        margin: 0;
+      }
+
+      .menu-chapter {
+        font-family: Arial;
+        font-size: 4vh;
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        background: #272727;
+        margin-top: 20vh;
+        width: 24vh;
+        position: relative;
+        left: 50%;
+        margin-left: -12vh;
+        z-index: 10;
+      }
+
+      .menu-chapter-line {
+        width: 33vw;
+        background: white;
+        height: 3px;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        top: -6.5vh;
+      }
+
+      .menu-list-container {
+        background: transparent;
+        width: 100%;
+        height: 20vh;
+        position: absolute;
+        margin-top: -4vh;
+      }
+
+      .menu-list-container:last-of-type {
+        height: 10vh;
+        background: transparent;
+      }
+
+      .menu-list-item {
+        font-size: 3vh;
+        font-family: arial;
+        color: pink;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 0.5vh;
+        transition: 0.5s;
+      }
+
+      .menu-list-item:hover {
+        margin-left: 2vh;
+      }
+
+    #stylists-header {
+        width: 100%;
+        height: 10vh;
+        background: #272727;
+        position: fixed;
+        z-index: 5;
+        border-bottom: 2px solid white;
+    }
+
+    #header-logo {
+        height: 12vh;
+        position: absolute;
+        left: 1%;
+    }
+
+    #stylists-menu {
+        height: 4vh;
+        position: absolute;
+        right: 1vw;
+        top: 50%;
+        margin-top: -2.25vh;
+        cursor: pointer;
+    }
+
+    #d-nav {
+        position: fixed;
+        right: 7vw;
+        top: 3vh;
+    }
+
+
+    #d-nav a {
+        color: #9B9B9B;
+        text-transform: uppercase;
+        font-family: arial;
+        font-size: 3vh;
+        text-decoration: none;
+    }
+
+    #d-nav span {
+        color: #E7B4EE;
+        font-size: 3vh;
+        padding-left: 1vh;
+        padding-right: 1vh;
+    }
+
+    #stylists-subheader {
+        position: absolute;
+        top: 13%;
+        width: 30%;
+        text-align: center;
+        margin-left: -15%;
+        left: 50%;
+    }
+
+    #stylists-subheader h1 {
+        color: #B7B7B7;
+        text-transform: uppercase;
+        font-family: arial;
+        font-size: 5vh;
+        text-shadow: 2px 2px 6px black;
+        
+    }
+
+    #stylists-subheader img {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    #card-container {
+        background: transparent;
+        width: 100%;
+        min-height: 120vh;
+        position: absolute;
+        top: 25%;
+        z-index: -5;
+    }
+
+    .card {
+        position: relative;
+        width: 60%;
+        height: 50vh;
+        background: transparent;
+        z-index: -4;
+    }
+
+    .card:nth-of-type(2n) {
+        background: transparent;
+        left: 100%;
+        margin-left: -60.5vw;
+    }
+
+
+    .card-items {
+        position: relative;
+        z-index: -3;
+        width: 60.5vw;
+        min-height: 50vh;
+        background: transparent;
+        display: block;
+    }
+
+
+    .name {
+        position: relative;
+        width: 35vw;
+        background: transparent;
+        height: auto;
+        top: 0%;
+        left: 0vw;
+        text-align: center;
+        z-index: -2;
+    }
+
+
+    .name-line {
+        height: 2px;
+        width: 35vw;
+        background: gray;
+        margin-top: 1.55vh;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .name-text {
+        text-transform: uppercase;
+        font-family: arial;
+        font-size: 3.25vh;
+        color: white;
+        background: #272727;
+        display: inline;
+        padding-left: 4vw;
+        padding-right: 4vw;
+    }
+
+    .stylist-picture {
+        width: 36%;
+        height: 45vh;
+        float: right;
+        top: -3.75vh;
+        position: relative;
+        
+    }
+
+    .card:nth-of-type(2n) .stylist-picture {
+        float: left;
+        top: 0;
+    }
+    .card:nth-of-type(2n) .stylist-bio {
+        float: right;
+        margin-right: 2.5%;
+    }
+    .card:nth-of-type(2n) .name {
+        float: right;
+    }
+
+    .stylist-bio {
+        width: 55%;
+        font-family: arial;
+        color: #B1B1B1;
+        margin-left: 2.5%;
+        margin-top: 3vh;
+        text-align: center;
+
+    }
+
+}

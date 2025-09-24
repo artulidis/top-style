@@ -1,0 +1,394 @@
+@media only screen and (max-width: 600px) {
+
+    #page-four {
+        height: 170vh;
+    }
+
+    #d-page-four-left-top, #d-page-four-right-section {display: none;}
+
+    #d-page-four-left-side {
+        display: none;
+    }
+
+    #page-four-top-left {
+        width: 42vw;
+        height: 30vh;
+        background: transparent;
+        position: relative;
+    }
+
+    #top-left-logo {
+        width: 93%;
+        position: absolute;
+        top: 0;
+    }
+
+    #schedule-container {
+        width: 100%;
+        height: 67%;
+        position: absolute;
+        bottom: 0;
+        background: transparent;
+        box-sizing: border-box;
+        border-top: 1.5px solid lightgray;
+        border-right: 1.5px solid lightgray;
+    }
+
+    #schedule-container h2 {
+        font-family: arial;
+        font-size: 1.5vh;
+        color: #B7B7B7;
+        text-transform: uppercase;
+        line-height: 1.5vh;
+        margin-left: 1vw;
+    }
+
+    #schedule-container span {
+        position: absolute;
+        left: 17vw;
+    }
+
+    #page-four-top-right {
+        width: 58vw;
+        height: 30vh;
+        background: transparent;
+        border-bottom: 1.5px solid lightgray;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .top-right-info {
+        color: #CDCDCD;
+        font-family: arial;
+        font-size: 1.5vh;
+        position: absolute;
+        top: 33%;
+        left: 1vw;
+    }
+
+    .top-right-span {
+        border-bottom: 1px solid gray;
+        box-sizing: border-box;
+        padding-right: 18vw;
+        padding-bottom: 0.3vh;
+        margin-left: 2vw;
+    }
+
+    #address-h2 {
+        position: absolute;
+        top: 50%;
+    }
+
+    #address-h2 span {
+        padding-right: 0;
+    }
+
+    #address-span-bottom {
+        display: block;
+        width: 30vw;
+        margin-left: 0;
+        margin-top: 1.2vh;
+    }
+
+    #map {
+        visibility: visible;
+        width: 100vw;
+        height: 46vh;
+    }
+
+    #contact-form {
+        width: 90vw;
+        height: 75vh;
+        background: pink;
+        position: relative;
+        margin-left: -45vw;
+        top: 10vh;
+        left: 50%;
+        box-shadow: 3px 3px 5px lightgray;
+    }
+
+    #contact-form h1 {
+        color: #464646;
+        text-transform: uppercase;
+        font-family: arial;
+        font-size: 4vh;
+        text-align: center;
+        position: relative;
+        top: 2%;
+    }
+
+    form {
+        height: 90%;
+    }
+
+    ::-webkit-input-placeholder {
+        color: #464646;
+        font-family: arial;
+        font-size: 2.5vh;
+        text-transform: uppercase;
+      }
+
+    input {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #464646;
+        margin-left: 5%;
+        margin-top: 10%;
+        height: 3vh;
+        font-size: 2.5vh;
+        width: 70%;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    input:focus::placeholder {
+        opacity: 0;
+        transition: 0.2s;
+    }
+
+    #name-input {
+        margin-bottom: 2vh;
+    }
+
+    textarea {
+        width: 90%;
+        height: 45%;
+        position: absolute;
+        margin-left: -45%;
+        left: 50%;
+        bottom: 10%;
+        background: transparent;
+        font-size: 2vh;
+        font-family: arial;
+    }
+
+    textarea:focus {
+        outline: none;
+    }
+
+    textarea:focus::placeholder {
+        opacity: 0;
+        transition: 0.2s;
+    }
+
+    #form-submit {
+        position: absolute;
+        bottom: 5%;
+        width: 25vw;
+        margin-left: -12.5vw;
+        left: 50%;
+        background: transparent;
+        color: black;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-family: arial;
+        font-size: 2vh;
+        border: none;
+    }
+
+}
+
+@media only screen and (min-width: 600px) {
+
+    #page-four {
+        height: 100vh;
+    }
+
+    #page-four-top-left, #page-four-top-right, #contact-form {display: none;}
+
+    #map {
+        border-right: 3px solid gray;
+        width: 45vw;
+        height: 60vh;
+        position: absolute;
+        bottom: 0;
+        z-index: 10;
+    }
+
+    #d-page-four-left-top {
+        width: 45vw;
+        height: 40vh;
+        position: absolute;
+        top: 0;
+        border-right: 3px solid gray;
+    }
+
+    #d-top-left-logo {
+        width: 21vh;
+        position: absolute;
+        top: 0;
+        left: 1vh;
+    }
+
+    #d-schedule-container {
+        width: 40%;
+        height: 29vh;
+        position: absolute;
+        top: 11vh;
+        border-top: 3px solid white;
+        border-right: 3px solid white;
+    }
+
+    #d-schedule-container h2 {
+        color: #B7B7B7;
+        font-family: arial;
+        font-size: 2vh;
+        line-height: 2vh;
+        text-transform: uppercase;
+        display: block;
+        width: 60%;
+        margin-left: -30%;
+        left: 50%;
+        position: relative;
+        margin-top: 2vh;
+    }
+
+    #d-schedule-container span {
+        position: absolute;
+        left: 45%;
+    }
+
+    #d-info-container {
+        position: absolute;
+        top: 11vh;
+        left: 45%;
+        width: 55%;
+    }
+
+    .d-info-container-span {
+        font-family: arial;
+        font-size: 2.3vh;
+        color: #CDCDCD;
+        position: absolute;
+        left: 30%;
+        width: 70%;
+        border-bottom: 2px solid gray;
+    }
+
+    .d-info {
+        font-family: arial;
+        font-size: 2.3vh;
+        color: gray;
+        width: 100%;
+    }
+
+    #address-span-bottom {
+        position: relative;
+        top: 3.5vh;
+        left: 10%;
+    }
+
+    #d-page-four-sm {
+        position: absolute;
+        right: 0;
+        top: 4vh;
+        border-bottom: 2px solid white;
+        width: 10vw;
+        height: 4vh;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #d-page-four-sm img {
+        height: 90%;
+    }
+
+    .d-page-four-sm-pic {
+        height: 90%;
+        opacity: 80%;
+    }
+
+
+    #d-contact-form {
+        width: 26vw;
+        height: 75vh;
+        background: #F7BEBE;
+        position: absolute;
+        top: 11vh;
+        right: 22vw;
+        box-shadow: 3px 3px 15px gray;
+    }
+
+    #d-contact-form h1 {
+        text-transform: uppercase;
+        font-size: 4vh;
+        text-align: center;
+        font-family: arial;
+        color: #464646;
+        text-shadow: 2px 2px 2px white;
+    }
+
+    ::-webkit-input-placeholder {
+        color: #464646;
+        font-family: arial;
+        font-size: 2.5vh;
+        text-transform: uppercase;
+      }
+
+    input {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #464646;
+        margin-left: 5%;
+        margin-top: 5%;
+        height: 3vh;
+        font-size: 2.5vh;
+        width: 70%;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    input:focus::placeholder {
+        opacity: 0;
+        transition: 0.2s;
+    }
+
+    #name-input {
+        margin-bottom: 2vh;
+    }
+
+    textarea {
+        width: 90%;
+        height: 45%;
+        position: absolute;
+        margin-left: -45%;
+        left: 50%;
+        bottom: 10%;
+        background: transparent;
+        font-size: 2vh;
+        font-family: arial;
+    }
+
+    textarea:focus {
+        outline: none;
+    }
+
+    textarea:focus::placeholder {
+        opacity: 0;
+        transition: 0.2s;
+    }
+
+    #form-submit {
+        position: absolute;
+        bottom: 3.5%;
+        width: 25vw;
+        margin-left: -12.5vw;
+        left: 50%;
+        background: transparent;
+        color: black;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-family: arial;
+        font-size: 2vh;
+        border: none;
+    }
+
+}

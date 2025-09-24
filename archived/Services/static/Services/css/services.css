@@ -1,0 +1,832 @@
+@keyframes heightDown {
+    0% {
+        height: 24vh;
+    }
+
+    100% {
+        height: 12vh;
+    }
+}
+
+@keyframes opacityNone {
+    0% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes heightUp {
+    0% {
+        height: 12vh;
+    }
+
+    100% {
+        height: 24vh;
+    }
+}
+
+@keyframes opacityAll {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.9;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .menu-screen {
+        width: 100%;
+        height: 100vh;
+        background:rgba(234,184,196, 0.95);
+        position: fixed;
+        z-index: 10000;
+        transition: 0.2s;
+        transition-delay: 0.25s;
+        display: none;
+        opacity: 0;
+      }
+
+      @keyframes menu-face-show-mobile {
+        from {
+          top: -70vh;
+        }
+        to {
+          top: 2vh;
+        }
+      }
+
+      @keyframes menu-face-hide {
+        from {
+          right: 2vh;
+        }
+        to {
+          right: -70vh;
+        }
+      }
+
+      .menu-face {
+        background: #272727;
+        width: 90vw;
+        height: 80vh;
+        position: absolute;
+        left: 50%;
+        margin-left: -45vw;
+        top: 2vh;
+
+        animation: menu-face-show 0.2s linear forwards;
+      }
+
+      .close-icon {
+        width: 5vh;
+        position: absolute;
+        top: 1vh;
+        right: 1vh;
+        cursor: pointer;
+      }
+
+      .take-me-heading {
+        font-size: 4.5vh;
+        color: white;
+        opacity: 83%;
+        font-family: arial;
+        font-weight: 500;
+        text-transform: uppercase;
+        position: absolute;
+        top: 2vh;
+        left: 2vh;
+        margin: 0;
+      }
+
+      .menu-chapter {
+        font-family: Arial;
+        font-size: 3.5vh;
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        background: #272727;
+        margin-top: 15vh;
+        width: 20vh;
+        position: relative;
+        left: 50%;
+        margin-left: -10vh;
+        z-index: 10;
+      }
+
+      .menu-chapter-line {
+        width: 90vw;
+        background: white;
+        height: 1px;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        top: -6.5vh;
+      }
+
+      .menu-list-container {
+        background: transparent;
+        width: 100%;
+        height: 20vh;
+        position: absolute;
+        margin-top: -3.3vh;
+      }
+
+      .menu-list-container:last-of-type {
+        height: 10vh;
+        background: transparent;
+      }
+
+      .menu-list-item {
+        font-size: 2.3vh;
+        font-family: arial;
+        color: pink;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 0.7vh;
+        margin-bottom: 0.5vh;
+        transition: 0.5s;
+      }
+
+      .menu-list-item:hover {
+        margin-left: 2vh;
+      }
+
+      #d-services-menu {display: none;}
+
+
+    .d-service-header {
+        display: none;
+    }
+
+    .services-page {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0;
+        margin: 0;
+        background: #272727;
+        width: 100%;
+        height: 200vh;
+        border: none;
+    }
+    
+    #coloring-page {
+        position: absolute;
+        top: 200vh;
+    }
+    
+    #bridal-page {
+        position: absolute;
+        top: 400vh;
+    }
+    
+    #extra-page {
+        position: absolute;
+        top: 600vh;
+    }
+    
+    .services-header {
+        width: 100%;
+        height: 10vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    .service-detail-close {
+        height: 15%;
+        position: absolute;
+        right: 0;
+        margin-top: -0.4vh;
+        z-index: 100;
+        
+    }
+    
+    .services-header-text {
+        text-transform: uppercase;
+        font-family: arial;
+        font-size: 5vh;
+        color: #C8C8C8;
+        position: absolute;
+        top: 0;
+        width: 50%;
+        left: 50%;
+        margin: 0;
+        margin-left: -25%;
+    }
+    
+    .services-menu {
+        width: 10%;
+        position: fixed;
+        top: 2%;
+        right: 3vw;
+        z-index: 1000;
+    }
+    
+    .services-container {
+        width: 85%;
+        height: 80vh;
+        background: transparent;
+        border: 2px solid #707070;
+        box-shadow: 2px 2px 6px rgb(223 157 157 / 45%);
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        margin: 0;
+        padding: 0;
+        margin-left: -42.5%;
+    
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: 12vh;
+        grid-row-gap: 12vh;
+        overflow-y: scroll;
+        align-content: space-between;
+    }
+    
+    .container-item {
+        width: 100%;
+        height: 12vh;
+        background: transparent;
+        border-top: 1px dashed #707070;
+        border-bottom: 1px dashed #707070;
+        background: #202020;
+        position: relative;
+        transition: 0.3s;
+    }
+    
+    .service-name-price {
+        color: lightgray;
+        font-family: arial;
+        font-weight: 100;
+        font-size: 1.5vh;
+        margin-left: 2vw;
+    }
+    
+    .service-name-price::before {
+        content: "-";
+        margin-right: 1vh;
+    }
+    
+    .service-float-right {
+        float: right;
+        margin-right: 3.5vw;
+    }
+    
+    .service-price:not(:last-child)::after {
+        content: "|";
+        margin-left: 1vw;
+        color: #96777B;
+    }
+    
+    .service-subtext {
+        color: #9B9B9B;
+        font-family: arial;
+        font-weight: 100;
+        font-size: 1.4vh;
+        margin-left: 5vw;
+    }
+    
+    .service-detail-table {
+        background: black;
+        opacity: 0;
+        width: 100%;
+        height: 12vh;
+        position: absolute;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        transition: 0.3s;
+    }
+    
+    .service-detail-header {
+        width: 100%;
+        height: 12%;
+        border-bottom: 1px solid white;
+        font-family: arial;
+        font-size: 2vh;
+        position: absolute;
+        top: 0;
+        color: lightgray;
+        margin: 0;
+        border-top: 0.2vh solid transparent;
+        text-align: center;
+        background: black;
+        z-index: 5;
+    }
+    
+    .service-text-container {
+        width: 100%;
+        height: 88%;
+        opacity: 0.5;
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        text-align: center;
+    }
+    
+     .service-text-div {
+         height: 100%;
+         border-right: 1px solid white;
+     }
+    
+     .service-detail-price {margin: 0; padding: 0; margin-top: 0.5vh; margin-bottom: 0.2vh; color: white;}
+    
+    .service-detail-text {
+        font-size: 1.4vh;
+        line-height: 1.6vh;
+        color: white;
+        font-family: arial;
+        margin: 0;
+        margin-top: 0vh;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+    }
+    
+    @keyframes gallery {
+        0% {
+            transform: translateY(0vh);
+        }
+    
+        100% {
+            transform: translateY(-486vh);
+        }
+    }
+    
+    .service-gallery {
+        width: 100%;
+        height: 81vh;
+        position: relative;
+        top: 100vh;
+        overflow-y: hidden;
+    }
+    
+    .gallery-image-parent {
+        width: 27vh;
+        height: 27vh;
+        position: relative;
+        left: 50%;
+        margin-left: -13.5vh;
+        display: flex;
+        align-items: center;
+        animation: gallery 30s linear infinite;
+    }
+    
+    .gallery-image {
+        width: 25vh;
+        height: 25vh;
+        display: block;
+        margin-left: 1vh;
+        
+    }
+    
+    .service-gallery-heading-left {
+        color: #C8C8C8;
+        text-align: center;
+        font-family: arial;
+        font-size: 3vh;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+        position: absolute;
+        top: 50%;
+        height: 40vh;
+        margin-top: -20vh;
+        transform: rotate(180deg);
+    }
+    .service-gallery-heading-right {
+        color: #C8C8C8;
+        text-align: center;
+        font-family: arial;
+        font-size: 3vh;
+        text-transform: uppercase;
+        writing-mode: vertical-lr;
+        position: absolute;
+        top: 50%;
+        height: 40vh;
+        right: 0;
+        margin-top: -20vh;
+    }
+    
+    #bridal-instagram {
+        position: relative;
+        color: white;
+        text-transform: uppercase;
+        font-family: arial;
+        font-size: 2vh;
+        text-decoration: none;
+        text-align: center;
+        top: 95vh;
+        width: 100vw;
+        display: block;
+    }
+
+    #d-bridal-instagram {display: none;}
+
+}
+
+
+
+
+
+
+@media only screen and (min-width: 600px) {
+    html, body {margin: 0;}
+    html {overflow-x: hidden;}
+
+    #d-services-menu {
+        position: fixed;
+        top: 1vh;
+        right: 1vh;
+        width: 5vh;
+        z-index: 1000;
+        cursor: pointer;
+    }
+
+    .menu-screen {
+        width: 100%;
+        height: 100vh;
+        background:rgba(234,184,196, 0.95);
+        position: fixed;
+        z-index: 10000;
+        transition: 0.2s;
+        transition-delay: 0.25s;
+        display: none;
+        opacity: 0;
+      }
+
+      @keyframes menu-face-show {
+        from {
+          right: -70vh;
+        }
+        to {
+          right: 2vh;
+        }
+      }
+
+      @keyframes menu-face-hide {
+        from {
+          right: 2vh;
+        }
+        to {
+          right: -70vh;
+        }
+      }
+
+      .menu-face {
+        background: #272727;
+        width: 33vw;
+        height: 96vh;
+        position: absolute;
+        right: 2vh;
+        top: 2vh;
+
+        animation: menu-face-show 0.2s linear forwards;
+      }
+
+      .close-icon {
+        width: 5vh;
+        position: absolute;
+        top: 1vh;
+        right: 1vh;
+        cursor: pointer
+      }
+
+      .take-me-heading {
+        font-size: 7vh;
+        color: white;
+        opacity: 83%;
+        font-family: arial;
+        font-weight: 500;
+        text-transform: uppercase;
+        position: absolute;
+        top: 0;
+        left: 1vh;
+        margin: 0;
+      }
+
+      .menu-chapter {
+        font-family: Arial;
+        font-size: 4vh;
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        background: #272727;
+        margin-top: 20vh;
+        width: 24vh;
+        position: relative;
+        left: 50%;
+        margin-left: -12vh;
+        z-index: 10;
+      }
+
+      .menu-chapter-line {
+        width: 33vw;
+        background: white;
+        height: 3px;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        top: -6.5vh;
+      }
+
+      .menu-list-container {
+        background: transparent;
+        width: 100%;
+        height: 20vh;
+        position: absolute;
+        margin-top: -4vh;
+      }
+
+      .menu-list-container:last-of-type {
+        height: 10vh;
+        background: transparent;
+      }
+
+      .menu-list-item {
+        font-size: 3vh;
+        font-family: arial;
+        color: pink;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 0.5vh;
+        transition: 0.5s;
+      }
+
+      .menu-list-item:hover {
+        margin-left: 2vh;
+      }
+
+    .services-menu, .service-gallery-heading-left, .service-gallery-heading-right, #bridal-instagram {display: none;}
+    .services-page {
+        background: #272727;
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+    }
+
+    #duplicate {
+        display: none;
+    }
+
+    .service-gallery {
+        width: 21%;
+        height: 100vh;
+        position: relative;
+        background: #1E1E1E;
+        top: 0vh;
+        overflow-y: scroll;
+    }
+
+    .service-gallery::-webkit-scrollbar {
+        width: 5px;
+        background: #4F4F4F;
+    }
+
+    .service-gallery::-webkit-scrollbar-thumb {
+        width: 5px;
+        background: gray;
+    }
+
+    .gallery-image-parent:nth-child(2n) {
+        left: 55%;
+        background: pink;
+    }
+
+
+    .gallery-image-parent {
+        width: 32vh;
+        height: 32vh;
+        position: relative;
+        background: white;
+        left: 40%;
+        margin-left: -16.5vh;
+        margin-bottom: 1.5vh;
+        margin-top: 0vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    .gallery-image {
+        width: 30vh;
+        height: 30vh;
+        display: block;
+        left: 50%;
+        margin-left: -14.75vh;
+        position: relative;   
+    }
+
+    .services-header {
+        width: 15%;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        z-index: 100;
+    }
+
+    .services-header-text {
+        font-family: arial;
+        text-transform: uppercase;
+        font-size: 7vh;
+        color: lightgray;
+        margin-top: 0;
+    }
+
+
+    .d-service-header {
+        width: 35%;
+        height: 12vh;
+        right: 10%;
+        top: 0;
+        position: absolute;
+        border: 2px solid #707070;
+        box-shadow: 2px 2px 6px rgb(223 157 157 / 45%);
+        border-top: none;
+    }
+
+    .d-service-header-text {
+        text-transform: uppercase;
+        font-family: arial;
+        font-size: 3vh;
+        color: lightgray;
+        width: 100%;
+        text-align: center;
+    }
+
+    .d-service-header-underline {
+        width: 60%;
+        height: 2px;
+        background: pink;
+        position: relative;
+        left: 50%;
+        margin-left: -30%;
+        margin-top: -2.3vh;
+    }
+
+    .services-container {
+        width: 35%;
+        height: 88vh;
+        background: transparent;
+        border: 2px solid #707070;
+        box-shadow: 2px 2px 6px rgb(223 157 157 / 45%);
+        position: absolute;
+        bottom: 0;
+        right: 10%;
+        margin: 0;
+        padding: 0;
+        margin-left: -17.5%;
+        border-bottom: none;
+        border-top: none;
+    
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: 12vh;
+        grid-row-gap: 10vh;
+        overflow-y: scroll;
+        align-content:space-between;
+    }
+
+    .services-container::-webkit-scrollbar {
+        width: 3px;
+        background: #272727;
+    }
+    
+    .services-container::-webkit-scrollbar-thumb {
+        background: gray;
+    }
+    
+    .container-item {
+        width: 100%;
+        height: 12vh;
+        background: transparent;
+        border-top: 1px dashed #707070;
+        border-bottom: 1px dashed #707070;
+        background: #202020;
+        position: relative;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .service-name-price {
+        color: lightgray;
+        font-family: arial;
+        font-weight: 100;
+        font-size: 2vh;
+        margin-left: 2vw;
+    }
+    
+    .service-name-price::before {
+        content: "-";
+        margin-right: 1vh;
+    }
+    
+    .service-float-right {
+        float: right;
+        margin-right: 3.5vw;
+    }
+    
+    .service-price:not(:last-child)::after {
+        content: "|";
+        margin-left: 0.5vh;
+        color: #96777B;
+    }
+    
+    .service-subtext {
+        color: #9B9B9B;
+        font-family: arial;
+        font-weight: 100;
+        font-size: 1.7vh;
+        margin-left: 3vw;
+        margin-top: -1vh;
+    }
+    
+    .service-detail-table {
+        background: black;
+        opacity: 0;
+        width: 100%;
+        height: 12vh;
+        position: absolute;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        transition: 0.3s;
+    }
+    
+    .service-detail-header {
+        width: 100%;
+        height: 12%;
+        border-bottom: 1px solid white;
+        font-family: arial;
+        font-size: 2vh;
+        position: absolute;
+        top: 0;
+        color: lightgray;
+        margin: 0;
+        border-top: 0.2vh solid transparent;
+        text-align: center;
+    }
+    
+    .service-text-container {
+        width: 100%;
+        height: 88%;
+        opacity: 0.5;
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        text-align: center;
+    }
+    
+     .service-text-div {
+         height: 100%;
+         border-left: 1px solid white;
+     }
+    
+     .service-detail-price {margin: 0; padding: 0; margin-top: 0.5vh; margin-bottom: 0.2vh; color: white;}
+    
+    .service-detail-text {
+        font-size: 1.4vh;
+        line-height: 1.6vh;
+        color: white;
+        font-family: arial;
+        margin: 0;
+        margin-top: 0vh;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+    }
+
+    #d-bridal-instagram {
+        position: relative;
+        color: white;
+        text-transform: uppercase;
+        font-family: arial;
+        font-size: 2vh;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+        margin-top: 0.3vh;
+    }
+
+    html::-webkit-scrollbar {
+        width: 5px;
+        background: #272727;
+    }
+    
+    html::-webkit-scrollbar-thumb {
+        background: gray;
+    }
+    
+
+}
+
+
+

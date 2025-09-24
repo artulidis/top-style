@@ -1,0 +1,139 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Store/css/Shop.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/css/Shop-Inventory.css' %}">
+    <title>Top Style | Shop</title>
+</head>
+<body>
+
+    <section id="landing-page">
+
+        <div class="menu-screen" id="menu-screen">
+
+            <div class="menu-face hidden" id="menu-face">
+                <img src="{% static 'Home/images/closeicon.png' %}" class="close-icon" id="close-icon">
+                <h1 class="take-me-heading">take me...</h1>
+    
+                <h3 class="menu-chapter">home</h3>
+                <div class="menu-chapter-line"></div>
+    
+                <div class="menu-list-container">
+                    <a href="/#page-one" class="menu-list-item">Home</a>
+                    <a href="/#page-two" class="menu-list-item">About Us</a>
+                    <a href="stylists" class="menu-list-item">Meet Our Stylists</a>
+                    <a href="/#page-three" class="menu-list-item">Media</a>
+                    <a href="/#page-four" class="menu-list-item">Contact</a>
+                </div>
+    
+                <h3 class="menu-chapter">services</h3>
+                <div class="menu-chapter-line"></div>
+    
+                <div class="menu-list-container">
+                    <a href="services" class="menu-list-item">Cutting</a>
+                    <a href="services#coloring-page" class="menu-list-item">Coloring</a>
+                    <a href="services#bridal-page" class="menu-list-item">Bridal</a>
+                    <a href="services#extra-page" class="menu-list-item">Extra</a>
+                </div>
+    
+                <h3 class="menu-chapter">shop</h3>
+                <div class="menu-chapter-line"></div>
+    
+                <div class="menu-list-container">
+                    <a href="store" class="menu-list-item">Shop</a>
+                </div>
+            </div>
+    
+        </div>
+
+
+        <div id="top-half">
+            <div id="shop-header">
+                <img src="{% static 'Store/images/topstyle-logo.png' %}" alt="" id="shop-header-logo">
+                <h1 id="shop-heading">shop</h1>
+                <div id="shop-heading-line"></div>
+                <img src="{% static 'Store/images/menu.png' %}" alt="" id="shop-header-menu">
+            </div>
+    
+            <div id="category-menu">
+
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    {% for brand in brands %}
+                    <input type="submit" value="{{brand.brand_name}}" name="btn" class="category-label">
+                    {% endfor %}     
+                    <input type="submit" value="View All" name="btn" class="category-label">
+                    
+                </form>
+
+
+                <!-- <a class="category-label">Kevin Murphy</a>
+                <a class="category-label">Pureology</a>
+                <a class="category-label">Brazilian Blowout</a>
+                <a class="category-label">View All</a> -->
+            </div>
+        </div>
+    
+        <div id="bottom-half">
+            <div class="recommend-container" id="recommend-container-top">
+
+                {% for item in topshelf %}
+
+                <img class="recommended-item" id="recommended-item-3" src="{{item.picture.url}}">
+
+                {%endfor%}
+
+                <img src="{% static 'Store/images/shelf.png' %}" alt="" class="shop-shelf" id="shelf-1">
+            </div>
+            <h1 id="we-recommend">we recommend...</h1>
+            <div class="recommend-container" id="recommend-container-bottom">
+                
+                {% for item in bottomshelf %}
+
+                <img class="recommended-item" id="recommended-item-3" src="{{item.picture.url}}">
+
+                {%endfor%}
+
+                <img src="{% static 'Store/images/shelf.png' %}" alt="" class="shop-shelf" id="shelf-2">
+            </div>
+    
+            <img src="{% static 'Store/images/scroll-arrow.png' %}" alt="" id="scroll-arrow">
+        </div>
+    </section>
+
+    <section id="inventory">
+        <div id="shop-nav">
+            <a href="#" class="nav-link" id="about">home</a>  <span class="nav-dash">/</span>  <a href="#" class="nav-link" id="about">about</a>  <span class="nav-dash">/</span>  <a href="#" class="nav-link" id="about">services</a>
+            <img src="{% static 'Store/images/topstyle-logo.png' %}" id="shop-nav-logo">
+        </div>
+
+        <div id="inventory-container">
+
+            {% for product in all_products %}
+
+            <div class="container-item">
+                <div class="price-tag">
+                    <img src="{% static 'Store/images/priceTag.png' %}" alt="" id="priceTag">
+                    <h3 class="price">${{product.price}}</h3>
+                </div>
+                <div class="item">
+                    <img class="item-pic" src="{{product.picture.url}}"></img>
+                </div>
+                <div class="item-label"><h4 class="item-label-text">{{product.name}}</h4></div>
+                <div class="item-line"></div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <script src="{% static 'Store/js/Shop.js' %}"></script>
+</body>
+</html>

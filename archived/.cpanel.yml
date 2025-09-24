@@ -1,0 +1,6 @@
+---
+deployment:
+      tasks:
+        - export DEPLOYPATH=/home/xv4ovhxz8bg0/public_html  # Add /<app_folder> if required
+        - /bin/cp -R * $DEPLOYPATH                 #Copy specific file to destination from root
+        

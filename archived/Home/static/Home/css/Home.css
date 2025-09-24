@@ -1,0 +1,678 @@
+
+/*ANIMTAIONS*/
+
+@keyframes scroll-arrow {
+    0% {
+      margin-top: 0;
+    }
+    50% {
+      margin-top: 1.2vh;
+    }
+    100% {
+      margin-top: 0;
+    }
+  }
+  
+  
+  /*MOBILE*/
+  
+  @media only screen and (max-width: 600px) {
+    
+    #d-page-one-left-section, #d-page-one-right-section, #d-scroll-arrow {display: none;}
+    
+    body,html {
+        margin: 0; padding: 0;
+        height: -webkit-fill-available;
+      }
+
+      .menu-screen {
+        width: 100%;
+        height: 100vh;
+        background:rgba(234,184,196, 0.95);
+        position: fixed;
+        z-index: 10000;
+        transition: 0.2s;
+        transition-delay: 0.25s;
+        display: none;
+        opacity: 0;
+      }
+
+      @keyframes menu-face-show-mobile {
+        from {
+          top: -70vh;
+        }
+        to {
+          top: 2vh;
+        }
+      }
+
+      @keyframes menu-face-hide {
+        from {
+          right: 2vh;
+        }
+        to {
+          right: -70vh;
+        }
+      }
+
+      .menu-face {
+        background: #272727;
+        width: 90vw;
+        height: 80vh;
+        position: absolute;
+        left: 50%;
+        margin-left: -45vw;
+        top: 2vh;
+
+        animation: menu-face-show 0.2s linear forwards;
+      }
+
+      .close-icon {
+        width: 5vh;
+        position: absolute;
+        top: 1vh;
+        right: 1vh;
+        cursor: pointer;
+      }
+
+      .take-me-heading {
+        font-size: 4.5vh;
+        color: white;
+        opacity: 83%;
+        font-family: arial;
+        font-weight: 500;
+        text-transform: uppercase;
+        position: absolute;
+        top: 2vh;
+        left: 2vh;
+        margin: 0;
+      }
+
+      .menu-chapter {
+        font-family: Arial;
+        font-size: 3.5vh;
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        background: #272727;
+        margin-top: 15vh;
+        width: 20vh;
+        position: relative;
+        left: 50%;
+        margin-left: -10vh;
+        z-index: 10;
+      }
+
+      .menu-chapter-line {
+        width: 90vw;
+        background: white;
+        height: 1px;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        top: -6.5vh;
+      }
+
+      .menu-list-container {
+        background: transparent;
+        width: 100%;
+        height: 20vh;
+        position: absolute;
+        margin-top: -3.3vh;
+      }
+
+      .menu-list-container:last-of-type {
+        height: 10vh;
+        background: transparent;
+      }
+
+      .menu-list-item {
+        font-size: 2.3vh;
+        font-family: arial;
+        color: pink;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 0.7vh;
+        margin-bottom: 0.5vh;
+        transition: 0.5s;
+      }
+
+      .menu-list-item:hover {
+        margin-left: 2vh;
+      }
+
+      /*END END END END*/
+  
+      .home-section {
+          width: 100%;
+          height: -webkit-fill-available;
+          background: #272727;
+          position: relative;
+      }
+  
+      .home-section:nth-child(2n) {background: white;}
+  
+  
+  
+  
+      #page-one-top-section {
+        position: absolute;
+        width: 100%;
+        height: 15vh;
+      }
+  
+      #page-one-menu {
+        width: 10%;
+        position: absolute;
+        top: 1vh;
+        right: 1vh;
+      }
+  
+      #page-one-logo {
+        width: 50%;
+        max-height: 122px;
+        min-height: 122px;
+      }
+  
+      #page-one-logo-underline {
+        width: 51%;
+        height: 12.25vh;
+        max-height: 100px;
+        min-height: 100px;
+        background: transparent;
+        position: absolute;
+        top: 0;
+        border-bottom: 4px solid white;
+      }
+  
+      #action-tabs {
+        position: absolute;
+        bottom: 0;
+        margin-bottom: -12vh;
+        width: 100%;
+        height: 8vh;
+        background: white;
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      #action-tab-appointment, #action-tab-contact {
+        width: 41%;
+        height: 100%;
+        background: white;
+        box-sizing: border-box;
+      }
+  
+      #action-tabs a {
+        text-align: center;
+        text-transform: uppercase;
+        font-family: Arial;
+        font-weight: 100;
+        color: gray;
+        text-decoration: none;
+        display: block;
+        font-size: 1.5vh;
+        margin-top: 2.7vh;
+      }
+  
+      #action-tab-appointment h4 {margin-left: 18%;}
+      #action-tab-contact h4 {margin-left: -18%;}
+  
+      #action-tab-appointment {border-bottom: 3px solid rgb(223,192,194);}
+      #action-tab-contact {border-top: 3px solid rgb(223,192,194);}
+  
+      #action-tab-divider {
+        height: 8vh;
+        width: 18%;
+        background: 
+        linear-gradient(to top left,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,0) calc(50% - 3px),
+            rgba(223,192,194,1) 50%,
+            rgba(0,0,0,0) calc(50% + 3px),
+            rgba(0,0,0,0) 100%);
+        justify-self: center;
+      }
+  
+      #menu-container {
+        width: 100%;
+        height: 47vh;
+        background: transparent;
+        position: absolute;
+        bottom: 10vh;
+        display: flex;
+        flex-wrap: wrap;
+      }
+  
+      .page-one-menu-item {
+        width: 100%;
+        background: transparent;
+        border-bottom: 2px solid #F2F2F2;
+        position: relative;
+      }
+  
+      .pink-film {
+        height: 100%;
+        width: 50%;
+        margin-left: 50%;
+        background: rgba(234,184,196, 0.65);
+        filter: brightness(0.7);
+      }
+  
+      .page-one-menu-item:nth-child(2n) .pink-film {
+        margin-left: 0%;
+      }
+  
+      #salon-image, #shop-image {
+        height: 100%;
+        width: 50%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: 0.4;
+        filter: brightness(0.7);
+      }
+  
+      #services-image {
+        height: 100%;
+        width: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.4;
+        filter: brightness(0.7);
+      }
+  
+      .page-one-menu-header {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-size: 5.5vh;
+        text-transform: uppercase;
+        color: #C4C4C4;
+        font-family: arial;
+        font-weight: 300;
+        text-shadow: 2px 2px 2px black;
+        z-index: 2;
+        text-decoration: none;
+        display: block;
+        margin-top: 5vh;
+      }
+  
+      
+  
+      
+  
+      #salon {border-top: 2px solid #F2F2F2;}
+  
+      .footer {
+          width: 100%;
+          height: 10vh;
+          position: absolute;
+          bottom: 0;
+          background: transparent;
+      }
+  
+      #scroll-arrow {
+        height: 4.5vh;
+        position: absolute;
+        top: 2.25vh;
+        left: 50%;
+        margin-left: -3vh;
+        width: 6vh;
+        animation: scroll-arrow ease-in 1.5s infinite;
+      }
+    }
+  
+    @media only screen and (min-width: 600px) {
+      #page-one-top-section, #scroll-arrow, .footer, #menu-container {display: none;}
+  
+      @keyframes home-h1 {
+        0%{
+          left: 0;
+        }
+        25%{
+          left: -1vh;
+        }
+        50%{
+          left: 2vh;
+        }
+        75%{
+          left: -0.5vh;
+        }
+        100%{
+          left: 0vh;
+        }
+      }
+    
+
+
+      body,html {
+        margin: 0;
+        padding: 0;
+      }
+
+      .menu-screen {
+        width: 100%;
+        height: 100vh;
+        background:rgba(234,184,196, 0.95);
+        position: fixed;
+        z-index: 10000;
+        transition: 0.2s;
+        transition-delay: 0.25s;
+        display: none;
+        opacity: 0;
+      }
+
+      @keyframes menu-face-show {
+        from {
+          right: -70vh;
+        }
+        to {
+          right: 2vh;
+        }
+      }
+
+      @keyframes menu-face-hide {
+        from {
+          right: 2vh;
+        }
+        to {
+          right: -70vh;
+        }
+      }
+
+      .menu-face {
+        background: #272727;
+        width: 33vw;
+        height: 96vh;
+        position: absolute;
+        right: 2vh;
+        top: 2vh;
+
+        animation: menu-face-show 0.2s linear forwards;
+      }
+
+      .close-icon {
+        width: 5vh;
+        position: absolute;
+        top: 1vh;
+        right: 1vh;
+        cursor: pointer
+      }
+
+      .take-me-heading {
+        font-size: 7vh;
+        color: white;
+        opacity: 83%;
+        font-family: arial;
+        font-weight: 500;
+        text-transform: uppercase;
+        position: absolute;
+        top: 0;
+        left: 1vh;
+        margin: 0;
+      }
+
+      .menu-chapter {
+        font-family: Arial;
+        font-size: 4vh;
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        background: #272727;
+        margin-top: 20vh;
+        width: 24vh;
+        position: relative;
+        left: 50%;
+        margin-left: -12vh;
+        z-index: 10;
+      }
+
+      .menu-chapter-line {
+        width: 33vw;
+        background: white;
+        height: 3px;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        top: -6.5vh;
+      }
+
+      .menu-list-container {
+        background: transparent;
+        width: 100%;
+        height: 20vh;
+        position: absolute;
+        margin-top: -4vh;
+      }
+
+      .menu-list-container:last-of-type {
+        height: 10vh;
+        background: transparent;
+      }
+
+      .menu-list-item {
+        font-size: 3vh;
+        font-family: arial;
+        color: pink;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 0.5vh;
+        transition: 0.5s;
+      }
+
+      .menu-list-item:hover {
+        margin-left: 2vh;
+      }
+  
+      .home-section {
+        width: 100%;
+        height: 100vh;
+        background: #272727;
+        position: relative;
+    }
+  
+    .home-section:nth-child(2n) {background: white;}
+  
+    #d-page-one-left-section {
+      width: 60vw;
+      height: 67.5vh;
+      position: relative;
+    }
+  
+    #d-page-one-menu {
+      width: 5vh;
+      position: absolute;
+      left: 1vh;
+      top: 1vh;
+      cursor: pointer;
+    }
+  
+    #d-underline-box {
+      position: absolute;
+      bottom: 13vh;
+      width: 100%;
+      height: 30vh;
+      border-bottom: 7px solid white;
+      box-sizing: border-box;
+      background: transparent;
+    }
+  
+    #d-page-one-logo {
+      position: absolute;
+      height: 100%;
+      left: 1vh;
+      bottom: -5.5vh;
+    }
+  
+    @keyframes logo-drop {
+      0%{
+        margin-bottom: 30vh;
+      }
+      20%{
+        margin-bottom: 0vh;
+      }
+      40%{
+        margin-bottom: 5vh;
+      }
+      60%{
+        margin-bottom: 0vh;
+      }
+      80%{
+        margin-bottom: 2vh;
+      }
+      100%{
+        margin-bottom: 0vh;
+      }
+    }
+  
+    #d-home-facebook, #d-home-instagram, #d-home-yelp {
+      width: 5vh;
+      position: absolute;
+      bottom: -1vh;
+      right: 25vh;
+      padding: 2vh;
+      transition: 0.3s;
+    }
+  
+    #d-home-facebook:hover, #d-home-instagram:hover, #d-home-yelp:hover {bottom: 1vh; transition: 0.3s;}
+  
+    #d-home-facebook {
+      animation: logo-drop 0.6s 0s ease-in-out forwards;
+    }
+  
+    #d-home-instagram {
+      width: 9vh;
+      bottom: -1vh;
+      right: 15vh;
+      animation: logo-drop 0.6s 0.2s ease-in-out forwards;
+    }
+  
+    #d-home-yelp {
+      right: 10vh;
+      animation: logo-drop 0.6s 0.4s ease-in-out forwards;
+    }
+  
+    #d-action-tabs {
+      position: absolute;
+      bottom: 0;
+      width: 60%;
+      height: 7vh;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+  
+    #d-action-tabs a {text-decoration: none;}
+  
+    #d-appointment, #d-contact {
+      padding: 1vh 2vh 1vh 2vh;
+      border: 3.5px solid #95458ee0;
+      border-radius: 50px;
+      box-shadow: 3.5px 3.5px 0px #de78d7d0;
+      height: 2vh;
+      font-family: Arial;
+      font-size: 2.3vh;
+      text-transform: uppercase;
+      color: #D1D1D1;
+    }
+  
+    #d-page-one-right-section {
+      height: 100vh;
+      width: 35vw;
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .d-right-row {
+      width: 100%;
+      height: 33%;
+      margin-bottom: 1vh;
+      margin-top: 1vh;
+      position: relative;
+    }
+  
+    .d-right-row h3 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      text-transform: uppercase;
+      font-family: Arial;
+      font-size: 3.5vh;
+      color: #D1D1D1;
+      font-weight: 200;
+    }
+  
+    .d-right-row a {
+      text-decoration: none;
+    }
+  
+    
+    .d-right-row h1 {
+      position: absolute;
+      top: 0vh;
+      left: 0;
+      text-transform: uppercase;
+      font-family: Arial;
+      font-size: 12vh;
+      color: #D1D1D1;
+      font-weight: 200;
+      z-index: 2;
+      text-shadow: 2px 2px 2px black;
+    }
+  
+    .d-right-row h1:hover {
+      animation: home-h1 0.5s linear forwards;
+    }
+  
+    .d-pink-film {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 70%;
+      background: #F5C3CC;
+      opacity: 0.5;
+      z-index: 1;
+      filter: brightness(0.7);
+    }
+  
+    .d-page-one-image {
+      position: absolute;
+      height: 100%;
+      right: 0;
+      opacity: 0.6;
+    }
+  
+    @keyframes d-scroll-arrow {
+      0% {
+        margin-bottom: 0;
+      }
+      50% {
+        margin-bottom: 1.5vh;
+      }
+      100% {
+        margin-bottom: 0;
+      }
+    }
+  
+    #d-scroll-arrow {
+      position: absolute;
+      bottom: 5vh;
+      width: 6vh;
+      margin-left: -3vh;
+      left: 50%;
+      animation: d-scroll-arrow 1.5s ease-out infinite;
+    }
+  
+    }

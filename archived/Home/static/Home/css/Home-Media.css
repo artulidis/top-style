@@ -1,0 +1,558 @@
+html::-webkit-scrollbar {
+    width: 5px;
+    background: #272727;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: gray;
+}
+
+@media only screen and (max-width: 600px) {
+
+    #scroll-arrow-media, #d-contact-us-media {display: none;}
+    
+    #d-right-side, #d-left-side {display: none;}
+
+    #page-three {
+        background: #272727;
+        height: 270vh;
+    }
+
+    #photo-gallery {
+        height: 70vh;
+        width: 100%;
+        background: #F0B8C0;
+        position: relative;
+    }
+
+    .page-three-header {
+        height: 15%;
+        width: 100%;
+        background: white;
+        position: absolute;
+    }
+
+    .page-three-header-text {
+        text-transform: uppercase;
+        font-size: 4vh;
+        font-family: arial;
+        color: #5F5F5F;
+        position: absolute;
+        bottom: 0;
+        width: 90vw;
+        text-align: center;
+        margin-left: -45vw;
+        left: 50%;
+        text-shadow: 1.3px 1.3px 0px pink;
+    }
+
+    @keyframes scroll {
+        0% {transform: translateY(0vw);}
+        100% {transform: translateY(-240vw);}
+    }
+
+    #photo-gallery-container {
+        display: grid;
+        width: 90vw;
+        height: 120vw;
+        position: absolute;
+        top: 17%;
+        left: 50%;
+        margin-left: -45vw;
+        overflow-y: hidden;
+
+        grid-template-columns: repeat(3, 30vw);
+
+        grid-auto-rows: 30vw;
+    }
+
+    #photo-gallery-image {
+        width: 30vw;
+        height: 30vw;
+        box-sizing: border-box;
+        animation: scroll 10s linear infinite;
+    }
+
+    #photo-gallery-container img {
+        width: 90%;
+        margin-left: -45%;
+        position: absolute;
+        left: 50%;
+    }
+
+    #stylists {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        background: #272727;
+    }
+
+    #stylists .page-three-header, #policies-header, #social-media-header {height: 10.5%;}
+
+    .page-three-title {
+        width: 80vw;
+        height: 5vh;
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        margin-left: -40vw;
+    }
+
+    @keyframes meet-stylists {
+        0%{
+            margin-left: 5%;
+        }
+        10%{
+            margin-left: 6%;
+        }
+        20%{
+            margin-left: 4%;
+        }
+        30%{
+            margin-left: 5%;
+        }
+        100%{
+            margin-left: 5%;
+        }
+    }
+
+    .page-three-title h1 {
+        color: #C0C0C0;
+        font-family: arial;
+        text-transform: uppercase;
+        font-size: 3vh;
+        width: 90%;
+        text-align: center;
+        margin-left: 5%;
+        font-weight: 200;
+
+        animation: meet-stylists 1.2s ease-in infinite;
+    }
+
+    .page-three-title a {
+        text-decoration: none;
+    }
+
+    .page-three-title-underline {
+        width: 90%;
+        height: 2px;
+        background: pink;
+        position: absolute;
+        bottom: -1vh;
+        margin-left: 5%;
+    }
+
+    #stylists p {
+        color: #919191;
+        font-family: arial;
+        font-size: 1.8vh;
+        line-height: 2.5vh;
+        position: absolute;
+        top: 23%;
+        width: 85%;
+        border: 1px solid rgba(223,192,194,0.7);
+        box-shadow: 0.5px 0.5px 5px white;
+        padding: 1.5vh;
+        padding-right: 0.5vh;
+        margin-left: -44.5%;
+        left: 50%;
+    }
+
+    #page-three-policies {
+        width: 100%;
+        height: 100vh;
+        background: #272727;
+        position: relative;
+    }
+
+    #policies-text {
+        width: 90vw;
+        border: 1px solid rgba(223,192,194,0.7);
+        box-shadow: 0.5px 0.5px 5px white;
+        padding: 1.5vh;
+        padding-right: 0.5vh;
+        position: absolute;
+        top: 11.5%;
+        left: 50%;
+        margin-left: -48vw;
+    }
+
+    #policies-text h5 {
+        color: white;
+        font-weight: bold;
+        font-family: arial;
+        font-size: 1.5vh;
+    }
+
+    #policies-text p {
+        color: #919191;
+        font-family: arial;
+        font-size: 1.6vh;
+        line-height: 2.2vh;
+    }
+
+    #policies-text span {
+        color: #EDEDED;
+        font-family: arial;
+        font-size: 1.3vh;
+    }
+
+    #page-three-social-media {
+        width: 100%;
+        height: 100vh;
+        background: pink;
+        position: relative;
+    }
+
+    .instagram-name {
+        text-transform: uppercase;
+        color: white;
+        z-index: 4;
+        font-family: arial;
+        font-size: 3.5vh;
+        position: absolute;
+    }
+
+    #instagram-name-left {
+        transform: rotate(-90deg);
+        top: 42%;
+        left: -35%;
+    }
+
+    #instagram-name-right {
+        transform: rotate(90deg);
+        top: 42%;
+        left: 42%;
+    }
+
+    #phone-container {
+        width: 70vw;
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        margin-left: -36.25vw;
+    }
+
+    #iphone {
+        width: 100%;
+    }
+
+
+    #instafeed {
+        width: 52.5vw;
+        height: 41vh;
+        position: absolute;
+        top: 23.5%;
+        left: 50.5%;
+        margin-left: -26vw;
+        overflow-y: scroll;
+
+        display: grid;
+        grid-template-columns: repeat(2, 24vw);
+        grid-auto-rows: 24vw;
+        justify-content: center;
+        grid-gap: 1vw;
+    }
+
+    #instafeed a img{
+        width: 24vw;
+        height: 24vw;
+    }
+
+    .follow-us-logo {
+        height: 5vh;
+    }
+
+    #social-media-logos {
+        position: absolute;
+        top: 82%;
+        left: 50%;
+        width: 50vw;
+        margin-left: -25vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+}
+
+@media only screen and (min-width: 600px) {
+    
+    #stylists, #page-three-policies, 
+    #social-media-header, #social-media-logos {
+        display: none;
+    }
+
+    #page-three {
+        height: 100vh;
+        background: #272727;
+    }
+
+    #d-nav {
+        z-index: 5000;
+    }
+    
+    #d-left-side {
+        width: 35vw;
+        height: 100vh;
+        background: pink;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .page-three-header {
+        display: none;
+    }
+
+    #photo-gallery {
+        height: 45vh;
+        width: 35vw;
+        z-index: 10;
+        background: transparent;
+        position: absolute;
+    }
+
+    @keyframes scroll {
+        0% {transform: translateY(0vw);}
+        100% {transform: translateY(-80vw);}
+    }
+
+    #photo-gallery-container {
+        display: grid;
+        width: 30vw;
+        height: 20vw;
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        margin-left: -14.5vw;
+        overflow-y: hidden;
+
+        justify-content: center;
+        grid-template-columns: repeat(3, 10vw);
+        grid-auto-rows: 10vw;
+    }
+
+    #photo-gallery-image {
+        width: 9vw;
+        height: 9vw;
+        box-sizing: border-box;
+        animation: scroll 15s linear infinite;
+        /* all sizes were 30vw */
+    }
+
+    #photo-gallery-container img {
+        width: 9vw;
+        height: 9vw;
+        margin-bottom: 20vh;
+    }
+
+    #left-side-divider {
+        width: 100%;
+        height: 10%;
+        background: white;
+        position: relative;
+        top: 50%;
+        margin-top: -5%;
+        box-shadow: 0px -4px 20px gray;
+    }
+
+    #page-three-social-media {
+        display: block;
+        z-index: 10;
+        position: absolute;
+        width: 35vw;
+        height: 45vh;
+        top: 55vh;
+        margin-top: 0.5vh
+    }
+
+    #phone-container {
+        width: 35vw;
+        height: 45vh;
+    }
+
+    #phone-container #iphone {
+        height: 100%;
+        width: 23.04vh;
+        position: absolute;
+        left: 50%;
+        margin-left: -11.52vh;
+    }
+
+    #instafeed {
+     width: 10vw;
+     height: 14vw;  
+     overflow-y: scroll;
+     position: absolute;
+     top: 25%;
+     left: 50%;
+     margin-left: -4.8vw;
+     
+     display: grid;
+     grid-template-columns: repeat(2, 4vw);
+     grid-auto-rows: 4vw;
+     justify-content: center;
+     grid-gap: 0.5vw;
+    }
+    #instafeed::-webkit-scrollbar {
+        display: none;
+    }
+
+    #instafeed a img {
+        width: 4vw;
+        height: 4vw;
+    }
+
+    #d-right-side {
+        position: absolute;
+        top: 0;
+        left: 35vw;
+        width: 60vw;
+        height: 100vh;
+        background: transparent;
+        margin: 0;
+        padding: 0;
+    }
+
+    #d-stylists-textbox {
+        width: 30vw;
+        height: 22vh;
+        border: 2px solid rgba(240, 184, 192,0.47);
+        position: absolute;
+        top: 10%;
+        right: 5%;
+        margin-left: -15vw;
+        transition: 0.3s;
+    }
+
+    #d-stylists-textbox-hit-area {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        position: absolute;
+        cursor: pointer;
+        z-index: 5000;
+    }
+
+    #d-stylists-text {
+        font-family: arial;
+        font-size: 2vh;
+        line-height: 3vh;
+        color: #919191;
+        padding: 2vh;
+        padding-top: 0;
+    }
+
+    #stylists-full-text {
+        opacity: 0;
+    }
+
+    .right-side-header {position: absolute; left: 5%; top: 16.5%; width: 22vw; height: 11vh;}
+
+    .right-side-header-text {
+        color: #C0C0C0;
+        font-family: arial;
+        font-size: 4vh;
+        text-transform: uppercase;
+        font-weight: 200;
+        position: absolute;
+        text-align: center;
+    }
+
+    .right-side-highlight {
+        height: 5vh;
+        position: absolute;
+        bottom: -0.3vh;
+        margin-left: -2vh;
+        width: 100%;
+    }
+
+    #right-side-header-bottom {
+        position: absolute;
+        left: 82%;
+        top: 67.5%;
+        margin-top: -5.5vh;
+        width: 16vw;
+        margin-left: -8vw;
+    }
+
+    #right-side-highlight-bottom {
+        transform: scaleX(-1);
+    }
+
+    #d-stylists-textbox-bottom {
+        width: 30vw;
+        height: 27vh;
+        border: 2px solid rgba(240, 184, 192,0.47);
+        position: absolute;
+        bottom: 20%;
+        left: 5%;
+        cursor: pointer;
+    }
+
+    #d-stylists-textbox-bottom p {
+        font-family: arial;
+        font-size: 2vh;
+        line-height: 3vh;
+        color: #919191;
+        padding: 2vh;
+        padding-top: 0;
+        margin-top: -3.5vh;
+    }
+
+    #d-stylists-textbox-bottom h5 {
+        font-family: arial;
+        font-size: 2vh;
+        color: white;
+        font-weight: bold;
+        padding: 2vh;
+        padding-top: 0;
+    }
+
+    #cancellation-policy-span {
+        color: white;
+        width: 26vw;
+        font-family: arial;
+        margin-left: -13vw;
+        left: 50%;
+        position: absolute;
+        margin-top: -1vh;
+    }
+
+    #cancellation-policy-h5, #cancellation-policy-p, #cancellation-policy-span, #covid-policy-h5, #covid-policy-p {opacity: 0;}
+
+    #d-contact-us-media {
+        position: absolute;
+        bottom: 3vh;
+        right: 2vh;
+    }
+
+    #d-contact-us-media img {
+        width: 6vh;
+        opacity: 50%;
+        position: absolute;
+        top: -1.7vh;
+        left: -7vh;
+    }
+
+    #d-contact-us-media a {
+        color: #C8C8C8;
+        font-size: 2.5vh;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-family: arial;
+    }
+
+    #scroll-arrow-media {
+        position: absolute;
+        bottom: 0;
+        height: 20vh;
+        width: 1vw;
+        margin-left: -0.5vw;
+        left: 17.5vw;
+    }
+
+
+
+}

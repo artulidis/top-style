@@ -1,0 +1,586 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Home/css/Home.css' %}">
+    <link rel="stylesheet" href="{% static 'Home/css/Home-About.css' %}">
+    <link rel="stylesheet" href="{% static 'Home/css/Home-Media.css' %}">
+    <link rel="stylesheet" href="{% static 'Home/css/Home-Contact.css' %}">
+    <title>TopStyle | Home</title>
+</head>
+<body>
+
+    <section class="home-section" id="page-one">
+        <div class="menu-screen" id="menu-screen">
+
+            <div class="menu-face hidden" id="menu-face">
+                <img src="{% static 'Home/images/closeicon.png' %}" class="close-icon" id="close-icon">
+                <h1 class="take-me-heading">take me...</h1>
+
+                <h3 class="menu-chapter">home</h3>
+                <div class="menu-chapter-line"></div>
+
+                <div class="menu-list-container">
+                    <a href="" class="menu-list-item">Home</a>
+                    <a href="#page-two" class="menu-list-item">About Us</a>
+                    <a href="stylists" class="menu-list-item">Meet Our Stylists</a>
+                    <a href="#page-three" class="menu-list-item">Media</a>
+                    <a href="#page-four" class="menu-list-item">Contact</a>
+                </div>
+
+                <h3 class="menu-chapter">services</h3>
+                <div class="menu-chapter-line"></div>
+
+                <div class="menu-list-container">
+                    <a href="services" class="menu-list-item">Cutting</a>
+                    <a href="services#coloring-page" class="menu-list-item">Coloring</a>
+                    <a href="services#bridal-page" class="menu-list-item">Bridal</a>
+                    <a href="services#extra-page" class="menu-list-item">Extra</a>
+                </div>
+
+                <h3 class="menu-chapter">shop</h3>
+                <div class="menu-chapter-line"></div>
+
+                <div class="menu-list-container">
+                    <a href="store" class="menu-list-item">Shop</a>
+                </div>
+            </div>
+
+        </div>
+        <div id="page-one-top-section">
+            <img src="{% static 'Home/images/menu.png' %}" id="page-one-menu">
+            <img src="{% static 'Home/images/topstyle-logo.png' %}" id="page-one-logo">
+            <div id="page-one-logo-underline"></div>
+
+            <div id="action-tabs">
+                <div id="action-tab-appointment"><a href="https://www.vagaro.com/topstylebykatenoda">book appointment</a></div>
+                    <div id="action-tab-divider">
+                        <div id="action-tab-divider-line"></div>
+                    </div>
+                <div id="action-tab-contact"><a href="#page-four">contact</a></div>
+            </div>
+        </div>
+
+        <div id="menu-container">
+            <div class="page-one-menu-item" id="salon">
+                <a href="#page-one" class="page-one-menu-header" id="salon-header">salon</a>
+                <div class="pink-film"></div>
+                <img src="{% static 'Home/images/page-one-salon.JPG' %}" id="salon-image">
+            </div>
+
+            <div class="page-one-menu-item" id="services">
+                <a href="services" class="page-one-menu-header" id="services-header">services</a>
+                <div class="pink-film"></div>
+                <img src="{% static 'Home/images/page-one-services.JPG' %}" id="services-image">
+            </div>
+
+            <div class="page-one-menu-item" id="shop">
+                <a href="store" class="page-one-menu-header" id="shop-header">shop</a>
+                <div class="pink-film"></div>
+                <img src="{% static 'Home/images/page-one-shop.JPG' %}" id="shop-image">
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="{% static 'Home/images/scroll-arrow.png' %}" id="scroll-arrow">
+        </div>
+
+        <!--DESKTOP-->
+
+        <div id="d-page-one-left-section">
+            <img src="{% static 'Home/images/menu.png' %}" id="d-page-one-menu">
+
+            <div id="d-underline-box">
+                <img src="{% static 'Home/images/topstyle-logo.png' %}" id="d-page-one-logo">
+
+                <a href="https://www.facebook.com/topstylehairbykatenoda"><img src="{% static 'Home/images/pink-facebook-logo.png' %}" id="d-home-facebook"></a>
+                <a href="https://www.instagram.com/topstyle.katenoda/"><img src="{% static 'Home/images/pink-instagram-logo.png' %}" id="d-home-instagram"></a>
+                <a href="https://www.yelp.com/biz/top-style-by-kate-noda-reston?osq=topstyle+kate+noda"><img src="{% static 'Home/images/pink-yelp-logo.png' %}" id="d-home-yelp"></a>
+            </div>
+
+            <div id="d-action-tabs">
+                <a href="https://www.vagaro.com/topstylebykatenoda"><span id="d-appointment">book appointment</span></a>
+                <a href="#"><span id="d-contact">contact</span></a>
+            </div>
+        </div>
+
+        <div id="d-page-one-right-section">
+            <div class="d-right-row" id="d-row-salon">
+                <h3>about -</h3>
+                <a href=""><h1>salon</h1></a>
+                <div class="d-pink-film"></div>
+                <img src="{% static 'Home/images/page-one-salon.JPG' %}" class="d-page-one-image" id="d-salon-image">
+                
+            </div>
+
+            <div class="d-right-row" id="d-row-services">
+                <h3>our -</h3>
+                <a href="services"><h1>services</h1></a>
+                <div class="d-pink-film"></div>
+                <img src="{% static 'Home/images/page-one-services.JPG' %}" class="d-page-one-image" id="d-services-image">
+            </div>
+
+            <div class="d-right-row" id="d-row-shop">
+                <h3>visit -</h3>
+                <a href="store"><h1>shop</h1></a>
+                <div class="d-pink-film"></div>
+                <img src="{% static 'Home/images/page-one-shop.JPG' %}" class="d-page-one-image" id="d-shop-image">
+            </div>
+        </div>
+
+        <img src="{% static 'Home/images/scroll-arrow.png' %}" id="d-scroll-arrow">
+
+    </section>
+
+    <section class="home-section" id="page-two">
+        <div id="about-header">
+            <img src="{% static 'Home/images/menu.png' %}" id="about-menu">
+            <img src="{% static 'Home/images/topstyle-logo.png' %}" id="about-header-logo">
+            <div id="about-header-dash"></div>
+            <h1 id="about-header-location">reston</h1>
+        </div>
+
+        <div id="about-main">
+            <h3 id="about-main-header">our mission</h3>
+            <p>In Top Style Salon we celebrate every individual for their real, most raw, authentic brilliance, who believe in themselves and are ready to step into the look they love. We focus on quality and comfort by employing the best hair products with some of the most natural and rich ingredients because we believe you should never expect less. Whether you're looking for a simple trim, exotic color change, make-up learning lessons, or a style, Kate's team's demeanor will instantly put you at ease, helping to focus the attention on YOUR top requests, YOUR top look, & YOUR top style. 100% guaranteed.</p>
+        </div>
+
+        <div id="about-footer">
+            <img src="{% static 'Home/images/scroll-arrow.png' %}" id="about-footer-arrow">
+        </div>
+
+            <!--DESKTOP-->
+
+        <video id="about-video-desktop" autoplay loop muted playsinline>
+            <source src="{% static 'Home/images/about-video-mobile.mp4' %}" type="video/mp4">
+        </video>
+
+        <div id="d-about-main">
+            <div id="d-about-header">
+
+                <div id="d-nav">
+                    <a href="">home</a> <span>/</span> <a href="services">services</a> <span>/</span> <a href="store">shop</a>
+                    <img src="{% static 'Home/images/menu.png' %}" id="d-about-menu">
+                </div>
+
+                <img src="{% static 'Home/images/topstyle-logo.png' %}" id="d-about-header-logo">
+                <div id="d-about-header-dash"></div>
+                <h1 id="d-about-header-location">reston</h1>
+            </div>
+
+            <div id="d-about-bottom">
+                <div id="d-our-mission">
+                    <p>In Top Style Salon we celebrate every individual for their real, most raw, authentic brilliance, who believe in themselves and are ready to step into the look they love. We focus on quality and comfort by employing the best hair products with some of the most natural and rich ingredients because we believe you should never expect less. Whether you're looking for a simple trim, exotic color change, make-up learning lessons, or a style, Kate's team's demeanor will instantly put you at ease, helping to focus the attention on YOUR top requests, YOUR top look, & YOUR top style. 100% guaranteed.</p>
+                    <img src="{% static 'Home/images/lead-arrow.png' %}">
+                </div>
+
+                <div id="d-our-mission-header">
+                    <h2>our mission</h2>
+                    <img src="{% static 'Home/images/header-underline.png' %}" id="d-header-underline">
+                </div>
+
+                <div id="d-contact-us">
+                    <a href="#page-four"><img src="{% static 'Home/images/contact-us.png' %}"></a>
+                    <a href="#page-four">contact us</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div id="about-video-mobile-container">
+        <video id="about-video-mobile" autoplay loop muted playsinline>
+            <source src="{% static 'Home/images/about-video-mobile.mp4' %}" type="video/mp4">
+        </video>
+    </div>
+        
+
+    <section class="home-section" id="page-three">
+
+        <div id="photo-gallery">
+            <div class="page-three-header">
+                <h1 class="page-three-header-text">photo gallery</h1>
+            </div>
+
+            <div id="photo-gallery-container">
+                {% for picture in mediaPhotoGallery %}
+                <div id="photo-gallery-image"><img src="{{ picture.picture.url }}"></div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="stylists">
+
+            <div class="page-three-header">
+                <h1 class="page-three-header-text">our stylists</h1>
+            </div>
+
+            <div class="page-three-title">
+                <a href="/stylists"><h1>meet our stylists</h1></a>
+                <div class="page-three-title-underline"></div>
+            </div>
+
+            <p>At Top Style Salon, all of our stylists are licensed professionals, continuously educating themselves with the latest hair trends. We love going to annual fashion conventions and taking numerous online and in-person classes. We are proud of being well known for doing detailed consultations with each and every guest to ensure we consistently achieve the most possible desired look. Every team member follows strict sanitation requirements and high standards of cleaning and disinfection to provide a healthy environment for our guests. Our salon also utilizes the latest technology, including personally written text messages, emails, social media direct messages, and other online communication to make sure we are easily reachable 7 days a week. We strive for the highest customer service and for top quality work. Thank you for supporting our small but awesome team! We look forward to seeing you!</p>
+
+        </div>
+
+        <script src="https://ig.instant-tokens.com/users/93db469f-f142-4888-a96e-037e42123054/instagram/17841402365446712/token.js?userSecret=afx9ag9i9zbfn6i18xheh8"></script>
+        <script src="{% static 'Home/js/instafeed.min.js' %}"></script>
+    
+        <div id="page-three-policies">
+            <div id="policies-header" class="page-three-header">
+                <h1 class="page-three-header-text">our policies</h1>
+            </div>
+    
+            <div id="policies-text">
+                <h5>Top Style's Satisfaction Policy</h5>
+                <p>At Top Style, your happiness is our Top priority. We want you to love your new look! If you're not completely satisfied with our services please let us know directly within 2 weeks of service date for any adjustments. We do not offer refunds, however we will do our absolute best to achieve your desired style...</p>
+            
+                <h5>Top Style's Missed Appointment and Cancellation Policy</h5>
+                <p>If you are unable to keep a scheduled appointment please give 24 hours advance notice, To ensure that you will not be charged for the appointment. Cancellations with less than 24 hours notice are subjects to a fee of 50% of scheduled service.</p>
+                <span>*You will be asked for credit card on file prior scheduling your service*</span>
+    
+                <h5>Covid-19 Policy</h5>
+                <p>At Top Style we are continually focused on the health and well-being of our team and our guests to ensure a safe and healthy environment for everyone. We have followed the direction of the CDC by implementing strict rules:wearing masks, temperature checks, UV-lights air filters, high standards of sanitation. Prior your appointment with 2-weeks and 2-days conformation texts you will receive safety guidelines information. Thank you for working Together to keep everyone SAFE!</p>
+            
+            </div>
+        </div>
+    
+        <div id="page-three-social-media">
+            <div id="social-media-header" class="page-three-header">
+                <h1 class="page-three-header-text">follow us</h1>
+            </div>
+            
+                <div id="phone-container">
+                    <img src="{% static 'Home/images/iphone.png' %}" id="iphone">
+                    <div id="instafeed"></div>
+                </div>
+    
+                    
+    
+            <div id="social-media-logos">
+                <a href="https://www.facebook.com/topstylehairbykatenoda"><img src="{% static 'Home/images/purple-facebook-logo.png' %}" class="follow-us-logo" id="purple-facebook-logo"></a>
+                <a href="https://www.instagram.com/topstylebykatenoda/"><img src="{% static 'Home/images/purple-instagram-logo.png' %}" class="follow-us-logo" id="purple-instagram-logo"></a>
+                <a href="https://www.yelp.com/biz/top-style-by-kate-noda-reston"><img src="{% static 'Home/images/purple-yelp-logo.png' %}" class="follow-us-logo" id="purple-yelp-logo"></a>
+            </div>
+        </div>
+
+        <div id="d-left-side">
+
+            <div id="left-side-divider"></div>
+
+        </div>
+
+        <div id="d-right-side">
+
+            <div class="right-side-header" id="right-side-header-top">
+                <a href="/stylists"><h2 class="right-side-header-text" id="right-side-header-text-top">meet our stylists</h2></a>
+                <img src="{% static 'Home/images/header-underline.png' %}" alt="" class="right-side-highlight" id="right-side-highlight-top">
+            </div>
+
+            <div id="d-stylists-textbox">
+                <div id="d-stylists-textbox-hit-area"></div>
+                <p id="d-stylists-text">At Top Style Salon, all of our stylists are licensed professionals, continuously educating themselves with the latest hair trends. We love going to annual fashion conventions and taking numerous online and in-person classes. We are proud of being well known for doing detailed consultations with each and every guest to ensure we consistently<span id="stylists-click-to-see">... (Click to see full text)</span> <span id="stylists-full-text" class="hidden">achieve the most possible desired look. Every team member follows strict sanitation requirements and high standards of cleaning and disinfection to provide a healthy environment for our guests. Our salon also utilizes the latest technology, including personally written text messages, emails, social media direct messages, and other online communication to make sure we are easily reachable 7 days a week. We strive for the highest customer service and for top quality work. Thank you for supporting our small but awesome team! We look forward to seeing you!</span></p>
+            </div>
+
+
+            <div id="d-stylists-textbox-bottom" class="hidden">
+                <div id="d-stylists-textbox-hit-area-bottom"></div>
+                <h5>Top Style's Satisfaction Policy</h5>
+                <p>At Top Style, your happiness is our Top priority. We want you to love your new look! If you're not completely satisfied with our services please let us know directly within 2 weeks of service date for any adjustments. We do not offer refunds, however we will do our absolute best to achieve your desired style <span id="click-to-see-policies">... (Click to see full text)</span></p>
+            
+                <h5 id="cancellation-policy-h5">Top Style's Missed Appointment and Cancellation Policy</h5>
+                <p id="cancellation-policy-p">If you are unable to keep a scheduled appointment please give 24 hours advance notice, To ensure that you will not be charged for the appointment. Cancellations with less than 24 hours notice are subjects to a fee of 50% of scheduled service.</p>
+                <span id="cancellation-policy-span">*You will be asked for credit card on file prior scheduling your service*</span>
+
+                <h5 id="covid-policy-h5">Covid-19 Policy</h5>
+                <p id="covid-policy-p">At Top Style we are continually focused on the health and well-being of our team and our guests to ensure a safe and healthy environment for everyone. We have followed the direction of the CDC by implementing strict rules:wearing masks, temperature checks, UV-lights air filters, high standards of sanitation. Prior your appointment with 2-weeks and 2-days conformation texts you will receive safety guidelines information. Thank you for working Together to keep everyone SAFE!</p>
+            </div>
+
+
+            <div class="right-side-header" id="right-side-header-bottom">
+                <h2 class="right-side-header-text" id="right-side-header-text-bottom">our policies</h2>
+                <img src="{% static 'Home/images/header-underline.png' %}" alt="" class="right-side-highlight" id="right-side-highlight-bottom">
+            </div>
+
+            <img src="{% static 'Home/images/lead-arrow.png' %}" alt="" id="scroll-arrow-media">
+
+            </div>
+            
+
+        <div id="d-contact-us-media">
+            <a href="#"><img src="{% static 'Home/images/contact-us.png' %}"></a>
+            <a href="#">contact us</a>
+        </div>
+
+    
+    </section>
+
+    
+
+    
+    <section class="home-section" id="page-four">
+        <div id="page-four-top-left">
+            <img id="top-left-logo" src="{% static 'Home/images/topstyle-logo.png' %}">
+            <div id="schedule-container">
+                <h2>mon <span>10a.m - 9p.m</span></h2>
+                <h2>tue <span>10a.m - 9p.m</span></h2>
+                <h2>wed <span>10a.m - 9p.m</span></h2>
+                <h2>thu <span>10a.m - 9p.m</span></h2>
+                <h2>fri <span>10a.m - 9p.m</span></h2>
+                <h2>sat <span>9a.m - 8p.m</span></h2>
+                <h2>sun <span>9a.m - 8p.m</span></h2>
+            </div>
+        </div>
+
+        <div id="page-four-top-right">
+            <h2 class="top-right-info">Call/Text <span class="top-right-span">(571) 356-5670</span></h2>
+
+            <h2 class="top-right-info" id="address-h2">Address <span class="top-right-span" id="address-span-top">1641 Washington Plaza N,</span> <span class="top-right-span" id="address-span-bottom">Reston, VA 20190</span></h2>
+
+        </div>
+
+        <div id="map"></div>
+
+        <div id="contact-form">
+
+            <h1>Contact Us:</h1>
+
+            <form action="" method="POST" id="form">
+                {% csrf_token %}
+
+                <input type="text" name="name" placeholder="Name:" class="form-input" id="name-input">
+
+                <input type="text" name="email" placeholder="Email:" class="form-input" id="email-input">
+
+                <textarea name="message" placeholder="Message:" id="message-textarea" class="form-textarea"></textarea>
+
+                <input type="submit" id="form-submit" value="Send >>">
+            </form>
+
+        </div>
+
+            <div id="d-page-four-left-top">
+                <img id="d-top-left-logo" src="{% static 'Home/images/topstyle-logo.png' %}">
+
+                <div id="d-schedule-container">
+                <h2>mon <span>10a.m - 9p.m</span></h2>
+                <h2>tue <span>10a.m - 9p.m</span></h2>
+                <h2>wed <span>10a.m - 9p.m</span></h2>
+                <h2>thu <span>10a.m - 9p.m</span></h2>
+                <h2>fri <span>10a.m - 9p.m</span></h2>
+                <h2>sat <span>9a.m - 8p.m</span></h2>
+                <h2>sun <span>9a.m - 8p.m</span></h2>
+                </div>
+
+                <div id="d-page-four-sm">
+                    <a class="d-page-four-sm-pic" href="https://www.facebook.com/topstylehairbykatenoda"><img src="{% static 'Home/images/pink-facebook-logo.png' %}" alt=""></a>
+                    <a class="d-page-four-sm-pic" href="https://www.instagram.com/topstylebykatenoda/"><img src="{% static 'Home/images/pink-instagram-logo.png' %}" alt=""></a>
+                    <a class="d-page-four-sm-pic" href="https://www.yelp.com/biz/top-style-by-kate-noda-reston"><img src="{% static 'Home/images/pink-yelp-logo.png' %}" alt=""></a>
+                </div>
+
+                <div id="d-info-container">
+                    <h2 class="d-info">Call/Text <span class="d-info-container-span">(571) 356-5670</span></h2>
+        
+                    <h2 class="d-info" id="address-h2">Address <span class="d-info-container-span" id="address-span-top">1641 Washington Plaza N,</span> <span class="d-info-container-span" id="address-span-bottom">Reston, VA 20190</span></h2>
+        
+                </div>
+            </div>
+
+            <div id="d-page-four-right-section">
+
+                <div id="d-contact-form">
+
+                    <h1>Contact Us:</h1>
+        
+                    <form action="" method="POST" id="d-form">
+                        {% csrf_token %}
+        
+                        <input type="text" name="name" placeholder="Name:" class="form-input" id="name-input">
+        
+                        <input type="text" name="email" placeholder="Email:" class="form-input" id="email-input">
+        
+                        <textarea name="message" placeholder="Message:" id="message-textarea" class="form-textarea"></textarea>
+        
+                        <input type="submit" id="form-submit" value="Send >>">
+                    </form>
+        
+                </div>
+
+            </div>
+
+    </section>
+
+
+
+
+<script src="{% static 'Home/js/Home.js' %}"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChPKyxwXLs_LVcY-ZaFP13upgmpSZa2sI&callback=initMap&libraries=&v=weekly" defer></script>
+<script type="text/javascript">
+    // Initialize and add the map
+    function initMap() {
+
+        const TopStyle = { lat: 38.968601273855235, lng: -77.34042946939456 };
+        const ParkingLot = { lat: 38.969606, lng: -77.341012 };
+
+
+        // Styles a map in night mode.
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 38.969252, lng: -77.340817 },
+            zoom: 18,
+            disableDefaultUI: true,
+            styles: [
+                { elementType: "geometry", stylers: [{ color: "#000000" }] },
+                { elementType: "labels.text.stroke", stylers: [{ color: "#000000" }] },
+                { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+                {
+                    featureType: "administrative.locality",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#d59563" }],
+                },
+                {
+                    featureType: "landscape.man_made",
+                    elementType: "geometry.stroke",
+                    stylers: [{ color: "#62345E" }],
+                },
+                {
+                    featureType: "landscape.man_made",
+                    elementType: "geometry.fill",
+                    stylers: [{ color: "#0F100F" }],
+                },
+                {
+                    featureType: "poi",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#d59563" }],
+                },
+                {
+                    featureType: "poi.shopping",
+                    elementType: "labels",
+                    stylers: [{ visibility: "off" }],
+                },
+                {
+                    featureType: "poi.park",
+                    elementType: "geometry",
+                    stylers: [{ color: "#070F08" }],
+                },
+                {
+                    featureType: "poi.park",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#6b9a76" }],
+                },
+                {
+                    featureType: "road",
+                    elementType: "geometry",
+                    stylers: [{ color: "#382930" }],
+                },
+                {
+                    featureType: "road",
+                    elementType: "geometry.stroke",
+                    stylers: [{ color: "#0f1114" }],
+                },
+                {
+                    featureType: "road",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#5d6674" }],
+                },
+                {
+                    featureType: "road",
+                    elementType: "labels.text.stroke",
+                    stylers: [{ color: "#000000" }],
+                },
+                {
+                    featureType: "road",
+                    elementType: "labels",
+                    stylers: [{ visibility: "on" }],
+                },
+                {
+                    featureType: "road.highway",
+                    elementType: "geometry.fill",
+                    stylers: [{ color: "#293b51" }],
+                },
+                {
+                    featureType: "road.highway",
+                    elementType: "geometry.stroke",
+                    stylers: [{ color: "#0b0b0f" }],
+                },
+                {
+                    featureType: "road.highway",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#f3d19c" }],
+                },
+                {
+                    featureType: "road.highway",
+                    elementType: "labels",
+                    stylers: [{ visibility: "on" }],
+                },
+                {
+                    featureType: "road.local",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#5d6674" }],
+                },
+                {
+                    featureType: "road.local",
+                    elementType: "labels",
+                    stylers: [{ visibility: "on" }],
+                },
+                {
+                    featureType: "transit",
+                    elementType: "geometry",
+                    stylers: [{ color: "#2f3948" }],
+                },
+                {
+                    featureType: "transit",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#666666" }],
+                },
+                {
+                    featureType: "water",
+                    elementType: "geometry",
+                    stylers: [{ color: "#000000" }],
+                },
+                {
+                    featureType: "water",
+                    elementType: "labels",
+                    stylers: [{ visibility: "on" }],
+                },
+                {
+                    featureType: "water",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#354245" }],
+                },
+                {
+                    featureType: "water",
+                    elementType: "labels.text.stroke",
+                    stylers: [{ color: "#354245" }],
+                },
+            ],
+        });
+        const marker = new google.maps.Marker({
+            position: TopStyle,
+            map: map,
+        });
+
+        const parkingMarker = new google.maps.Marker({
+            position: ParkingLot,
+            map: map,
+            icon: "{% static 'Home/images/parkingIcon.png' %}"
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    var feed = new Instafeed({
+    accessToken: InstagramToken,
+    debug: true
+    });
+    feed.run();
+</script>
+
+</body>
+</html>

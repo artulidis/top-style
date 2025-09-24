@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Stylists/css/Stylists.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <title>TopStyle | Stylists</title>
+</head>
+<body>
+
+    <div class="menu-screen" id="menu-screen">
+
+        <div class="menu-face hidden" id="menu-face">
+            <img src="{% static 'Home/images/closeicon.png' %}" class="close-icon" id="close-icon">
+            <h1 class="take-me-heading">take me...</h1>
+
+            <h3 class="menu-chapter">home</h3>
+            <div class="menu-chapter-line"></div>
+
+            <div class="menu-list-container">
+                <a href="/#page-one" class="menu-list-item">Home</a>
+                <a href="/#page-two" class="menu-list-item">About Us</a>
+                <a href="stylists" class="menu-list-item">Meet Our Stylists</a>
+                <a href="/#page-three" class="menu-list-item">Media</a>
+                <a href="/#page-four" class="menu-list-item">Contact</a>
+            </div>
+
+            <h3 class="menu-chapter">services</h3>
+            <div class="menu-chapter-line"></div>
+
+            <div class="menu-list-container">
+                <a href="services" class="menu-list-item">Cutting</a>
+                <a href="services#coloring-page" class="menu-list-item">Coloring</a>
+                <a href="services#bridal-page" class="menu-list-item">Bridal</a>
+                <a href="services#extra-page" class="menu-list-item">Extra</a>
+            </div>
+
+            <h3 class="menu-chapter">shop</h3>
+            <div class="menu-chapter-line"></div>
+
+            <div class="menu-list-container">
+                <a href="store" class="menu-list-item">Shop</a>
+            </div>
+        </div>
+
+    </div>
+    
+    <div id="stylists-header">
+        <img src="{% static 'Stylists/images/topstyle-logo.png' %}" id="header-logo">
+        <img src="{% static 'Stylists/images/menu.png' %}" id="stylists-menu">
+
+        <!-- Desktop -->
+        <div id="d-nav">
+            <a href=#>home</a> <span>/</span> <a href=#>services</a> <span>/</span> <a href=#>shop</a>
+        </div>
+    </div>
+
+    <div id="stylists-subheader">
+        <h1>meet our stylists</h1>
+        <img src="{% static 'Stylists/images/stylists-highlight.png' %}">
+    </div>
+
+    <div id="card-container">
+        {%for stylist in stylists%}
+    <div class="card">
+
+         <div class="card-items" data-aos="fade-up">
+
+            <div class="name">
+                <div class="name-line"></div>
+                <h2 class="name-text">{{stylist.name}}</h2>
+            </div>
+    
+            <div id="image-instagram">
+                <img src="{{stylist.picture.url}}" class="stylist-picture">
+                {% if stylist.instagram != "" %}
+                <div class="instabox">
+                    <h2 class="stylist-instagram">@{{stylist.instagram}}</h2>
+                </div>
+                {% endif %}
+            </div>
+
+            <p class="stylist-bio"> {{stylist.bio}} </p>
+        
+        </div>
+
+    </div>
+    {%endfor%}
+
+
+    </div>
+
+    <script src="{% static 'Stylists/js/Stylists.js' %}"></script>
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <script>
+
+    AOS.init();
+    
+    </script>
+</body>
+</html>
