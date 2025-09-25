@@ -13,6 +13,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
         
         <link rel="stylesheet" href="./home.css" />
+        <link rel="stylesheet" href="./menu.css" />
 
         <meta property="og:title" content="TopStyle by Kate Noda - Hair Salon" />
         <meta property="og:description" content="Premium salon services tailored to your style. Book online with Kate Noda today." />
@@ -24,8 +25,99 @@
 
     <body>
         <div id="app">
+            <header id="header">
+                <img src="assets/HamburgerMenu.png" id="hamburger-menu" alt="menu icon" />
+                <img src="assets/TopStyleLogo.png" id="topstyle-logo" alt="TopStyle Salon logo" />
+            </header>
 
+            <nav id="mobile-menu">
+                <img src="assets/CloseIcon.png" id="menu-close" alt="Close menu" />
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Bridal</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+
+                <a href="#" class="pink-button" id="mobile-menu-button">Book Appointment</a>
+            </nav>
+
+            <section id="hero-section">
+                <h1 class="italiana-regular" id="hero-text">
+                At Top Style Salon, we celebrate your authentic beauty with expert care,
+                premium products, and styles made just for you.
+                </h1>
+
+                <div id="social-media-icons">
+                <a href="https://www.facebook.com/topstylehairbykatenoda/">
+                    <img src="assets/FacebookLogo.png" alt="Facebook" class="social-media-icon" />
+                </a>
+                <a href="https://www.instagram.com/topstyle.katenoda/?hl=en">
+                    <img src="assets/InstagramLogo.png" alt="Instagram" class="social-media-icon" />
+                </a>
+                <a href="https://www.yelp.com/biz/top-style-by-kate-noda-reston">
+                    <img src="./assets/YelpLogo.png" alt="Yelp" class="social-media-icon" />
+                </a>
+                </div>
+
+                <div id="gallery-container">
+                    <div id="gallery-rows">
+                        <div class="gallery-row"></div>
+                        <div class="gallery-row"></div>
+                        <div class="gallery-row"></div>
+                    </div>
+
+                    <div id="gallery-cols">
+                        <div class="gallery-col"></div>
+                        <div class="gallery-col"></div>
+                        <div class="gallery-col"></div>
+                    </div>
+
+                    <div id="gallery-imgs">
+                        <div class="img-container"><img src="./assets/Photo.jpg" alt="gallery image" class="gallery-img" /></div>
+                        <div class="img-container"><img src="./assets/Photo.jpg" alt="gallery image" class="gallery-img" /></div>
+                        <div class="img-container"><img src="./assets/Photo.jpg" alt="gallery image" class="gallery-img" /></div>
+                        <div class="img-container"><img src="./assets/Photo.jpg" alt="gallery image" class="gallery-img" /></div>
+                        <div class="img-container"><img src="./assets/Photo.jpg" alt="gallery image" class="gallery-img" /></div>
+                        <div class="img-container"><img src="./assets/Photo.jpg" alt="gallery image" class="gallery-img" /></div>
+                        <div class="img-container"><img src="./assets/Photo.jpg" alt="gallery image" class="gallery-img" /></div>
+                        <div class="img-container"><img src="./assets/Photo.jpg" alt="gallery image" class="gallery-img" /></div>
+                        <div class="img-container"><img src="./assets/Photo.jpg" alt="gallery image" class="gallery-img" /></div>
+                    </div>
+                </div>
+
+                <a href="https://na2.meevo.com/OnlineBookingApp/login?tenantId=500778&locationId=500950" id="book-appointment" class="pink-button">Book Appointment</a>
+
+            </section>
         </div>
-    </body>
+    
+    <script defer>
+        document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.getElementById("hamburger-menu");
+  const menu = document.getElementById("mobile-menu");
+  const overlay = document.createElement("div");
+  overlay.id = "menu-overlay";
+  document.body.appendChild(overlay);
 
+  const closeBtn = document.getElementById("menu-close");
+
+  function openMenu() {
+    menu.classList.add("open");
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu() {
+    menu.classList.remove("open");
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  hamburger.addEventListener("click", openMenu);
+  closeBtn.addEventListener("click", closeMenu);
+  overlay.addEventListener("click", closeMenu);
+});
+
+    </script>
+    </body>
 </html>
