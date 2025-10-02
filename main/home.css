@@ -167,3 +167,80 @@ section {
   background: transparent;
   pointer-events: all;
 }
+
+.image-horizontal {
+  width: 90%;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+.contact-information, 
+#contactForm {
+  font-family: var(--font-family-regular);
+  width: 90%;
+  margin: 0 auto;
+  color: var(--text-color-regular);
+}
+
+#contactForm {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contact-input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-text {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  color: var(--text-color-regular);
+}
+
+.contact-input {
+  width: 75%;
+  background: transparent;
+  border: none;
+  height: 15px;
+  border-bottom: 1px solid var(--text-color-light);
+  border-radius: 4px;
+  padding: 0.7rem 0.2rem;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.contact-input:focus {
+  border-bottom: 1px solid var(--pink);
+}
+
+.message-input:focus {
+  border: 1px solid var(--pink);
+}
+
+.message-input {
+  height: 200px;
+  width: 90%;
+  font-family: var(--font-family-regular);
+  border: 1px solid var(--text-color-light);
+  resize: vertical;
+}
+
+#sendButton {
+  align-self: flex-start;
+  width: 150px;
+  margin-top: 0.2rem;
+  padding: 8px 0 8px 0;
+}
+
+#map {
+  margin-top: 30px;
+  width: 100%;
+  height: 400px;
+}
