@@ -1,3 +1,5 @@
+/* Root Variables */
+
 :root {
   --background-color: #FFFCF4;
   --brown: #D1C6B7;
@@ -12,6 +14,7 @@
   --font-family-regular: Arial;
 }
 
+/* Global Resets */
 *,
 *::before,
 *::after {
@@ -27,6 +30,8 @@ body {
   line-height: 1.25;
 }
 
+/* Typography */
+
 .italiana-regular {
   font-family: "Italiana", sans-serif;
   font-weight: 400;
@@ -36,6 +41,12 @@ body {
   width: 90%;
 }
 
+h3 {
+  font-size: 1.5rem;
+}
+
+/* Header */
+
 #header {
   display: flex;
   justify-content: center;
@@ -44,19 +55,20 @@ body {
   width: 100%;
 }
 
-#hamburger-menu {
+#hamburgerMenu {
   position: absolute;
   top: 0;
   right: 0;
   width: 50px;
 }
 
-#topstyle-logo {
+#topStyleLogo {
   width: 200px;
   position: relative;
   padding-top: 20px;
 }
 
+/* Sections */
 
 section {
   display: flex;
@@ -67,7 +79,9 @@ section {
   margin-bottom: 3rem;
 }
 
-#social-media-icons {
+/* Social Media */
+
+.social-media-icons {
   display: flex;
   justify-content: center;
   gap: 30px;
@@ -80,7 +94,11 @@ section {
   vertical-align: middle;
 }
 
-#gallery-container {
+#socialMediaContact { margin-top: 20px; }
+
+/* Gallery */
+
+#galleryContainer {
   position: relative;
   width: 280px;
   height: 280px;
@@ -88,49 +106,67 @@ section {
   box-sizing: content-box;
 }
 
-#gallery-rows,
-#gallery-cols,
-#gallery-imgs {
+#galleryRows,
+#galleryCols,
+#galleryImgs {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-
   display: grid;
   grid-gap: 11px;
 }
 
-#gallery-rows {
+#galleryRows {
   grid-template-rows: repeat(3, 86px);
 }
+
 .gallery-row {
   height: 86px;
   grid-column: 1/-1;
   background: var(--brown);
 }
 
-#gallery-cols {
+#galleryCols {
   grid-template-columns: repeat(3, 86px);
 }
+
 .gallery-col {
   width: 86px;
   grid-row: 1/-1;
   background: var(--light-pink);
 }
 
-#gallery-imgs {
+#galleryImgs {
   grid-template-rows: repeat(3, 86px);
   grid-template-columns: repeat(3, 86px);
 }
+
 .img-container {
   width: 86px;
   height: 86px;
 }
+
 .gallery-img {
   width: 100%;
   height: 100%;
 }
+
+#bridalImageGrid {
+  display: grid;
+  width: 90%;
+  max-width: 350px;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+}
+
+.bridal-img {
+  width: 100%;
+}
+
+/* Buttons */
 
 .pink-button {
   background: var(--pink);
@@ -141,9 +177,18 @@ section {
   text-decoration: none;
 }
 
+#sendButton {
+  align-self: flex-start;
+  width: 150px;
+  margin-top: 0.2rem;
+  padding: 8px 0 8px 0;
+}
+
+/* Videos */
+
 .video-container {
   width: 80vw;
-  max-width: 400px;
+  max-width: 350px;
   position: relative;
   aspect-ratio: 9 / 16;
   overflow: hidden;
@@ -168,13 +213,16 @@ section {
   pointer-events: all;
 }
 
+/* Images */
+
 .image-horizontal {
   width: 90%;
+  max-width: 350px;
 }
 
-h3 {
-  font-size: 1.5rem;
-}
+/* Contact */
+
+#contactSection {margin-bottom: 0;}
 
 .contact-information, 
 #contactForm {
@@ -204,6 +252,7 @@ h3 {
 
 .contact-input {
   width: 75%;
+  max-width: 350px;
   background: transparent;
   border: none;
   height: 15px;
@@ -220,27 +269,25 @@ h3 {
   border-bottom: 1px solid var(--pink);
 }
 
-.message-input:focus {
-  border: 1px solid var(--pink);
-}
-
 .message-input {
   height: 200px;
   width: 90%;
+  max-width: 350px;
   font-family: var(--font-family-regular);
   border: 1px solid var(--text-color-light);
   resize: vertical;
 }
 
-#sendButton {
-  align-self: flex-start;
-  width: 150px;
-  margin-top: 0.2rem;
-  padding: 8px 0 8px 0;
+.message-input:focus {
+  border: 1px solid var(--pink);
 }
+
+/* Map */
 
 #map {
   margin-top: 30px;
   width: 100%;
   height: 400px;
+  border-top: 2px solid var(--brown);
+  border-bottom: 2px solid var(--brown);
 }
