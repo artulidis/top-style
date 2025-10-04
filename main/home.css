@@ -15,6 +15,7 @@
 }
 
 /* Global Resets */
+
 *,
 *::before,
 *::after {
@@ -22,6 +23,21 @@
   margin: 0;
   padding: 0;
 }
+
+a { text-decoration: none; }
+
+/* Mobile Resets */
+
+#desktopMenu { display: none; }
+.desktop-container-vertical, .desktop-container-horizontal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+/* Main Styling */
 
 body {
   background-color: var(--background-color);
@@ -100,57 +116,51 @@ section {
 
 #galleryContainer {
   position: relative;
-  width: 280px;
-  height: 280px;
+  width: 90%;
+  max-width: 350px;
+  aspect-ratio: 1 / 1;
   border: 3px solid var(--light-pink);
-  box-sizing: content-box;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
-#galleryRows,
-#galleryCols,
 #galleryImgs {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   display: grid;
-  grid-gap: 11px;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  z-index: 1000;
 }
 
+.gallery-img {width: 100%;}
+
 #galleryRows {
-  grid-template-rows: repeat(3, 86px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  row-gap: 10px;
 }
 
 .gallery-row {
-  height: 86px;
-  grid-column: 1/-1;
   background: var(--brown);
 }
 
 #galleryCols {
-  grid-template-columns: repeat(3, 86px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10px;
 }
 
 .gallery-col {
-  width: 86px;
-  grid-row: 1/-1;
   background: var(--light-pink);
-}
-
-#galleryImgs {
-  grid-template-rows: repeat(3, 86px);
-  grid-template-columns: repeat(3, 86px);
-}
-
-.img-container {
-  width: 86px;
-  height: 86px;
-}
-
-.gallery-img {
-  width: 100%;
-  height: 100%;
 }
 
 #bridalImageGrid {
@@ -171,10 +181,10 @@ section {
 .pink-button {
   background: var(--pink);
   width: 200px;
+  border-radius: 4px;
   text-align: center;
   padding: 12px 0 12px 0;
   color: white;
-  text-decoration: none;
 }
 
 #sendButton {
@@ -290,4 +300,105 @@ section {
   height: 400px;
   border-top: 2px solid var(--brown);
   border-bottom: 2px solid var(--brown);
+}
+
+/* Desktop Media Query */
+
+@media(min-width: 800px) {
+  #header {
+    height: 20vh;
+    justify-content: left;
+}
+
+  section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 80vh;
+    padding: 0 20px 0 20px;
+    margin-top: 1rem;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  #hamburgerMenu {
+    display: none;
+  }
+
+  #topStyleLogo {
+    padding-left: 10px;
+    padding-top: 10px;
+    width: auto;
+    height: 100%;
+  }
+
+  #desktopMenu { 
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-self: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 20px 0 0;
+  }
+
+  .desktop-menu-link {
+    color: var(--text-color-light);
+    margin: 0 20px 0 20px;
+    transition: 0.4s;
+  }
+
+  .desktop-menu-link:hover {
+    color: var(--brown);
+  }
+
+  .pink-button {
+    padding: 8px 0px 8px 0px;
+    transition: 0.4s;
+  }
+
+  .pink-button:hover {
+    opacity: 0.8;
+  }
+
+  .desktop-container-vertical {
+    width: 40vw;
+    gap: 3rem;
+    margin-left: 4rem;
+  }
+
+  .desktop-container-horizontal {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #bookAppointment { display: none; }
+
+  @keyframes social-media-animation {
+    from {
+      rotate: 0deg;
+    }
+
+    50% {
+      rotate: 25deg;
+    }
+
+    to {
+      rotate: 0deg;
+    }
+  }
+
+  .social-media-icon:hover {
+    animation: social-media-animation 0.2s;
+  }
+
+  #galleryContainer {
+    margin: 0;
+    width: 40vw;
+    max-width: 400px;
+  }
 }
