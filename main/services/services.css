@@ -24,6 +24,16 @@
 
 a { text-decoration: none; }
 
+/* Mobile Resets */
+
+.desktop-container-vertical, .desktop-container-horizontal {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
 /* Main Styling */
 
 body {
@@ -140,5 +150,37 @@ section {
 }
 
 @media(min-width: 800px) {
+  section {
+    padding: 0 20px 0 20px;
+    align-items: start;
+  }
+
+
   #popularSection { margin-top: 100px; padding-top: 7px; }
+  #pricingNoteHeading, #pricingNote { margin: 0; padding: 0; width: auto; text-align: left;}
+  #pricingNote {
+    width: 80vw;
+  }
+
+  .italiana-regular { padding-bottom: 20px; }
+
+  .desktop-container-horizontal {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .desktop-container-vertical {
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .services-photo {
+    width: 250px;
+    height: 250px;
+  }
 }
