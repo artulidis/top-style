@@ -1,3 +1,5 @@
+#desktopMenu { display: none; }
+
 #menuOverlay {
   position: fixed;
   top: 0;
@@ -95,4 +97,64 @@
   position: relative;
   left: 50%;
   margin-left: -100px;
+}
+
+@media(min-width: 800px) {
+  #header {
+    position: fixed;
+    margin-top: -100px;
+    padding-bottom: 7px;
+    box-sizing: content-box;
+    height: 100px;
+    justify-content: left;
+    background: var(--background-color);
+    z-index: 2;
+  }
+
+  #hamburgerMenu {
+    display: none;
+  }
+
+  #topStyleLogo {
+    padding-left: 12px;
+    padding-top: 12px;
+    width: auto;
+    height: 100%;
+    min-height: 100px;
+  }
+
+  #desktopMenu { 
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-self: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 20px 0 0;
+  }
+
+  .desktop-menu-link {
+    color: var(--text-color-light);
+    margin: 0 20px 0 20px;
+    transition: 0.4s;
+  }
+
+  .desktop-menu-link:hover {
+    color: var(--brown);
+  }
+
+  .pink-button {
+    padding: 8px 0px 8px 0px;
+    transition: 0.4s;
+    box-shadow: 2px 2px 10px #EBEBEB;
+    border-radius: 3px;
+  }
+
+  #desktopMenuButton {
+    width: 175px;
+  }
+
+  .pink-button:hover {
+    opacity: 0.8;
+  }
 }

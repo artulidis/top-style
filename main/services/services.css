@@ -1,0 +1,144 @@
+:root {
+  --background-color: #FFFCF4;
+  --brown: #D1C6B7;
+  --pink: #F4C9CD;
+  --light-pink: #F9E1DF;
+  
+  --text-color-bold: #000000;
+  --text-color-regular: #424242;
+  --text-color-light: #929292;
+
+  --font-family-bold: "Italiana", sans-serif;
+  --font-family-regular: "Montserrat", sans-serif;
+}
+
+/* Global Resets */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a { text-decoration: none; }
+
+/* Main Styling */
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color-regular);
+  font-family: var(--font-family-regular);
+  line-height: 1.25;
+}
+
+/* Typography */
+
+.italiana-regular {
+  font-family: "Italiana", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2em;
+  width: 90%;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+/* Header */
+
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+}
+
+#hamburgerMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+}
+
+#topStyleLogo {
+  width: 200px;
+  position: relative;
+  padding-top: 20px;
+}
+
+/* Sections */
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+
+.pink-button {
+  width: 200px;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 0 12px 0;
+  color: white;
+  background: var(--pink);
+}
+
+#pricingNoteHeading {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+#pricingNote {
+  color: var(--text-color-light);
+  text-align: center;
+  padding: 0;
+  width: 90%;
+}
+
+.service {
+  height: 100px;
+}
+
+.service span {
+  color: var(--pink);
+}
+
+.service-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: var(--font-family-regular)
+}
+
+.service-name {
+    width: 60%;
+    display: block;
+    color: var(--text-color-regular);
+}
+
+
+.service-details {
+  color: var(--text-color-light);
+}
+
+.services-menu-container {
+    width: 90%;
+}
+
+.services-photo {
+    width: 90%;
+}
+
+@media(min-width: 800px) {
+  #popularSection { margin-top: 100px; padding-top: 7px; }
+}
