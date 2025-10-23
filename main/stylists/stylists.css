@@ -1,3 +1,5 @@
+/* Root Variables */
+
 :root {
   --background-color: #FFFCF4;
   --brown: #D1C6B7;
@@ -24,23 +26,21 @@
 
 a { text-decoration: none; }
 
-/* Mobile Resets */
-
-.desktop-container-vertical, .desktop-container-horizontal {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* Main Styling */
-
 body {
   background-color: var(--background-color);
   color: var(--text-color-regular);
   font-family: var(--font-family-regular);
   line-height: 1.25;
+}
+
+/* Mobile Resets */
+
+.desktop-container-vertical, .desktop-container-horizontal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
 }
 
 /* Typography */
@@ -49,12 +49,21 @@ body {
   font-family: "Italiana", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 3em;
-  width: 90%;
+  font-size: 2em;
+  text-align: center;
 }
 
 h3 {
   font-size: 1.5rem;
+}
+
+.paragraph-text {
+  color: var(--text-color-light);
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* Header */
@@ -87,7 +96,7 @@ section {
   flex-direction: column;
   align-items: center;
   margin-top: 1rem;
-  gap: 1.5rem;
+  gap: 2.5rem;
   margin-bottom: 2rem;
 }
 
@@ -102,86 +111,64 @@ section {
   background: var(--pink);
 }
 
-#pricingNoteHeading {
-  margin-top: 20px;
-  width: 100%;
-  text-align: center;
+.stylist {
+    margin-top: 50px;
 }
 
-#pricingNote {
-  color: var(--text-color-light);
-  text-align: center;
-  padding: 0;
-  width: 90%;
-}
+.stylist-name-mobile { display: block; }
+.stylist-name-desktop { display: none; }
 
-.service {
-  height: 100px;
-}
-
-.service span {
-  color: var(--pink);
-}
-
-.service-flex {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  color: var(--font-family-regular)
-}
-
-.service-name {
-    width: 60%;
-    display: block;
-    color: var(--text-color-regular);
-}
-
-
-.service-details {
-  color: var(--text-color-light);
-}
-
-.services-menu-container {
+.stylist-image {
     width: 90%;
 }
 
-.services-photo {
+.stylist-bio {
+    text-align: center;
     width: 90%;
 }
 
 @media(min-width: 800px) {
+  .italiana-regular {
+    color: #000000;
+    width: auto;
+    text-align: left;
+    font-size: 3rem;
+  }
+
+  .paragraph-text {
+    font-size: 1.1rem;
+  }
+
   section {
-    padding: 0 20px 0 20px;
-    align-items: start;
-  }
-
-
-  #popularSection { margin-top: 100px; padding-top: 7px; }
-  #pricingNoteHeading, #pricingNote { margin: 0; padding: 0; width: auto; text-align: left;}
-  #pricingNote {
-    width: 80vw;
-  }
-
-  .italiana-regular { padding-bottom: 20px; }
-
-  .desktop-container-horizontal {
-    width: 100%;
-    margin-top: 30px;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: space-between;
     align-items: start;
+    min-height: 450px;
+    padding: 0 20px 0 20px;
+    margin-top: 1rem;
+    gap: 1.5rem;
+    margin-bottom: 7rem;
   }
 
   .desktop-container-vertical {
-    width: 60vw;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+    gap: 1.5vw;
+    align-items: center;
   }
 
-  .services-photo {
-    width: 250px;
-    height: 250px;
+  .stylist { margin-top: 100px; padding-top: 7px; }
+
+  .stylist-name-mobile { display: none; }
+  .stylist-name-desktop { display: block; }
+
+  .stylist-image { width: 30vw; max-width: 350px; }
+
+  .desktop-container-horizontal {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    margin-top: 50px;
+    align-items: start;
   }
 }
