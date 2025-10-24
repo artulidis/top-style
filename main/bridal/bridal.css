@@ -1,11 +1,11 @@
 #bridalHeading {
-  margin-top: 20px;
+  margin-top: 2rem;
   width: 100%;
   text-align: center;
 }
 
 .desktop-container-horizontal {
-    gap: 3rem;
+    gap: 4.8rem;
 }
 
 #bridalPhoto {
@@ -13,14 +13,14 @@
 }
 
 @media(min-width: 800px) {
-    #bridalSection { margin-top: 100px; padding-top: 7px; }
+    #bridalSection { margin-top: 10rem; padding-top: 0.7rem; }
     #bridalHeading, #bridalNote { margin: 0; padding: 0; width: auto; text-align: left;}
     #bridalNote {
         width: 80vw;
     }
 
     #bridalPhoto {
-        width: 500px;
-        height: 500px;
+        width: 50rem;
+        height: 50rem;
     }
 }

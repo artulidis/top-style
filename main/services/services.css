@@ -5,7 +5,7 @@ section {
 .desktop-container-vertical { gap: 1.5rem; }
 
 #pricingNoteHeading {
-  margin-top: 20px;
+  margin-top: 2rem;
   width: 100%;
   text-align: center;
 }
@@ -15,10 +15,11 @@ section {
   text-align: center;
   padding: 0;
   width: 90%;
+  font-size: 1.6rem;
 }
 
 .service {
-  height: 100px;
+  height: 10rem;
 }
 
 .service span {
@@ -36,10 +37,14 @@ section {
     width: 60%;
     display: block;
     color: var(--text-color-regular);
+    font-size: 1.6rem;
 }
+
+.service-price { font-size: 1.6rem; }
 
 .service-details {
   color: var(--text-color-light);
+  font-size: 1.6rem;
 }
 
 .services-menu-container {
@@ -52,17 +57,17 @@ section {
 
 @media(min-width: 800px) {
   section {
-    padding: 0 20px 0 20px;
+    padding: 0 2rem 0 2rem;
     align-items: start;
   }
 
-  #popularSection { margin-top: 100px; padding-top: 7px; }
+  #popularSection { margin-top: 10rem; padding-top: 0.7rem; }
   #pricingNoteHeading, #pricingNote { margin: 0; padding: 0; width: auto; text-align: left;}
   #pricingNote {
     width: 80vw;
   }
 
-  .italiana-regular { padding-bottom: 20px; }
+  .italiana-regular { padding-bottom: 2rem; }
 
   .desktop-container-vertical {
     width: 60vw;
@@ -70,13 +75,13 @@ section {
   }
 
   .desktop-container-horizontal {
-    margin-top: 30px;
+    margin-top: 3rem;
     flex-direction: row-reverse;
     align-items: start;
   }
 
   .services-photo {
-    width: 250px;
-    height: 250px;
+    width: 25rem;
+    height: 25rem;
   }
 }
