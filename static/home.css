@@ -162,8 +162,8 @@
   border: none;
   height: 1.5rem;
   border-bottom: 1px solid var(--text-color-light);
-  padding: 1rem 0.32rem;
-  letter-spacing: 0.1rem;
+  padding: 1rem 0.3rem;
+  letter-spacing: 1px;
   font-size: 1.6rem;
   outline: none;
   transition: border-color 0.2s ease;
@@ -180,6 +180,7 @@
   font-family: var(--font-family-regular);
   border: 1px solid var(--text-color-light);
   border-radius: 4px;
+  padding: 1rem 1rem;
   resize: vertical;
 }
 
@@ -199,7 +200,7 @@
 
 /* Desktop Media Query */
 
-@media(min-width: 800px) {
+@media(min-width: 1000px) {
   #heroSection { min-height: 40rem; margin-top: 10rem; padding-top: 0.7rem;}
 
   #bookAppointment { display: none; }
@@ -221,7 +222,7 @@
   #socialMediaHero {
     justify-content: left;
     width: auto;
-    margin-top: 1.6rem;
+    margin-top: 0rem;
   }
 
   .social-media-icon:hover {
@@ -330,7 +331,7 @@
     max-width: none;
     width: 100%;
     font-size: 1.2rem;
-    padding: 0;
+    padding: 1rem 0.3rem;
   }
 
   #messageInputContainer {
@@ -341,7 +342,7 @@
   #contactForm .message-input {
     grid-row: 3 / 4;
     grid-column: 1 / span 2;
-    height: 5rem;
+    height: 8rem;
     max-width: none;
     width: 100%;
     resize: none;

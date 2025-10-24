@@ -18,7 +18,7 @@ section { gap: 4rem; }
     width: 90%;
 }
 
-@media(min-width: 800px) {
+@media(min-width: 1000px) {
   .desktop-container-vertical { align-items: center; }
 
   .stylist { margin-top: 10rem; padding-top: 0.7rem; }

@@ -55,7 +55,7 @@ section {
     width: 90%;
 }
 
-@media(min-width: 800px) {
+@media(min-width: 1000px) {
   section {
     padding: 0 2rem 0 2rem;
     align-items: start;
