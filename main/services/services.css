@@ -1,106 +1,8 @@
-:root {
-  --background-color: #FFFCF4;
-  --brown: #D1C6B7;
-  --pink: #F4C9CD;
-  --light-pink: #F9E1DF;
-  
-  --text-color-bold: #000000;
-  --text-color-regular: #424242;
-  --text-color-light: #929292;
-
-  --font-family-bold: "Italiana", sans-serif;
-  --font-family-regular: "Montserrat", sans-serif;
-}
-
-/* Global Resets */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-a { text-decoration: none; }
-
-/* Mobile Resets */
-
-.desktop-container-vertical, .desktop-container-horizontal {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* Main Styling */
-
-body {
-  background-color: var(--background-color);
-  color: var(--text-color-regular);
-  font-family: var(--font-family-regular);
-  line-height: 1.25;
-}
-
-/* Typography */
-
-.italiana-regular {
-  font-family: "Italiana", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 3em;
-  width: 90%;
-}
-
-h3 {
-  font-size: 1.5rem;
-}
-
-/* Header */
-
-#header {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-  width: 100%;
-}
-
-#hamburgerMenu {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50px;
-}
-
-#topStyleLogo {
-  width: 200px;
-  position: relative;
-  padding-top: 20px;
-}
-
-/* Sections */
-
 section {
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 1rem;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
 }
 
-/* Buttons */
-
-.pink-button {
-  width: 200px;
-  border-radius: 4px;
-  text-align: center;
-  padding: 12px 0 12px 0;
-  color: white;
-  background: var(--pink);
-}
+.desktop-container-vertical { gap: 1.5rem; }
 
 #pricingNoteHeading {
   margin-top: 20px;
@@ -136,7 +38,6 @@ section {
     color: var(--text-color-regular);
 }
 
-
 .service-details {
   color: var(--text-color-light);
 }
@@ -155,7 +56,6 @@ section {
     align-items: start;
   }
 
-
   #popularSection { margin-top: 100px; padding-top: 7px; }
   #pricingNoteHeading, #pricingNote { margin: 0; padding: 0; width: auto; text-align: left;}
   #pricingNote {
@@ -164,19 +64,14 @@ section {
 
   .italiana-regular { padding-bottom: 20px; }
 
-  .desktop-container-horizontal {
-    width: 100%;
-    margin-top: 30px;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: start;
-  }
-
   .desktop-container-vertical {
     width: 60vw;
-    display: flex;
-    flex-direction: column;
+    margin: 0;
+  }
+
+  .desktop-container-horizontal {
+    margin-top: 30px;
+    flex-direction: row-reverse;
     align-items: start;
   }
 

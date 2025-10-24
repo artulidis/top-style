@@ -1,115 +1,6 @@
-/* Root Variables */
+.desktop-container-vertical, .desktop-container-horizontal { width: 100%; }
 
-:root {
-  --background-color: #FFFCF4;
-  --brown: #D1C6B7;
-  --pink: #F4C9CD;
-  --light-pink: #F9E1DF;
-  
-  --text-color-bold: #000000;
-  --text-color-regular: #424242;
-  --text-color-light: #929292;
-
-  --font-family-bold: "Italiana", sans-serif;
-  --font-family-regular: "Montserrat", sans-serif;
-}
-
-/* Global Resets */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-a { text-decoration: none; }
-
-body {
-  background-color: var(--background-color);
-  color: var(--text-color-regular);
-  font-family: var(--font-family-regular);
-  line-height: 1.25;
-}
-
-/* Mobile Resets */
-
-.desktop-container-vertical, .desktop-container-horizontal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-}
-
-/* Typography */
-
-.italiana-regular {
-  font-family: "Italiana", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 2em;
-  text-align: center;
-}
-
-h3 {
-  font-size: 1.5rem;
-}
-
-.paragraph-text {
-  color: var(--text-color-light);
-  text-align: center;
-  font-family: "Raleway", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-/* Header */
-
-#header {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-  width: 100%;
-}
-
-#hamburgerMenu {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50px;
-}
-
-#topStyleLogo {
-  width: 200px;
-  position: relative;
-  padding-top: 20px;
-}
-
-/* Sections */
-
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1rem;
-  gap: 2.5rem;
-  margin-bottom: 2rem;
-}
-
-/* Buttons */
-
-.pink-button {
-  width: 200px;
-  border-radius: 4px;
-  text-align: center;
-  padding: 12px 0 12px 0;
-  color: white;
-  background: var(--pink);
-}
+section { gap: 2.5rem; }
 
 .stylist {
     margin-top: 50px;
@@ -128,33 +19,7 @@ section {
 }
 
 @media(min-width: 800px) {
-  .italiana-regular {
-    color: #000000;
-    width: auto;
-    text-align: left;
-    font-size: 3rem;
-  }
-
-  .paragraph-text {
-    font-size: 1.1rem;
-  }
-
-  section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: start;
-    min-height: 450px;
-    padding: 0 20px 0 20px;
-    margin-top: 1rem;
-    gap: 1.5rem;
-    margin-bottom: 7rem;
-  }
-
-  .desktop-container-vertical {
-    gap: 1.5vw;
-    align-items: center;
-  }
+  .desktop-container-vertical { align-items: center; }
 
   .stylist { margin-top: 100px; padding-top: 7px; }
 
@@ -164,9 +29,6 @@ section {
   .stylist-image { width: 30vw; max-width: 350px; }
 
   .desktop-container-horizontal {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
     gap: 3rem;
     margin-top: 50px;
     align-items: start;
