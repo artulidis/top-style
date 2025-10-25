@@ -127,7 +127,7 @@
 
 /* Contact */
 
-#contactSection {padding-top: 3rem; margin-bottom: 0;}
+#contact {padding-top: 3rem; margin-bottom: 0;}
 
 .contact-information, 
 #contactForm {
@@ -273,7 +273,7 @@
     gap: 0.7rem;
   }
 
-  #contactSection {
+  #contact {
     min-height: 0;
     padding-bottom: 5rem;
     height: auto;
