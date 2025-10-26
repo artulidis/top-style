@@ -1,7 +1,13 @@
-from flask import Flask, render_template, abort
+from flask import Flask, redirect, render_template, abort, request
 from jinja2 import TemplateNotFound
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
+
+@app.before_request
+def clear_trailing_slashes():
+    if request.path != '/' and request.path.endswith('/'):
+            return redirect(request.path[:-1])
 
 @app.route("/")
 def index():
