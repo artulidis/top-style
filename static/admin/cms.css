@@ -1,0 +1,24 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#iframe {
+    background: #d1c6b782;
+    border: 1px solid #929292;
+    width: 1200px;
+    height: 600px;
+    resize: both;
+    overflow: auto;
+    padding-right: 25px;
+}

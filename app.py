@@ -11,12 +11,16 @@ def clear_trailing_slashes():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("main/index.html")
+
+@app.route("/admin")
+def admin():
+     return render_template("/admin/cms.html")
 
 @app.route("/<path:page>")
 def render_page(page):
     try:
-        return render_template(f"{page}.html")
+        return render_template(f"main/{page}.html")
     
     except TemplateNotFound:
         abort(404)
