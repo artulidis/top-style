@@ -60,8 +60,8 @@
             <section id="heroSection">
                 <div class="desktop-container-horizontal">
                     <div class="desktop-container-vertical">
-                        <h1 class="italiana-regular" id="heroText">
-                            Our Mission
+                        <h1 class="italiana-regular" id="heroText" data-cms-key="hero.title">
+                            {{ cms.get('index', {}).get('hero.title', 'Our Mission')|safe }}
                         </h1>
 
                         <p class="paragraph-text">At Top Style by Kate Noda, we believe beauty begins with feeling appreciated, understood, and cared for. 
@@ -279,6 +279,7 @@
             </section>
         
         <script src="../static/shared/mobile-menu.js" defer></script>
+        <script src="../static/shared/cms-mode.js" defer></script>
         
         <script>
             document.addEventListener("DOMContentLoaded", () => {
