@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Admin - TopStyle by Kate Noda</title>        
+        <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="../static/admin/cms.css" />
+    </head>
+
+    <body>
+        <div id="app">
+            <div id="toolbar">
+                <button id="btn-request">Request current content</button>
+                <button id="btn-save">Save to server</button>
+                <span id="status"></span>
+            </div>
+
+            <iframe id="iframe" src="/?edit=true" sandbox="allow-same-origin allow-scripts allow-forms"></iframe>
+        </div>
+
+        <script>
+            const iframe = document.getElementById('iframe');
+            const status = document.getElementById('status');
+            let latestChanges = null;
+            const page = 'index'; // or choose dynamically
+
+            // Request updated content from iframe
+            document.getElementById('btn-request').addEventListener('click', () => {
+                iframe.contentWindow.postMessage({type:'GET_EDIT_CONTENT', page}, '*');
+                status.textContent = 'Requested content…';
+            });
+
+            // Receive content from iframe
+            window.addEventListener('message', e => {
+                const msg = e.data || {};
+                if (msg.type === 'EDIT_CONTENT') {
+                    latestChanges = msg.changes;
+                    status.textContent = `Got ${Object.keys(latestChanges).length} change(s) — ready to save.`;
+                    console.log('changes', latestChanges);
+                }
+            });
+
+            // Save changes to server
+            document.getElementById('btn-save').addEventListener('click', async () => {
+            if (!latestChanges) { status.textContent = 'No changes to save. Press "Request current content" first.'; return; }
+            status.textContent = 'Saving…';
+            
+            try {
+                const res = await fetch('/admin/save', {
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({page, changes: latestChanges})
+                });
+
+                const j = await res.json();
+                status.textContent = j.status === 'OK' ? 'Saved' : 'Save failed';
+            }
+            
+            catch(err) {
+                status.textContent = 'Save error';
+                console.error(err);
+            }
+            });
+        </script>
+    </body>
+</html>

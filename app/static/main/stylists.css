@@ -1,0 +1,36 @@
+.desktop-container-vertical, .desktop-container-horizontal { width: 100%; }
+
+section { gap: 4rem; }
+
+.stylist {
+    margin-top: 5rem;
+}
+
+.stylist-name-mobile { display: block; }
+.stylist-name-desktop { display: none; }
+
+.stylist-image {
+    width: 90%;
+}
+
+.stylist-bio {
+    text-align: center;
+    width: 90%;
+}
+
+@media(min-width: 1000px) {
+  .desktop-container-vertical { align-items: center; }
+
+  .stylist { margin-top: 10rem; padding-top: 0.7rem; }
+
+  .stylist-name-mobile { display: none; }
+  .stylist-name-desktop { display: block; }
+
+  .stylist-image { width: 30vw; max-width: 35rem; }
+
+  .desktop-container-horizontal {
+    gap: 4.8rem;
+    margin-top: 5rem;
+    align-items: start;
+  }
+}

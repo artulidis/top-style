@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+    width: 1200px;
+    margin-left: -600px;
+    position: relative;
+    left: 50%;
+    top: 100px;
+}
+
+iframe {
+    background: #d1c6b782;
+    border: 1px solid #929292;
+    width: 1200px;
+    height: 600px;
+    resize: both;
+    overflow: auto;
+    padding: 0 10px 10px 0;
+}
+
+#toolbar{
+    padding: 10px;
+    background: #f3f4f6;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+#toolbar button {
+    background: rgb(148, 173, 248);
+    font-family: Arial;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    color: white;
+}

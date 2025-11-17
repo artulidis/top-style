@@ -1,0 +1,17 @@
+services:
+  flask:
+    build: ./app
+    container_name: flask_app
+    expose:
+      - "5000"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_server
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./app/static/:/static/:ro
+    depends_on:
+      - flask

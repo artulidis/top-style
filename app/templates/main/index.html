@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="description" content="TopStyle by Kate Noda – Professional hair salon offering premium styling, coloring, and treatments in Reston, VA. Book your appointment today!" />
+
+        <title>Home - TopStyle by Kate Noda</title>        
+        <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="../static/shared/styles.css" />
+        <link rel="stylesheet" href="../static/main/index.css" />
+
+        <meta property="og:title" content="TopStyle by Kate Noda - Hair Salon" />
+        <meta property="og:description" content="Premium salon services tailored to your style. Book online with Kate Noda today." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://topstylebykatenoda.com/" />
+        <meta property="og:image" content="https://topstylebykatenoda.com/static/assets/SalonImage.jpg" />
+
+    </head>
+
+    <body>
+        <div id="app">
+            <header id="header">
+                <img src="../static/assets/TopStyleLogo.png" id="topStyleLogo" alt="TopStyle salon logo" />
+
+                <!-- Desktop Menu -->
+                <nav id="desktopMenu">
+                    <a href="/" class="desktop-menu-link">About Us</a>
+                    <a href="/services" class="desktop-menu-link">Services</a>
+                    <a href="/stylists" class="desktop-menu-link">Stylists</a>
+                    <a href="/bridal" class="desktop-menu-link">Bridal</a>
+                    <a href="#contact" class="desktop-menu-link">Contact</a>
+
+                    <a href="https://na2.meevo.com/OnlineBookingApp/login?tenantId=500778&locationId=500950" class="pink-button" id="desktopMenuButton">Book Appointment</a>
+
+                </nav>
+
+                <img src="../static/assets/HamburgerMenu.png" id="hamburgerMenu" alt="Menu icon" />
+            </header>
+
+            <nav id="mobileMenu">
+                <img src="../static/assets/CloseIcon.png" id="menuClose" alt="Close menu" />
+                <ul>
+                    <li><a href="/">About Us</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/stylists">Stylists</a></li>
+                    <li><a href="/bridal">Bridal</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <a href="https://na2.meevo.com/OnlineBookingApp/login?tenantId=500778&locationId=500950" class="pink-button" id="mobileMenuButton">Book Appointment</a>
+            </nav>
+
+            <section id="heroSection">
+                <div class="desktop-container-horizontal">
+                    <div class="desktop-container-vertical">
+                        <h1 class="italiana-regular" id="heroText" data-cms-key="hero.title">
+                            {{ cms.get('index', {}).get('hero.title', 'Our Mission')|safe }}
+                        </h1>
+
+                        <p class="paragraph-text">At Top Style by Kate Noda, we believe beauty begins with feeling appreciated, understood, and cared for. 
+                            Our mission is to create more than great hair — it’s to create an experience where every guest feels seen, valued, and celebrated for their 
+                            authentic self. We honor individuality by crafting personalized looks that reflect your natural beauty and lifestyle. From effortless 
+                            color transformations to timeless cuts and styling, every service is performed with intention, artistry, and heart. 
+                            We use only the finest products with rich, nourishing ingredients because we believe you deserve uncompromising quality and comfort in every 
+                            visit. Whether you’re here for a quick refresh or a full transformation, our warm, talented team will make you feel at home — 
+                            focusing on your goals, your look, and your Top Style.</p>
+
+                        <div class="social-media-icons" id="socialMediaHero">
+                            <a href="https://www.facebook.com/topstylehairbykatenoda/">
+                                <img src="../static/assets/FacebookLogo.png" alt="Facebook" class="social-media-icon" />
+                            </a>
+                            <a href="https://www.instagram.com/topstyle.katenoda/?hl=en">
+                                <img src="../static/assets/InstagramLogo.png" alt="Instagram" class="social-media-icon" />
+                            </a>
+                            <a href="https://www.yelp.com/biz/top-style-by-kate-noda-reston">
+                                <img src="../static/assets/YelpLogo.png" alt="Yelp" class="social-media-icon" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="galleryContainer">
+                        <div id="galleryRows">
+                            <div class="gallery-row"></div>
+                            <div class="gallery-row"></div>
+                            <div class="gallery-row"></div>
+                        </div>
+
+                        <div id="galleryCols">
+                            <div class="gallery-col"></div>
+                            <div class="gallery-col"></div>
+                            <div class="gallery-col"></div>
+                        </div>
+
+                        <div id="galleryImgs">
+                            <div class="gallery-item">
+                                <div class="img-placeholder"></div>
+                                <img data-src="../static/assets/GalleryImage1.jpg" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-placeholder"></div>
+                                <img data-src="../static/assets/GalleryImage2.jpg" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-placeholder"></div>
+                                <img data-src="../static/assets/GalleryImage3.jpg" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-placeholder"></div>
+                                <img data-src="../static/assets/GalleryImage4.jpg" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-placeholder"></div>
+                                <img data-src="../static/assets/GalleryImage5.jpg" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-placeholder"></div>
+                                <img data-src="../static/assets/GalleryImage6.jpg" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-placeholder"></div>
+                                <img data-src="../static/assets/GalleryImage7.jpg" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-placeholder"></div>
+                                <img data-src="../static/assets/GalleryImage8.jpg" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-placeholder"></div>
+                                <img data-src="../static/assets/GalleryImage9.jpg" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://na2.meevo.com/OnlineBookingApp/login?tenantId=500778&locationId=500950" id="bookAppointment" class="pink-button">Book Appointment</a>
+
+            </section>
+
+            <section id="servicesSection">
+                <div class="desktop-container-horizontal">
+                    <div class="desktop-container-vertical">
+                        <h1 class="italiana-regular" id="servicesText">
+                        From classic cuts to bold colors, we make every style uniquely yours
+                        </h1>
+
+                        <a href="/services" class="pink-button" id="ourServicesDesktop">Our Services</a>
+
+                    </div>
+
+                    <div class="video-container">
+                        <video 
+                            id="salonVideo"
+                            autoplay
+                            loop
+                            muted
+                        >
+                        <source src="../static/assets/TopStyleVideo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <a href="/services" class="pink-button" id="ourServices">Our Services</a>
+            </section>
+
+            <section id="stylistsSection">
+                <div class="desktop-container-horizontal">
+                    <div class="desktop-container-vertical">
+                        <h1 class="italiana-regular" id="stylistsText">
+                        Meet our expert stylists who bring out your best look with skill and care
+                        </h1>
+
+                        <p class="paragraph-text">At Top Style Salon, all of our stylists are licensed professionals, continuously educating themselves 
+                            with the latest hair trends. We love going to annual fashion conventions and taking numerous online and in-person classes. 
+                            We are proud of being well known for doing detailed consultations with each and every guest to ensure we consistently 
+                            achieve the most possible desired look. Every team member follows strict sanitation requirements and high standards of 
+                            cleaning and disinfection to provide a healthy environment for our guests. Our salon also utilizes the latest technology, 
+                            including personally written text messages, emails, social media direct messages, and other online communication to make 
+                            sure we are easily reachable 7 days a week. We strive for the highest customer service and for top quality work. 
+                            Thank you for supporting our small but awesome team! We look forward to seeing you!</p>
+
+                        <a href="/stylists" class="pink-button" id="ourStylistsDesktop">Our Stylists</a>
+                    </div>
+
+                    <div class="desktop-container-vertical" id="stylistsImagesVerticalContainer">
+                        <img src="../static/assets/StylistsGroupPhoto.jpg" class="image-horizontal" />
+                        <img src="../static/assets/StylistsAtWorkPhoto.jpg" class="image-horizontal" />
+                    </div>
+                </div>
+
+
+                <a href="/stylists" class="pink-button" id="ourStylists">Our Stylists</a>
+            </section>
+
+            <section id="bridalSection">
+                <div class="desktop-container-horizontal">
+                    <div class="desktop-container-vertical">
+                        <h1 class="italiana-regular" id="bridalText">
+                        Radiant, timeless, and unforgettable — our bridal services ensure you look as breathtaking as the moment itself
+                        </h1>
+
+                        <a href="/bridal" class="pink-button" id="bridalButtonDesktop">Bridal Services</a>
+                    </div>
+
+                    <div id="bridalImageGrid">
+                        <img src="../static/assets/HomeBridal1.jpg" class="bridal-img">
+                        <img src="../static/assets/HomeBridal2.jpg" class="bridal-img">
+                        <img src="../static/assets/HomeBridal3.jpg" class="bridal-img">
+                        <img src="../static/assets/HomeBridal4.jpg" class="bridal-img">
+                    </div>
+                </div>
+
+                <a href="/bridal" class="pink-button" id="bridalButton">Bridal Services</a>
+            </section>
+
+            <section id="contact">
+                <div class="desktop-container-horizontal" id="contactSectionHorizontalContainer">
+                    <div class="desktop-container-vertical" id="contactInformationDesktopContainer">
+                        <div class="contact-information" id="hoursInformation">
+                            <h3 class="contact-heading" id="hoursHeading">Hours</h3>
+                            <p class="contact-text">Sunday: Closed</p>
+                            <p class="contact-text">Monday: 10:00 a.m - 6 p.m</p>
+                            <p class="contact-text">Tuesday - Friday: 10:00 a.m - 9 p.m</p>
+                        </div>
+
+                        <div class="contact-information" id="phoneInformation">
+                            <h3 class="contact-heading" id="hoursHeading">Phone</h3>
+                            <p class="contact-text">(571) 356-5670</p>
+                        </div>
+
+                        <div class="contact-information" id="addressInformation">
+                            <h3 class="contact-heading" id="hoursHeading">Address</h3>
+                            <p class="contact-text">1641 Washington Plaza N,</p>
+                            <p class="contact-text">Reston, VA 20190</p>
+                        </div>
+                    </div>
+
+                        <form action="" method="POST" id="contactForm">
+                            <h3 class="contact-heading" id="contactUsHeading">Contact Us</h3>
+                            <input type="hidden" name="contact_number">
+                            <div class="contact-input-container" id="nameInputContainer">
+                                <label for="from_name" class="contact-text">Name:</label>
+                                <input name="from_name" type="text" class="contact-input" />
+                            </div>
+
+                            <div class="contact-input-container" id="emailInputContainer">
+                                <label for="reply_to" class="contact-text">Email:</label>
+                                <input name="reply_to" type="email" class="contact-input" />
+                            </div>
+
+                            <div class="contact-input-container" id="messageInputContainer">
+                                <p class="contact-text">Message:</p>
+                                <textarea name="message" class="contact-input message-input"></textarea>
+                            </div>
+
+                            <input type="submit" class="pink-button" id="sendButton" value="Send">
+
+                            <div class="social-media-icons" id="socialMediaContact">
+                                <a href="https://www.facebook.com/topstylehairbykatenoda/">
+                                    <img src="../static/assets/FacebookLogo.png" alt="Facebook" class="social-media-icon" />
+                                </a>
+                                <a href="https://www.instagram.com/topstyle.katenoda/?hl=en">
+                                    <img src="../static/assets/InstagramLogo.png" alt="Instagram" class="social-media-icon" />
+                                </a>
+                                <a href="https://www.yelp.com/biz/top-style-by-kate-noda-reston">
+                                    <img src="../static/assets/YelpLogo.png" alt="Yelp" class="social-media-icon" />
+                                </a>
+                            </div>
+                        </form>
+                        
+                    <div id="map"></div>
+                </div>
+            </section>
+        
+        <script src="../static/shared/mobile-menu.js" defer></script>
+        <script src="../static/shared/cms-mode.js" defer></script>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+            const lazyImages = document.querySelectorAll(".lazy");
+
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const placeholder = img.previousElementSibling;
+
+                    // Load the real image
+                    img.src = img.getAttribute("data-src");
+                    img.onload = () => {
+                    img.classList.add("loaded");
+                    placeholder.classList.add("fade-out");
+                    };
+
+                    observer.unobserve(img);
+                }
+                });
+            }, {
+                rootMargin: "100px 0px",
+                threshold: 0.1
+            });
+
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+            });
+        </script>
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+        <script type="text/javascript">
+            (function() {
+                emailjs.init('hDUAaB2fOlf57zpoP');
+            })();
+        </script>
+
+        <script type="text/javascript">
+            window.onload = function() {
+                form = document.getElementById('contactForm')
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    this.contact_number.value = Math.random() * 100000 | 0;
+                    emailjs.sendForm('topstyle_service', 'contact_template', this)
+                        .then(function() {
+                            form.reset()
+                        }, function(error) {
+                            console.log(error)
+                        });
+                });
+            }
+        </script>
+
+        <!-- Google Maps API -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChPKyxwXLs_LVcY-ZaFP13upgmpSZa2sI&callback=initMap&libraries=&v=weekly" async defer></script>
+        <script type="text/javascript">
+
+        function initMap() {
+
+            const TopStyle = { lat: 38.968601273855235, lng: -77.34042946939456 };
+            const ParkingLot = { lat: 38.969606, lng: -77.341012 };
+
+            const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 38.969252, lng: -77.340817 },
+            zoom: 17,
+            disableDefaultUI: true,
+            styles: [
+                { elementType: "geometry", stylers: [{ color: "#FFFCF4" }] },
+                { elementType: "labels.text.fill", stylers: [{ color: "#5A4A42" }] },
+                { elementType: "labels.text.stroke", stylers: [{ color: "#FFFCF4" }] },
+
+                // Administrative
+                { featureType: "administrative", elementType: "geometry", stylers: [{ color: "#D1C6B7" }] },
+                { featureType: "administrative.land_parcel", elementType: "geometry", stylers: [{ color: "#E6DDD2" }] },
+                { featureType: "administrative.neighborhood", elementType: "labels.text.fill", stylers: [{ color: "#7B6D66" }] },
+
+                // POIs
+                { featureType: "poi", elementType: "geometry", stylers: [{ color: "#F4C9CD" }] },
+                { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#EBDCD0" }] },
+                { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#6E5A54" }] },
+                { featureType: "poi.business", elementType: "geometry", stylers: [{ color: "#E3C7C9" }] },
+                { featureType: "poi.government", elementType: "geometry", stylers: [{ color: "#D1C6B7" }] },
+                { featureType: "poi.school", elementType: "geometry", stylers: [{ color: "#F1D7D9" }] },
+                { featureType: "poi.medical", elementType: "geometry", stylers: [{ color: "#C9A6A9" }] },
+
+                // Roads
+                { featureType: "road", elementType: "geometry", stylers: [{ color: "#E6DDD2" }] },
+                { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#C8B8AC" }] },
+                { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#5A4A42" }] },
+                { featureType: "road.arterial", elementType: "geometry.fill", stylers: [{ color: "#F4C9CD" }] },
+                { featureType: "road.arterial", elementType: "geometry.stroke", stylers: [{ color: "#C7A9AC" }] },
+                { featureType: "road.highway", elementType: "geometry.fill", stylers: [{ color: "#D1C6B7" }] },
+                { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#A29288" }] },
+                { featureType: "road.highway.controlled_access", elementType: "geometry.fill", stylers: [{ color: "#F1D7D9" }] },
+                { featureType: "road.local", elementType: "geometry.fill", stylers: [{ color: "#FFFCF4" }] },
+                { featureType: "road.local", elementType: "geometry.stroke", stylers: [{ color: "#D1C6B7" }] },
+
+                // Transit
+                { featureType: "transit", elementType: "geometry", stylers: [{ color: "#E8D8D9" }] },
+                { featureType: "transit.line", elementType: "geometry", stylers: [{ color: "#D1C6B7" }] },
+                { featureType: "transit.station", elementType: "geometry", stylers: [{ color: "#F4C9CD" }] },
+                { featureType: "transit.station.rail", elementType: "geometry", stylers: [{ color: "#C9A6A9" }] },
+                { featureType: "transit.station.bus", elementType: "geometry", stylers: [{ color: "#E3C7C9" }] },
+                { featureType: "transit.station.airport", elementType: "geometry", stylers: [{ color: "#D1C6B7" }] },
+
+                // Water
+                { featureType: "water", elementType: "geometry", stylers: [{ color: "#D8E7E8" }] },
+                { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#6E7A7A" }] }
+            ]
+        });
+
+
+
+            
+            const marker = new google.maps.Marker({
+                position: TopStyle,
+                map: map,
+            });
+
+            const parkingMarker = new google.maps.Marker({
+                position: ParkingLot,
+                map: map,
+                icon: "../static/assets/parkingIcon.png"
+            });
+        }
+        
+        </script>
+    </body>
+</html>
