@@ -27,7 +27,7 @@
     <body>
         <div id="app">
             <header id="header">
-                <img src="../static/assets/TopStyleLogo.png" id="topStyleLogo" alt="TopStyle salon logo" />
+                <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
 
                 <!-- Desktop Menu -->
                 <nav id="desktopMenu">
@@ -45,7 +45,7 @@
             </header>
 
             <nav id="mobileMenu">
-                <img src="../static/assets/CloseIcon.png" id="menuClose" alt="Close menu" />
+                <img src="../static/assets/CloseIcon.png" class="close-icon" id="menuClose" alt="Close menu" />
                 <ul>
                     <li><a href="/">About Us</a></li>
                     <li><a href="/services">Services</a></li>
@@ -147,8 +147,10 @@
                 <div class="desktop-container-horizontal">
                     <div class="desktop-container-vertical">
                         <h1 class="italiana-regular" id="servicesText">
-                        From classic cuts to bold colors, we make every style uniquely yours
+                            Award-Winning Excellence in Every Style
                         </h1>
+
+                        <p class="paragraph-text">At TopStyle Salon, our commitment to exceptional service has earned us some of the region’s highest honors year after year. We are proud winners of Northern VA Magazine’s Best Salon in 2017, 2022, 2023, 2024, and 2025, as well as Best of the Knot 2022, WeddingWire 2025, and Best of Reston Hair Salon 2025. These recognitions reflect our passion for artistry and our team’s unwavering pursuit of beauty done right.</p>
 
                         <a href="/services" class="pink-button" id="ourServicesDesktop">Our Services</a>
 
@@ -176,7 +178,7 @@
                         Meet our expert stylists who bring out your best look with skill and care
                         </h1>
 
-                        <p class="paragraph-text">At Top Style Salon, all of our stylists are licensed professionals, continuously educating themselves 
+                        <p class="paragraph-text">At Top Style Salon, all of our stylists are licensed          professionals, continuously educating themselves 
                             with the latest hair trends. We love going to annual fashion conventions and taking numerous online and in-person classes. 
                             We are proud of being well known for doing detailed consultations with each and every guest to ensure we consistently 
                             achieve the most possible desired look. Every team member follows strict sanitation requirements and high standards of 
@@ -189,8 +191,7 @@
                     </div>
 
                     <div class="desktop-container-vertical" id="stylistsImagesVerticalContainer">
-                        <img src="../static/assets/StylistsGroupPhoto.jpg" class="image-horizontal" />
-                        <img src="../static/assets/StylistsAtWorkPhoto.jpg" class="image-horizontal" />
+                        <img src="../static/assets/StylistsGroupPhoto.jpg" id="stylistsGroupPhoto" />
                     </div>
                 </div>
 
@@ -202,8 +203,10 @@
                 <div class="desktop-container-horizontal">
                     <div class="desktop-container-vertical">
                         <h1 class="italiana-regular" id="bridalText">
-                        Radiant, timeless, and unforgettable — our bridal services ensure you look as breathtaking as the moment itself
+                            Bridal Beauty, Perfected
                         </h1>
+
+                        <p class="paragraph-text">Your wedding day deserves nothing less than flawless. At TopStyle Salon, our bridal specialists create elegant, timeless looks tailored to your vision — whether soft and romantic or glam and dramatic. With award-winning expertise and a calming, detail-focused approach, we ensure you feel confident, radiant, and picture-perfect from “I do” to the last dance.</p>
 
                         <a href="/bridal" class="pink-button" id="bridalButtonDesktop">Bridal Services</a>
                     </div>
@@ -241,22 +244,28 @@
                         </div>
                     </div>
 
-                        <form action="" method="POST" id="contactForm">
+                        <form action="" method="POST" id="contactForm" novalidate>
                             <h3 class="contact-heading" id="contactUsHeading">Contact Us</h3>
                             <input type="hidden" name="contact_number">
                             <div class="contact-input-container" id="nameInputContainer">
                                 <label for="from_name" class="contact-text">Name:</label>
-                                <input name="from_name" type="text" class="contact-input" />
+                                <input name="from_name" type="text" class="contact-input" required />
                             </div>
 
                             <div class="contact-input-container" id="emailInputContainer">
                                 <label for="reply_to" class="contact-text">Email:</label>
-                                <input name="reply_to" type="email" class="contact-input" />
+                                <input name="reply_to" type="email" class="contact-input" required />
                             </div>
 
                             <div class="contact-input-container" id="messageInputContainer">
+                                <div id="emailSentPopupOverlay"></div>
+                                <div id="emailSentPopup">
+                                    <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
+                                    <h1 class="italiana-regular" id="emailSubmitMessage"></h1>
+                                    <img src="../static/assets/CloseIcon.png" class="close-icon" id="messageClose" alt="Close Message" />
+                                </div>
                                 <p class="contact-text">Message:</p>
-                                <textarea name="message" class="contact-input message-input"></textarea>
+                                <textarea name="message" class="contact-input message-input" required ></textarea>
                             </div>
 
                             <input type="submit" class="pink-button" id="sendButton" value="Send">
@@ -321,19 +330,52 @@
         </script>
 
         <script type="text/javascript">
+            const overlay = document.getElementById("emailSentPopupOverlay")
+            const popup = document.getElementById("emailSentPopup")
+            const messageClose = document.getElementById("messageClose")
+            const emailSubmitMessage = document.getElementById("emailSubmitMessage")
+
             window.onload = function() {
                 form = document.getElementById('contactForm')
                 form.addEventListener('submit', function(event) {
                     event.preventDefault();
+
+                    if(!this.checkValidity()) {
+                        this.reportValidity()
+                        return
+                    }
+
                     this.contact_number.value = Math.random() * 100000 | 0;
-                    emailjs.sendForm('topstyle_service', 'contact_template', this)
+                    emailjs.sendForm('topstyle_servic4', 'contact_template', this)
                         .then(function() {
                             form.reset()
+                            emailSubmitMessage.textContent = "Thank you for contacting the TopStyle salon. We will reach out to out to you shortly!"
+                            overlay.style.visibility = "visible"
+                            overlay.style.opacity = "1"
+
+                            popup.style.visibility = "visible"
+                            popup.style.top = "4rem"
+
                         }, function(error) {
-                            console.log(error)
+                            emailSubmitMessage.textContent = "Sorry, your message was not delivered."
+                            overlay.style.visibility = "visible"
+                            overlay.style.opacity = "1"
+
+                            popup.style.visibility = "visible"
+                            popup.style.top = "4rem"
                         });
-                });
+                        
+                
+                    });
             }
+
+            messageClose.addEventListener("click", () => {
+                popup.style.top = "-30rem"
+                popup.style.visibility = "hidden"
+                
+                overlay.style.opacity = "0"
+                overlay.style.visibility = "hidden"
+            })
         </script>
 
         <!-- Google Maps API -->
