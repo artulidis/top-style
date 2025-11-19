@@ -17,7 +17,7 @@ jobs:
           tar -czf repo.tar.gz --exclude='.git' .
 
       - name: Copy repo to droplet
-        uses: appleboy/scp-action@v0.1.8
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DROPLET_HOST }}
           username: ${{ secrets.DROPLET_USER }}
@@ -27,7 +27,7 @@ jobs:
           target: "/home/${{ secrets.DROPLET_USER }}/topstyle/"
 
       - name: Extract and deploy on droplet
-        uses: appleboy/ssh-action@v0.1.8
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.DROPLET_HOST }}
           username: ${{ secrets.DROPLET_USER }}
