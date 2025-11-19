@@ -1,0 +1,48 @@
+name: Deploy to Digital Ocean Droplet
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Archive repo
+        run: |
+          tar -czf repo.tar.gz --exclude='.git' .
+
+      - name: Copy repo to droplet
+        uses: appleboy/scp-action@v0.1.8
+        with:
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          port: 22
+          source: "repo.tar.gz"
+          target: "/home/${{ secrets.DROPLET_USER }}/topstyle/"
+
+      - name: Extract and deploy on droplet
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          port: 22
+          script: |
+            set -e
+            cd ~/topstyle
+            tar -xzf repo.tar.gz -C ~/topstyle
+            # ensure correct ownership
+            chown -R $USER:$USER ~/topstyle
+            # stop old containers, pull/build and start new ones
+            docker compose down
+            docker compose pull || true
+            docker compose build --no-cache
+            docker compose up -d
+            # cleanup dangling images
+            docker image prune -f
