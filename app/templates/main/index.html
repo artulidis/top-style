@@ -346,7 +346,7 @@
                     }
 
                     this.contact_number.value = Math.random() * 100000 | 0;
-                    emailjs.sendForm('topstyle_servic4', 'contact_template', this)
+                    emailjs.sendForm('topstyle_service', 'contact_template', this)
                         .then(function() {
                             form.reset()
                             emailSubmitMessage.textContent = "Thank you for contacting the TopStyle salon. We will reach out to out to you shortly!"
