@@ -12,9 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Archive repo
+      - name: Create deploy package
         run: |
-          tar -czf repo.tar.gz --exclude='.git' .
+          mkdir deploy
+          rsync -av --exclude='.git' --exclude='deploy' ./ deploy/
+          cd deploy
+          tar -czf ../repo.tar.gz .
 
       - name: Copy repo to droplet
         uses: appleboy/scp-action@v0.1.7
