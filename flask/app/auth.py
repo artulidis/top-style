@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
 
 auth = Blueprint("auth", __name__)
 
-@auth.route("/login")
+@auth.route("/admin-login")
 def login():
     return render_template("admin/login.html")
 
