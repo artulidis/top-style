@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Admin - TopStyle by Kate Noda</title>        
+        <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+
+        <link rel="stylesheet" href="../static/admin/cms.css" />
+    </head>
+
+    <body>
+        <form method="POST" action="/login">
+            <div>
+                <div>
+                    <input type="username" name="username" placeholder="Username:" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div>
+                    <input type="password" name="password" placeholder="Password:">
+                </div>
+            </div>
+
+            <div class="field">
+                <label>
+                    <input type="checkbox" name="remember">
+                    Remember me
+                </label>
+            </div>
+
+            <button>Login</button>
+        </form>
+    </body>
+</html>

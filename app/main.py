@@ -1,9 +1,10 @@
 import os, json
-from flask import Flask, jsonify, redirect, render_template, abort, request
+from flask import Blueprint, jsonify, render_template
+from flask import abort, redirect, request
+from flask_login import login_required, current_user
 from jinja2 import TemplateNotFound
 
-app = Flask(__name__)
-app.url_map.strict_slashes = False
+main = Blueprint("main", __name__)
 
 # Admin Logic
 
@@ -21,11 +22,11 @@ def save_content(data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
-@app.context_processor
+@main.context_processor
 def inject_cms():
     return {"cms": load_content()}
 
-@app.route("/admin/save", methods=["POST"])
+@main.route("/admin/save", methods=["POST"])
 def admin_save():
     """
         Expected Payload:
@@ -54,27 +55,24 @@ def admin_save():
 
 # Routing Logic
 
-@app.before_request
+@main.before_request
 def clear_trailing_slashes():
     if request.path != '/' and request.path.endswith('/'):
             return redirect(request.path[:-1])
 
-@app.route("/")
+@main.route("/")
 def index():
     return render_template("main/index.html")
 
-@app.route("/admin")
+@main.route("/admin")
+@login_required
 def admin():
      return render_template("/admin/cms.html")
 
-@app.route("/<path:page>")
+@main.route("/<path:page>")
 def render_page(page):
     try:
         return render_template(f"main/{page}.html")
     
     except TemplateNotFound:
         abort(404)
-
-
-if __name__ == "__main__":
-   app.run(host="0.0.0.0", port=5000) 
