@@ -245,46 +245,44 @@
                         </div>
                     </div>
 
-                        <form action="" method="POST" id="contactForm" novalidate>
-                            <h3 class="contact-heading" id="contactUsHeading">Contact Us</h3>
-                            <input type="hidden" name="contact_number">
-                            <div class="contact-input-container" id="nameInputContainer">
-                                <label for="from_name" class="contact-text">Name:</label>
-                                <input name="from_name" type="text" class="contact-input" required />
-                            </div>
+                    <form action="" method="POST" id="contactForm" novalidate>
+                        <h3 class="contact-heading" id="contactUsHeading">Contact Us</h3>
+                        <input type="hidden" name="contact_number">
+                        <div class="contact-input-container" id="nameInputContainer">
+                            <label for="from_name" class="contact-text">Name:</label>
+                            <input name="from_name" type="text" class="contact-input" required />
+                        </div>
 
-                            <div class="contact-input-container" id="emailInputContainer">
-                                <label for="reply_to" class="contact-text">Email:</label>
-                                <input name="reply_to" type="email" class="contact-input" required />
-                            </div>
+                        <div class="contact-input-container" id="emailInputContainer">
+                            <label for="reply_to" class="contact-text">Email:</label>
+                            <input name="reply_to" type="email" class="contact-input" required />
+                        </div>
 
-                            <div class="contact-input-container" id="messageInputContainer">
-                                <div id="emailSentPopupOverlay"></div>
-                                <div id="emailSentPopup">
-                                    <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
-                                    <h1 class="italiana-regular" id="emailSubmitMessage"></h1>
-                                    <img src="../static/assets/CloseIcon.png" class="close-icon" id="messageClose" alt="Close Message" />
-                                </div>
-                                <p class="contact-text">Message:</p>
-                                <textarea name="message" class="contact-input message-input" required ></textarea>
+                        <div class="contact-input-container" id="messageInputContainer">
+                            <div id="emailSentPopupOverlay"></div>
+                            <div id="emailSentPopup">
+                                <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
+                                <h1 class="italiana-regular" id="emailSubmitMessage"></h1>
+                                <img src="../static/assets/CloseIcon.png" class="close-icon" id="messageClose" alt="Close Message" />
                             </div>
+                            <p class="contact-text">Message:</p>
+                            <textarea name="message" class="contact-input message-input" required ></textarea>
+                        </div>
 
-                            <input type="submit" class="pink-button" id="sendButton" value="Send">
+                        <input type="submit" class="pink-button" id="sendButton" value="Send">
 
-                            <div class="social-media-icons" id="socialMediaContact">
-                                <a href="https://www.facebook.com/topstylehairbykatenoda/">
-                                    <img src="../static/assets/FacebookLogo.png" alt="Facebook" class="social-media-icon" />
-                                </a>
-                                <a href="https://www.instagram.com/topstyle.katenoda/?hl=en">
-                                    <img src="../static/assets/InstagramLogo.png" alt="Instagram" class="social-media-icon" />
-                                </a>
-                                <a href="https://www.yelp.com/biz/top-style-by-kate-noda-reston">
-                                    <img src="../static/assets/YelpLogo.png" alt="Yelp" class="social-media-icon" />
-                                </a>
-                            </div>
-                        </form>
-                        
-                    <div id="map"></div>
+                        <div class="social-media-icons" id="socialMediaContact">
+                            <a href="https://www.facebook.com/topstylehairbykatenoda/">
+                                <img src="../static/assets/FacebookLogo.png" alt="Facebook" class="social-media-icon" />
+                            </a>
+                            <a href="https://www.instagram.com/topstyle.katenoda/?hl=en">
+                                <img src="../static/assets/InstagramLogo.png" alt="Instagram" class="social-media-icon" />
+                            </a>
+                            <a href="https://www.yelp.com/biz/top-style-by-kate-noda-reston">
+                                <img src="../static/assets/YelpLogo.png" alt="Yelp" class="social-media-icon" />
+                            </a>
+                        </div>
+                    </form>
                 </div>
             </section>
         
@@ -377,81 +375,6 @@
                 overlay.style.opacity = "0"
                 overlay.style.visibility = "hidden"
             })
-        </script>
-
-        <!-- Google Maps API -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChPKyxwXLs_LVcY-ZaFP13upgmpSZa2sI&callback=initMap&libraries=&v=weekly" async defer></script>
-        <script type="text/javascript">
-
-        function initMap() {
-
-            const TopStyle = { lat: 38.968601273855235, lng: -77.34042946939456 };
-            const ParkingLot = { lat: 38.969606, lng: -77.341012 };
-
-            const map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: 38.969252, lng: -77.340817 },
-            zoom: 17,
-            disableDefaultUI: true,
-            styles: [
-                { elementType: "geometry", stylers: [{ color: "#FFFCF4" }] },
-                { elementType: "labels.text.fill", stylers: [{ color: "#5A4A42" }] },
-                { elementType: "labels.text.stroke", stylers: [{ color: "#FFFCF4" }] },
-
-                // Administrative
-                { featureType: "administrative", elementType: "geometry", stylers: [{ color: "#D1C6B7" }] },
-                { featureType: "administrative.land_parcel", elementType: "geometry", stylers: [{ color: "#E6DDD2" }] },
-                { featureType: "administrative.neighborhood", elementType: "labels.text.fill", stylers: [{ color: "#7B6D66" }] },
-
-                // POIs
-                { featureType: "poi", elementType: "geometry", stylers: [{ color: "#F4C9CD" }] },
-                { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#EBDCD0" }] },
-                { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#6E5A54" }] },
-                { featureType: "poi.business", elementType: "geometry", stylers: [{ color: "#E3C7C9" }] },
-                { featureType: "poi.government", elementType: "geometry", stylers: [{ color: "#D1C6B7" }] },
-                { featureType: "poi.school", elementType: "geometry", stylers: [{ color: "#F1D7D9" }] },
-                { featureType: "poi.medical", elementType: "geometry", stylers: [{ color: "#C9A6A9" }] },
-
-                // Roads
-                { featureType: "road", elementType: "geometry", stylers: [{ color: "#E6DDD2" }] },
-                { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#C8B8AC" }] },
-                { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#5A4A42" }] },
-                { featureType: "road.arterial", elementType: "geometry.fill", stylers: [{ color: "#F4C9CD" }] },
-                { featureType: "road.arterial", elementType: "geometry.stroke", stylers: [{ color: "#C7A9AC" }] },
-                { featureType: "road.highway", elementType: "geometry.fill", stylers: [{ color: "#D1C6B7" }] },
-                { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#A29288" }] },
-                { featureType: "road.highway.controlled_access", elementType: "geometry.fill", stylers: [{ color: "#F1D7D9" }] },
-                { featureType: "road.local", elementType: "geometry.fill", stylers: [{ color: "#FFFCF4" }] },
-                { featureType: "road.local", elementType: "geometry.stroke", stylers: [{ color: "#D1C6B7" }] },
-
-                // Transit
-                { featureType: "transit", elementType: "geometry", stylers: [{ color: "#E8D8D9" }] },
-                { featureType: "transit.line", elementType: "geometry", stylers: [{ color: "#D1C6B7" }] },
-                { featureType: "transit.station", elementType: "geometry", stylers: [{ color: "#F4C9CD" }] },
-                { featureType: "transit.station.rail", elementType: "geometry", stylers: [{ color: "#C9A6A9" }] },
-                { featureType: "transit.station.bus", elementType: "geometry", stylers: [{ color: "#E3C7C9" }] },
-                { featureType: "transit.station.airport", elementType: "geometry", stylers: [{ color: "#D1C6B7" }] },
-
-                // Water
-                { featureType: "water", elementType: "geometry", stylers: [{ color: "#D8E7E8" }] },
-                { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#6E7A7A" }] }
-            ]
-        });
-
-
-
-            
-            const marker = new google.maps.Marker({
-                position: TopStyle,
-                map: map,
-            });
-
-            const parkingMarker = new google.maps.Marker({
-                position: ParkingLot,
-                map: map,
-                icon: "../static/assets/parkingIcon.png"
-            });
-        }
-        
         </script>
     </body>
 </html>

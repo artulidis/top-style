@@ -161,7 +161,7 @@
 
 /* Contact */
 
-#contact {padding-top: 3rem; margin-bottom: 0;}
+#contact { padding-top: 3rem; }
 
 .contact-information, 
 #contactForm {
@@ -273,16 +273,6 @@
 
 #sendButton { cursor: pointer; border: none; }
 
-/* Map */
-
-#map {
-  margin-top: 3rem;
-  width: 100%;
-  height: 40rem;
-  border-top: 2px solid var(--brown);
-  border-bottom: 2px solid var(--brown);
-}
-
 /* Desktop Media Query */
 
 @media(min-width: 1000px) {
@@ -365,6 +355,7 @@
     box-sizing: content-box;
     border-top: 1px solid var(--brown);
     padding-top: 1.6rem;
+    margin-bottom: 0;
   }
 
   .contact-information {
@@ -381,7 +372,6 @@
   }
 
   #contactSectionHorizontalContainer {
-    align-items: start;
     height: 40vh;
   }
 
@@ -390,8 +380,9 @@
     grid-template-columns: 1fr 1fr; /* 2 columns */
     grid-template-rows: auto auto auto auto; /* 4 rows */
     gap: 1.6rem 3.2rem;
-    width: 30%;
-    margin: 0;
+    min-width: 30rem;
+    width: 40rem;
+    margin: 0 10rem 0 30rem;
   }
 
   /* Grid item placement */
@@ -466,13 +457,5 @@
     margin-left: -25rem;
     width: 50rem;
     height: 30rem;
-  }
-
-  #map {
-    margin-top: 0;
-    border: 0;
-    width: 25%;
-    min-width: 20rem;
-    height: 100%;
   }
 }

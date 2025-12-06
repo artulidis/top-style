@@ -216,6 +216,7 @@ section {
   align-items: center;
   margin-top: 1.6rem;
   gap: 2.4rem;
+  min-width: 300px;
   margin-bottom: 3.2rem;
 }
 
