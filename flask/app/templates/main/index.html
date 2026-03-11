@@ -31,7 +31,7 @@
 
                 <!-- Desktop Menu -->
                 <nav id="desktopMenu">
-                    <a href="/" class="desktop-menu-link">About Us</a>
+                    <a href="/" class="desktop-menu-link">Home</a>
                     <a href="/services" class="desktop-menu-link">Services</a>
                     <a href="/stylists" class="desktop-menu-link">Our Team</a>
                     <a href="/bridal" class="desktop-menu-link">Bridal</a>
@@ -47,7 +47,7 @@
             <nav id="mobileMenu">
                 <img src="../static/assets/CloseIcon.png" class="close-icon" id="menuClose" alt="Close menu" />
                 <ul>
-                    <li><a href="/">About Us</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/services">Services</a></li>
                     <li><a href="/stylists">Our Team</a></li>
                     <li><a href="/bridal">Bridal</a></li>
@@ -60,17 +60,15 @@
             <section id="heroSection">
                 <div class="desktop-container-horizontal">
                     <div class="desktop-container-vertical">
-                        <h1 class="italiana-regular" id="heroText" data-cms-key="hero.title">
-                            {{ cms.get('index', {}).get('hero.title', 'Our Mission')|safe }}
-                        </h1>
+                        <h1 class="italiana-regular" id="heroText">{{ home_about_section.heading if home_about_section and home_about_section.heading else "Our Mission" }}</h1>
 
-                        <p class="paragraph-text">At Top Style by Kate Noda, we believe beauty begins with feeling appreciated, understood, and cared for. 
+                        <p class="paragraph-text">{{ home_about_section.text if home_about_section and home_about_section.text else "At Top Style by Kate Noda, we believe beauty begins with feeling appreciated, understood, and cared for. 
                             Our mission is to create more than great hair — it’s to create an experience where every guest feels seen, valued, and celebrated for their 
                             authentic self. We honor individuality by crafting personalized looks that reflect your natural beauty and lifestyle. From effortless 
                             color transformations to timeless cuts and styling, every service is performed with intention, artistry, and heart. 
                             We use only the finest products with rich, nourishing ingredients because we believe you deserve uncompromising quality and comfort in every 
                             visit. Whether you’re here for a quick refresh or a full transformation, our warm, talented team will make you feel at home — 
-                            focusing on your goals, your look, and your Top Style.</p>
+                            focusing on your goals, your look, and your Top Style." }}</p>
 
                         <div class="social-media-icons" id="socialMediaHero">
                             <a href="https://www.facebook.com/topstylehairbykatenoda/">
@@ -85,7 +83,7 @@
                         </div>
                     </div>
 
-                    <div id="galleryContainer">
+                    <div id="aboutGalleryContainer">
                         <div id="galleryRows">
                             <div class="gallery-row"></div>
                             <div class="gallery-row"></div>
@@ -101,39 +99,39 @@
                         <div id="galleryImgs">
                             <div class="gallery-item">
                                 <div class="img-placeholder"></div>
-                                <img data-src="../static/assets/GalleryImage1.jpg" alt="gallery image" class="gallery-img lazy" />
+                                <img data-src="{{ home_about_section.gallery_image1 if home_about_section and home_about_section.gallery_image1 else '../static/assets/GalleryImage1.jpg' }}" alt="gallery image" class="gallery-img lazy" />
                             </div>
                             <div class="gallery-item">
                                 <div class="img-placeholder"></div>
-                                <img data-src="../static/assets/GalleryImage2.jpg" alt="gallery image" class="gallery-img lazy" />
+                                <img data-src="{{ home_about_section.gallery_image2 if home_about_section and home_about_section.gallery_image2 else '../static/assets/GalleryImage2.jpg' }}" alt="gallery image" class="gallery-img lazy" />
                             </div>
                             <div class="gallery-item">
                                 <div class="img-placeholder"></div>
-                                <img data-src="../static/assets/GalleryImage3.jpg" alt="gallery image" class="gallery-img lazy" />
+                                <img data-src="{{ home_about_section.gallery_image3 if home_about_section and home_about_section.gallery_image3 else '../static/assets/GalleryImage3.jpg' }}" alt="gallery image" class="gallery-img lazy" />
                             </div>
                             <div class="gallery-item">
                                 <div class="img-placeholder"></div>
-                                <img data-src="../static/assets/GalleryImage4.jpg" alt="gallery image" class="gallery-img lazy" />
+                                <img data-src="{{ home_about_section.gallery_image4 if home_about_section and home_about_section.gallery_image4 else '../static/assets/GalleryImage4.jpg' }}" alt="gallery image" class="gallery-img lazy" />
                             </div>
                             <div class="gallery-item">
                                 <div class="img-placeholder"></div>
-                                <img data-src="../static/assets/GalleryImage5.jpg" alt="gallery image" class="gallery-img lazy" />
+                                <img data-src="{{ home_about_section.gallery_image5 if home_about_section and home_about_section.gallery_image5 else '../static/assets/GalleryImage5.jpg' }}" alt="gallery image" class="gallery-img lazy" />
                             </div>
                             <div class="gallery-item">
                                 <div class="img-placeholder"></div>
-                                <img data-src="../static/assets/GalleryImage6.jpg" alt="gallery image" class="gallery-img lazy" />
+                                <img data-src="{{ home_about_section.gallery_image6 if home_about_section and home_about_section.gallery_image6 else '../static/assets/GalleryImage6.jpg' }}" alt="gallery image" class="gallery-img lazy" />
                             </div>
                             <div class="gallery-item">
                                 <div class="img-placeholder"></div>
-                                <img data-src="../static/assets/GalleryImage7.jpg" alt="gallery image" class="gallery-img lazy" />
+                                <img data-src="{{ home_about_section.gallery_image7 if home_about_section and home_about_section.gallery_image7 else '../static/assets/GalleryImage7.jpg' }}" alt="gallery image" class="gallery-img lazy" />
                             </div>
                             <div class="gallery-item">
                                 <div class="img-placeholder"></div>
-                                <img data-src="../static/assets/GalleryImage8.jpg" alt="gallery image" class="gallery-img lazy" />
+                                <img data-src="{{ home_about_section.gallery_image8 if home_about_section and home_about_section.gallery_image8 else '../static/assets/GalleryImage8.jpg' }}" alt="gallery image" class="gallery-img lazy" />
                             </div>
                             <div class="gallery-item">
                                 <div class="img-placeholder"></div>
-                                <img data-src="../static/assets/GalleryImage9.jpg" alt="gallery image" class="gallery-img lazy" />
+                                <img data-src="{{ home_about_section.gallery_image9 if home_about_section and home_about_section.gallery_image9 else '../static/assets/GalleryImage9.jpg' }}" alt="gallery image" class="gallery-img lazy" />
                             </div>
                         </div>
                     </div>
@@ -146,11 +144,9 @@
             <section id="servicesSection">
                 <div class="desktop-container-horizontal">
                     <div class="desktop-container-vertical">
-                        <h1 class="italiana-regular" id="servicesText">
-                            Award-Winning Excellence in Every Style
-                        </h1>
+                        <h1 class="italiana-regular" id="servicesText">{{ home_services_section.heading if home_services_section and home_services_section.heading else "Award-Winning Excellence in Every Style" }}</h1>
 
-                        <p class="paragraph-text">At TopStyle Salon, our commitment to exceptional service has earned us some of the region’s highest honors year after year. We are proud winners of Northern VA Magazine’s Best Salon in 2017, 2022, 2023, 2024, and 2025, as well as Best of the Knot 2022, WeddingWire 2025, and Best of Reston Hair Salon 2025. These recognitions reflect our passion for artistry and our team’s unwavering pursuit of beauty done right.</p>
+                        <p class="paragraph-text">{{ home_services_section.text if home_services_section and home_services_section.text else "At TopStyle Salon, our commitment to exceptional service has earned us some of the region’s highest honors year after year. We are proud winners of Northern VA Magazine’s Best Salon in 2017, 2022, 2023, 2024, and 2025, as well as Best of the Knot 2022, WeddingWire 2025, and Best of Reston Hair Salon 2025. These recognitions reflect our passion for artistry and our team’s unwavering pursuit of beauty done right." }}</p>
 
                         <a href="/services" class="pink-button" id="ourServicesDesktop">Our Services</a>
 
@@ -164,7 +160,7 @@
                             muted
                             playsinline
                         >
-                        <source src="../static/assets/TopStyleVideo.mp4" type="video/mp4">
+                        <source src="{{ home_services_section.salon_video if home_services_section and home_services_section.salon_video else '../static/assets/TopStyleVideo.mp4' }}" type="video/mp4">
                         </video>
                     </div>
                 </div>
@@ -175,24 +171,22 @@
             <section id="stylistsSection">
                 <div class="desktop-container-horizontal">
                     <div class="desktop-container-vertical">
-                        <h1 class="italiana-regular" id="stylistsText">
-                        Meet our expert stylists who bring out your best look with skill and care
-                        </h1>
+                        <h1 class="italiana-regular" id="stylistsText">{{ home_stylists_section.heading if home_stylists_section and home_stylists_section.heading else "Meet our expert stylists who bring out your best look with skill and care" }}</h1>
 
-                        <p class="paragraph-text">At Top Style Salon, all of our stylists are licensed          professionals, continuously educating themselves 
+                        <p class="paragraph-text">{{ home_stylists_section.text if home_stylists_section and home_stylists_section.text else "At Top Style Salon, all of our stylists are licensed          professionals, continuously educating themselves 
                             with the latest hair trends. We love going to annual fashion conventions and taking numerous online and in-person classes. 
                             We are proud of being well known for doing detailed consultations with each and every guest to ensure we consistently 
                             achieve the most possible desired look. Every team member follows strict sanitation requirements and high standards of 
                             cleaning and disinfection to provide a healthy environment for our guests. Our salon also utilizes the latest technology, 
                             including personally written text messages, emails, social media direct messages, and other online communication to make 
                             sure we are easily reachable 7 days a week. We strive for the highest customer service and for top quality work. 
-                            Thank you for supporting our small but awesome team! We look forward to seeing you!</p>
+                            Thank you for supporting our small but awesome team! We look forward to seeing you!" }}</p>
 
                         <a href="/stylists" class="pink-button" id="ourStylistsDesktop">Our Stylists</a>
                     </div>
 
                     <div class="desktop-container-vertical" id="stylistsImagesVerticalContainer">
-                        <img src="../static/assets/StylistsGroupPhoto.jpg" id="stylistsGroupPhoto" />
+                        <img src="{{ home_stylists_section.stylists_image if home_stylists_section and home_stylists_section.stylists_image else '../static/assets/StylistsGroupPhoto.jpg' }}" id="stylistsGroupPhoto" />
                     </div>
                 </div>
 
@@ -203,20 +197,18 @@
             <section id="bridalSection">
                 <div class="desktop-container-horizontal">
                     <div class="desktop-container-vertical">
-                        <h1 class="italiana-regular" id="bridalText">
-                            Bridal Beauty, Perfected
-                        </h1>
+                        <h1 class="italiana-regular" id="bridalText">{{ home_bridal_section.heading if home_bridal_section and home_bridal_section.heading else "Bridal Beauty, Perfected" }}</h1>
 
-                        <p class="paragraph-text">Your wedding day deserves nothing less than flawless. At TopStyle Salon, our bridal specialists create elegant, timeless looks tailored to your vision — whether soft and romantic or glam and dramatic. With award-winning expertise and a calming, detail-focused approach, we ensure you feel confident, radiant, and picture-perfect from “I do” to the last dance.</p>
+                        <p class="paragraph-text">{{ home_bridal_section.text if home_bridal_section and home_bridal_section.text else "Your wedding day deserves nothing less than flawless. At TopStyle Salon, our bridal specialists create elegant, timeless looks tailored to your vision — whether soft and romantic or glam and dramatic. With award-winning expertise and a calming, detail-focused approach, we ensure you feel confident, radiant, and picture-perfect from “I do” to the last dance." }}</p>
 
                         <a href="/bridal" class="pink-button" id="bridalButtonDesktop">Bridal Services</a>
                     </div>
 
                     <div id="bridalImageGrid">
-                        <img src="../static/assets/HomeBridal1.jpg" class="bridal-img">
-                        <img src="../static/assets/HomeBridal2.jpg" class="bridal-img">
-                        <img src="../static/assets/HomeBridal3.jpg" class="bridal-img">
-                        <img src="../static/assets/HomeBridal4.jpg" class="bridal-img">
+                        <img src="{{ home_bridal_section.bridal_image1 if home_bridal_section and home_bridal_section.bridal_image1 else '../static/assets/homebridal1.jpg' }}" class="bridal-img">
+                        <img src="{{ home_bridal_section.bridal_image2 if home_bridal_section and home_bridal_section.bridal_image2 else '../static/assets/homebridal2.jpg' }}" class="bridal-img">
+                        <img src="{{ home_bridal_section.bridal_image3 if home_bridal_section and home_bridal_section.bridal_image3 else '../static/assets/homebridal3.jpg' }}" class="bridal-img">
+                        <img src="{{ home_bridal_section.bridal_image4 if home_bridal_section and home_bridal_section.bridal_image4 else '../static/assets/homebridal4.jpg' }}" class="bridal-img">
                     </div>
                 </div>
 
@@ -288,6 +280,14 @@
         
         <script src="../static/shared/mobile-menu.js" defer></script>
         <script src="../static/shared/cms-mode.js" defer></script>
+
+        <script>
+            document.querySelectorAll("a[href*='OnlineBookingApp/login']").forEach((link) => {
+                link.addEventListener("click", () => {
+                    navigator.sendBeacon("/stats/appointments-click");
+                });
+            });
+        </script>
         
         <script>
             document.addEventListener("DOMContentLoaded", () => {
@@ -348,6 +348,7 @@
                     emailjs.sendForm('topstyle_service', 'contact_template', this)
                         .then(function() {
                             form.reset()
+                            fetch('/stats/email-sent', { method: 'POST', keepalive: true })
                             emailSubmitMessage.textContent = "Thank you for contacting the TopStyle salon. We will reach out to out to you shortly!"
                             overlay.style.visibility = "visible"
                             overlay.style.opacity = "1"

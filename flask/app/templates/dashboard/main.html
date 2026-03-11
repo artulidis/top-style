@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Main - TopStyle Dashboard</title>        
+        <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+        <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../static/dashboard/styles/shared.css" />
+        <link rel="stylesheet" href="../static/dashboard/styles/main.css" />
+    </head>
+
+    <body>
+        <div class="dashboard-alert">
+            <p>Dashboard alert...</p>
+        </div>
+
+        <header id="header">
+            <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
+
+            <nav>
+                <a href="{{ url_for('main.dashboard') }}" class="nav-link">Main</a>
+                <div class="pages-menu-container">
+                    <h3 id="pagesMenuToggle" class="nav-link">Pages</h3>
+                    <div id="pagesMenu">
+                        <li><a href="{{ url_for('main.dashboard_home') }}">Home</a></li>
+                        <li><a href="{{ url_for('main.dashboard_services') }}">Services</a></li>
+                        <li><a href="{{ url_for('main.dashboard_stylists') }}">Our Team</a></li>
+                        <li><a href="{{ url_for('main.dashboard_bridal') }}">Bridal</a></li>
+                    </div>
+                </div>
+                <h3>{{ current_user.name }} - {{ current_user.role|capitalize }}</h3>
+            </nav>
+        </header> 
+
+
+        <div class="container-horizontal">
+            <div class="container-vertical">
+                {% if current_user.role == 'admin' %}
+                <div id="addEditorContainer">
+                    <h1 class="italiana-regular">Add Editor</h1>
+                    <form id="addEditorForm" method="POST" action="/dashboard/invite">
+                        <div id="editorFormInputs">
+                            <input type="text" id="editorName" placeholder="Name:" required></input>
+                            <input type="email" id="editorEmail" placeholder="Email:" required></input>
+                        </div>
+                        <button id="addEditorButton" type="submit">
+                            <img src="../static/assets/dashboard/add-icon.png" alt="Add editor button" />
+                        </button>
+                    </form>
+                </div>
+                {% endif %}
+
+                {% if current_user.role == 'admin' %}
+                <div id="permittedEditorsContainer">
+                    <h1 class="italiana-regular">Permitted Editors</h1>
+                    <div id="permittedEditorsPanel">
+                        {% for permitted_user in permitted_users %}
+                        <div class="editor {{ permitted_user.status }}" data-user-id="{{ permitted_user.id }}" data-user-status="{{ permitted_user.status }}">
+                            <img src="../static/assets/dashboard/editor-icon.png" alt="Editor icon">
+                            <h3 class="{% if permitted_user.id == seeded_admin_id %}non-deletable{% endif %}" data-deletable="{{ 'false' if permitted_user.id == seeded_admin_id else 'true' }}">{{ permitted_user.name }}</h3>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <video width="320" height="240" controls>
+                    <source src="../static/assets/dashboard/sample_video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="container-vertical">
+                <div id="monthlyStatsContainer">
+                    <div class="stat">
+                        <h1 class="italiana-regular">Visitors</h1>
+                        <h2 class="stat-number">{{ website_stats.visitors }}</h2>
+                    </div>
+
+                    <div class="stat">
+                        <h1 class="italiana-regular">Appointments Booked</h1>
+                        <h2 class="stat-number">{{ website_stats.appointments_booked }}</h2>
+                    </div>
+
+                    <div class="stat">
+                        <h1 class="italiana-regular">Emails Sent</h1>
+                        <h2 class="stat-number">{{ website_stats.emails_sent }}</h2>
+                    </div>
+                </div>
+            </div>
+            <p id="mobileDisclaimer">Welcome to the TopStyle dashboard! To edit website content, please visit on a computer.</p>
+        </div>
+
+            <script type="module" src="../static/dashboard/scripts/menu.js"></script>
+            <script type="module" src="../static/dashboard/scripts/pages/main.js"></script>
+    </body>
+</html>

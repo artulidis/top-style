@@ -1,0 +1,183 @@
+.container-horizontal {
+    width: 90%;
+    margin-left: -45%;
+    position: relative;
+    left: 50%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.container-vertical {
+    width: 45%;
+    row-gap: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#addEditorForm {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+#addEditorContainer { min-width: 300px; }
+
+#addEditorForm input {
+    height: 35px;
+    width: 42%;
+    font-size: 1.25rem;
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+}
+
+#editorFormInputs {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+#addEditorButton {
+    visibility: hidden;
+}
+
+#addEditorButton img {
+    visibility: visible;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    border-radius: 100%;
+    transition: 0.35s;
+    padding: 5px;
+    border: 1px solid #929292;
+}
+
+#addEditorButton img:hover {
+    border: 1px solid black;
+}
+
+#permittedEditorsContainer { min-width: 300px; }
+
+#permittedEditorsPanel {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    min-width: 300px;
+}
+
+.editor {
+    display: flex;
+    align-items: center;
+    margin-right: 4rem;
+    margin-bottom: 1rem;
+}
+
+.editor.invited {
+    opacity: 0.5;
+}
+
+.editor.active {
+    opacity: 1;
+}
+
+.editor img {
+    width: 30px;
+}
+
+.editor h3 {
+    font-size: 1.25rem;
+    font-weight: normal;
+    margin-left: 5px;
+    color: var(--text-color-light);
+    cursor: pointer;
+    transition: 0.35s;
+}
+
+.editor h3:hover {
+    text-decoration: line-through;
+    text-decoration-color: #000000;
+}
+
+.editor h3.non-deletable {
+    cursor: default;
+}
+
+.editor h3.non-deletable:hover {
+    text-decoration: none;
+}
+
+#monthlyStatsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 300px;
+}
+
+.stat {
+    margin-right: 6rem;
+    margin-bottom: 4rem;
+}
+
+.stat-number {
+    font-weight: normal;
+    color: var(--text-color-light);
+    font-size: 4rem;
+}
+
+@media(max-width: 1000px) {
+    .top-style-logo { height: 8rem; }
+    nav h3 { display: none; }
+    nav h3:last-child { display: block; margin: 0; padding: 0; font-size: 1.75rem; }
+
+    #mobileDisclaimer {
+        display: block;
+        font-size: 1.75rem;
+        color: var(--text-color-light);
+        margin-bottom: 20px;
+    }
+
+    .container-horizontal {
+        flex-direction: column-reverse;
+    }
+
+    #monthlyStatsContainer {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .stat {
+        margin-right: 0;
+    }
+
+    #addEditorContainer {
+        width: 100%;
+    }
+
+    #addEditorForm {
+        align-items: end;
+    }
+
+    #addEditorForm input {
+        width: 90%;
+    }
+
+    #editorFormInputs {
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    #permittedEditorsContainer {
+        width: 100%;
+    }
+
+}

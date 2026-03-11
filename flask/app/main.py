@@ -1,57 +1,41 @@
-import os, json
-from flask import Blueprint, jsonify, render_template
-from flask import abort, redirect, request
-from flask_login import login_required, current_user
-from jinja2 import TemplateNotFound
+from flask import Blueprint, render_template
+from flask import redirect, request
+from flask_login import login_required
+from .models import User, HomeAboutSection, HomeServicesSection, HomeStylistsSection, HomeBridalSection, Service, ServicesImage, Stylist
+from .stats import increment_stat, get_website_stats
 
 main = Blueprint("main", __name__)
 
-# Admin Logic
 
-CONTENT_FILE = "content.json"
+def _get_services_page_context():
+    services = Service.query.order_by(Service.category.asc(), Service.order.asc(), Service.id.asc()).all()
+    images = ServicesImage.query.order_by(ServicesImage.category.asc(), ServicesImage.id.asc()).all()
 
-def load_content():
-    if os.path.exists(CONTENT_FILE):
-        with open(CONTENT_FILE, "r", encoding="UTF-8") as f:
-             return json.load(f)
-    
-    return {}
+    services_by_category = {}
+    services_by_category_order = {}
 
-def save_content(data):
-     with open(CONTENT_FILE, "w", encoding="UTF-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+    for service in services:
+        services_by_category.setdefault(service.category, []).append(service)
+        services_by_category_order.setdefault(service.category, {})[service.order] = service
+
+    images_by_category = {image.category: image.uri for image in images}
+
+    return {
+        "services": services,
+        "images": images,
+        "services_by_category": services_by_category,
+        "services_by_category_order": services_by_category_order,
+        "images_by_category": images_by_category,
+    }
 
 
-@main.context_processor
-def inject_cms():
-    return {"cms": load_content()}
-
-@main.route("/admin/save", methods=["POST"])
-def admin_save():
-    """
-        Expected Payload:
-        {
-        "page": "index",
-        "changes": {
-            "hero.h1": "New Hero Heading",
-            "services.price_1": "45"
-            }
-        }
-    """
-
-    payload = request.get_json() or {}
-    page = payload.get("page")
-    changes = payload.get("changes", {})
-
-    content = load_content()
-
-    if page not in content:
-        content[page] = {}
-    
-    content[page].update(changes)
-    save_content(content)
-    return jsonify({"status": "OK", "saved": len(changes)}), 200  
-
+def _get_stylists_page_context():
+    stylists = Stylist.query.order_by(Stylist.order.asc(), Stylist.id.asc()).all()
+    stylists_by_order = {stylist.order: stylist for stylist in stylists}
+    return {
+        "stylists": stylists,
+        "stylists_by_order": stylists_by_order,
+    }
 
 # Routing Logic
 
@@ -62,17 +46,80 @@ def clear_trailing_slashes():
 
 @main.route("/")
 def index():
-    return render_template("main/index.html")
+    home_about_section = HomeAboutSection.query.first()
+    home_services_section = HomeServicesSection.query.first()
+    home_stylists_section = HomeStylistsSection.query.first()
+    home_bridal_section = HomeBridalSection.query.first()
+    return render_template(
+        "main/index.html",
+        home_about_section=home_about_section,
+        home_services_section=home_services_section,
+        home_stylists_section=home_stylists_section,
+        home_bridal_section=home_bridal_section,
+    )
 
-@main.route("/admin")
+@main.route("/dashboard")
 @login_required
-def admin():
-     return render_template("/admin/cms.html")
+def dashboard():
+    permitted_users = User.query.order_by(User.id.asc()).all()
+    seeded_admin = User.query.filter_by(role="admin").order_by(User.id.asc()).first()
+    seeded_admin_id = seeded_admin.id if seeded_admin else None
+    website_stats = get_website_stats()
 
-@main.route("/<path:page>")
-def render_page(page):
-    try:
-        return render_template(f"main/{page}.html")
-    
-    except TemplateNotFound:
-        abort(404)
+    return render_template(
+        "/dashboard/main.html",
+        permitted_users=permitted_users,
+        seeded_admin_id=seeded_admin_id,
+        website_stats=website_stats,
+    )
+
+
+@main.route("/dashboard/home")
+@login_required
+def dashboard_home():
+    home_about_section = HomeAboutSection.query.first()
+    home_services_section = HomeServicesSection.query.first()
+    home_stylists_section = HomeStylistsSection.query.first()
+    home_bridal_section = HomeBridalSection.query.first()
+    return render_template(
+        "/dashboard/home.html",
+        home_about_section=home_about_section,
+        home_services_section=home_services_section,
+        home_stylists_section=home_stylists_section,
+        home_bridal_section=home_bridal_section,
+    )
+
+@main.route("/dashboard/services")
+@login_required
+def dashboard_services():
+    return render_template("/dashboard/services.html", **_get_services_page_context())
+
+
+@main.route("/dashboard/bridal")
+@login_required
+def dashboard_bridal():
+    return render_template("/dashboard/bridal.html", **_get_services_page_context())
+
+
+@main.route("/dashboard/stylists")
+@login_required
+def dashboard_stylists():
+    return render_template("/dashboard/stylists.html", **_get_stylists_page_context())
+
+
+@main.route("/services")
+def services_page():
+    increment_stat("visitors")
+    return render_template("main/services.html", **_get_services_page_context())
+
+
+@main.route("/stylists")
+def stylists_page():
+    increment_stat("visitors")
+    return render_template("main/stylists.html", **_get_stylists_page_context())
+
+
+@main.route("/bridal")
+def bridal_page():
+    increment_stat("visitors")
+    return render_template("main/bridal.html", **_get_services_page_context())

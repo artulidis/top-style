@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Home - TopStyle Dashboard</title>
+        <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+        <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../static/dashboard/styles/shared.css" />
+        <link rel="stylesheet" href="../static/dashboard/styles/home.css" />
+    </head>
+
+    <body>
+        <div class="dashboard-alert">
+            <p>Dashboard alert...</p>
+        </div>
+        <header id="header">
+            <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
+
+            <nav>
+                <a href="{{ url_for('main.dashboard') }}" class="nav-link">Main</a>
+                <div class="pages-menu-container">
+                    <h3 id="pagesMenuToggle" class="nav-link">Pages</h3>
+                    <div id="pagesMenu">
+                        <li><a href="{{ url_for('main.dashboard_home') }}">Home</a></li>
+                        <li><a href="{{ url_for('main.dashboard_services') }}">Services</a></li>
+                        <li><a href="{{ url_for('main.dashboard_stylists') }}">Our Team</a></li>
+                        <li><a href="{{ url_for('main.dashboard_bridal') }}">Bridal</a></li>
+                    </div>
+                </div>
+                <h3>{{ current_user.name }} - {{ current_user.role|capitalize }}</h3>
+            </nav>
+        </header>
+
+        <div class="container-horizontal">
+            <div class="container-vertical">
+                <div class="edit-caption">
+                    <img src="../static/assets/dashboard/pencil-icon.png" alt="Pencil icon" class="content-icon">
+                    <h4 class="edit-caption-text">Edit mission statement</h4>
+                </div>
+                <div class="edit-text-block">
+                    <h1 class="italiana-regular">{{ home_about_section.heading if home_about_section and home_about_section.heading else "Our Mission" }}</h1>
+                    <p class="edit-text">{{ home_about_section.text if home_about_section and home_about_section.text else "At Top Style Salon, all of our stylists are licensed professionals, continuously educating themselves with the latest hair trends. We love going to annual fashion conventions and taking numerous online and in-person classes. We are proud of being well known for doing detailed consultations with each and every guest to ensure we consistently achieve the most possible desired look. Every team member follows strict sanitation requirements and high standards of cleaning and disinfection to provide a healthy environment for our guests. Our salon also utilizes the latest technology, including personally written text messages, emails, social media direct messages, and other online communication to make sure we are easily reachable 7 days a week. We strive for the highest customer service and for top quality work. Thank you for supporting our small but awesome team! We look forward to seeing you!" }}</p>
+                </div>
+                <div class="pink-button save-changes disabled" id="saveMissionStatement">Save changes</div>
+            </div>
+
+            <div class="container-vertical">
+                <div class="edit-caption">
+                    <img src="../static/assets/dashboard/image-icon.png" alt="Image icon" class="content-icon">
+                    <h4 class="edit-caption-text actionable" id="replaceAboutImagesButton">Replace images</h4>
+                </div>
+                <form id="aboutGalleryUploadForm" action="#" method="POST" enctype="multipart/form-data">
+                    <input id="aboutGalleryUploadInput" name="images" type="file" accept="image/*" multiple hidden>
+                    <div id="aboutGalleryContainer">
+                        <div id="galleryRows">
+                            <div class="gallery-row"></div>
+                            <div class="gallery-row"></div>
+                            <div class="gallery-row"></div>
+                        </div>
+
+                        <div id="galleryCols">
+                            <div class="gallery-col"></div>
+                            <div class="gallery-col"></div>
+                            <div class="gallery-col"></div>
+                        </div>
+
+                        <div id="galleryImgs">
+                            <div class="gallery-item">
+                                <div class="img-selector">
+                                    <div class="img-selected"></div>
+                                </div>
+                                <div class="img-placeholder"></div>
+                                <img data-src="{{ home_about_section.gallery_image1 if home_about_section and home_about_section.gallery_image1 else '../static/assets/GalleryImage1.jpg' }}" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-selector">
+                                    <div class="img-selected"></div>
+                                </div>
+                                <div class="img-placeholder"></div>
+                                <img data-src="{{ home_about_section.gallery_image2 if home_about_section and home_about_section.gallery_image2 else '../static/assets/GalleryImage2.jpg' }}" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-selector">
+                                    <div class="img-selected"></div>
+                                </div>
+                                <div class="img-placeholder"></div>
+                                <img data-src="{{ home_about_section.gallery_image3 if home_about_section and home_about_section.gallery_image3 else '../static/assets/GalleryImage3.jpg' }}" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-selector">
+                                    <div class="img-selected"></div>
+                                </div>
+                                <div class="img-placeholder"></div>
+                                <img data-src="{{ home_about_section.gallery_image4 if home_about_section and home_about_section.gallery_image4 else '../static/assets/GalleryImage4.jpg' }}" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-selector">
+                                    <div class="img-selected"></div>
+                                </div>
+                                <div class="img-placeholder"></div>
+                                <img data-src="{{ home_about_section.gallery_image5 if home_about_section and home_about_section.gallery_image5 else '../static/assets/GalleryImage5.jpg' }}" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-selector">
+                                    <div class="img-selected"></div>
+                                </div>
+                                <div class="img-placeholder"></div>
+                                <img data-src="{{ home_about_section.gallery_image6 if home_about_section and home_about_section.gallery_image6 else '../static/assets/GalleryImage6.jpg' }}" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-selector">
+                                    <div class="img-selected"></div>
+                                </div>
+                                <div class="img-placeholder"></div>
+                                <img data-src="{{ home_about_section.gallery_image7 if home_about_section and home_about_section.gallery_image7 else '../static/assets/GalleryImage7.jpg' }}" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-selector">
+                                    <div class="img-selected"></div>
+                                </div>
+                                <div class="img-placeholder"></div>
+                                <img data-src="{{ home_about_section.gallery_image8 if home_about_section and home_about_section.gallery_image8 else '../static/assets/GalleryImage8.jpg' }}" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                            <div class="gallery-item">
+                                <div class="img-selector">
+                                    <div class="img-selected"></div>
+                                </div>
+                                <div class="img-placeholder"></div>
+                                <img data-src="{{ home_about_section.gallery_image9 if home_about_section and home_about_section.gallery_image9 else '../static/assets/GalleryImage9.jpg' }}" alt="gallery image" class="gallery-img lazy" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="container-horizontal">
+            <div class="container-vertical">
+                <div class="edit-caption">
+                    <img src="../static/assets/dashboard/pencil-icon.png" alt="Pencil icon" class="content-icon">
+                    <h4 class="edit-caption-text">Edit service statement</h4>
+                </div>
+                <div class="edit-text-block">
+                    <h1 class="italiana-regular">{{ home_services_section.heading if home_services_section and home_services_section.heading else "Award-Winning Excellence in Every Style" }}</h1>
+                    <p class="edit-text">{{ home_services_section.text if home_services_section and home_services_section.text else "At TopStyle Salon, our commitment to exceptional service has earned us some of the region’s highest honors year after year. We are proud winners of Northern VA Magazine’s Best Salon in 2017, 2022, 2023, 2024, and 2025, as well as Best of the Knot 2022, WeddingWire 2025, and Best of Reston Hair Salon 2025. These recognitions reflect our passion for artistry and our team’s unwavering pursuit of beauty done right." }}</p>
+                </div>
+                <div class="pink-button save-changes disabled" id="saveServicesStatement">Save changes</div>
+            </div>
+
+            <div class="container-vertical">
+                <div class="edit-caption">
+                    <img src="../static/assets/dashboard/video-icon.png" alt="Video icon" class="content-icon">
+                    <h4 class="edit-caption-text actionable" id="replaceVideoButton">Replace salon video</h4>
+                </div>
+                <form id="salonVideoUploadForm" action="#" method="POST" enctype="multipart/form-data">
+                    <input id="salonVideoInput" name="images" type="file" accept="video/*" multiple hidden>
+                    <video src="../static/assets/TopStyleVideo.mp4" id="salonVideo" alt="Salon Video" autoplay loop muted></video>
+                </form>
+            </div>
+        </div>
+
+        <div class="container-horizontal">
+            <div class="container-vertical">
+                <div class="edit-caption">
+                    <img src="../static/assets/dashboard/pencil-icon.png" alt="Pencil icon" class="content-icon">
+                    <h4 class="edit-caption-text">Edit stylists statement</h4>
+                </div>
+                <div class="edit-text-block">
+                    <h1 class="italiana-regular">{{ home_stylists_section.heading if home_stylists_section and home_stylists_section.heading else "Meet our expert stylists who bring out your best look with skill and care" }}</h1>
+                    <p class="edit-text">{{ home_stylists_section.text if home_stylists_section and home_stylists_section.text else "At Top Style Salon, all of our stylists are licensed professionals, continuously educating themselves with the latest hair trends. We love going to annual fashion conventions and taking numerous online and in-person classes. We are proud of being well known for doing detailed consultations with each and every guest to ensure we consistently achieve the most possible desired look. Every team member follows strict sanitation requirements and high standards of cleaning and disinfection to provide a healthy environment for our guests. Our salon also utilizes the latest technology, including personally written text messages, emails, social media direct messages, and other online communication to make sure we are easily reachable 7 days a week. We strive for the highest customer service and for top quality work. Thank you for supporting our small but awesome team! We look forward to seeing you!" }}</p>
+                </div>
+                <div class="pink-button save-changes disabled" id="saveStylistsStatement">Save changes</div>
+            </div>
+
+            <div class="container-vertical">
+                <div class="edit-caption">
+                    <img src="../static/assets/dashboard/image-icon.png" alt="Image icon" class="content-icon">
+                    <h4 class="edit-caption-text actionable" id="replaceTeamPhotoButton">Replace team photo</h4>
+                </div>
+                <form id="teamPhotoUploadForm" action="#" method="POST" enctype="multipart/form-data">
+                    <input id="teamPhotoUploadInput" name="images" type="file" accept="image/*" hidden>
+                    <img src="../static/assets/StylistsGroupPhoto.jpg" id="teamPhoto" alt="Team photo"></img>
+                </form>
+            </div>
+        </div>
+
+        <div class="container-horizontal">
+            <div class="container-vertical">
+                <div class="edit-caption">
+                    <img src="../static/assets/dashboard/pencil-icon.png" alt="Pencil icon" class="content-icon">
+                    <h4 class="edit-caption-text">Edit bridal statement</h4>
+                </div>
+                <div class="edit-text-block">
+                    <h1 class="italiana-regular">{{ home_bridal_section.heading if home_bridal_section and home_bridal_section.heading else "Bridal Beauty, Perfected" }}</h1>
+                    <p class="edit-text">{{ home_bridal_section.text if home_bridal_section and home_bridal_section.text else "Your wedding day deserves nothing less than flawless. At TopStyle Salon, our bridal specialists create elegant, timeless looks tailored to your vision — whether soft and romantic or glam and dramatic. With award-winning expertise and a calming, detail-focused approach, we ensure you feel confident, radiant, and picture-perfect from “I do” to the last dance." }}</p>
+                </div>
+                <div class="pink-button save-changes disabled" id="saveBridalStatement">Save changes</div>
+            </div>
+
+            <div class="container-vertical">
+                <div class="edit-caption">
+                    <img src="../static/assets/dashboard/image-icon.png" alt="Image icon" class="content-icon">
+                    <h4 class="edit-caption-text actionable" id="replaceBridalImagesButton">Replace images</h4>
+                </div>
+                <form id="bridalGalleryUploadForm" action="#" method="POST" enctype="multipart/form-data">
+                    <input id="bridalGalleryUploadInput" name="images" type="file" accept="image/*" multiple hidden>
+                    <div id="bridalImageGrid">
+                        <div class="gallery-item">
+                            <div class="img-selector">
+                                <div class="img-selected"></div>
+                            </div>
+                            <img src="{{ home_bridal_section.bridal_image1 if home_bridal_section and home_bridal_section.bridal_image1 else '../static/assets/homebridal1.jpg' }}" class="gallery-img bridal">
+                        </div>
+
+                        <div class="gallery-item">
+                                <div class="img-selector">
+                                    <div class="img-selected"></div>
+                                </div>
+                                <img src="{{ home_bridal_section.bridal_image2 if home_bridal_section and home_bridal_section.bridal_image2 else '../static/assets/homebridal2.jpg' }}" class="gallery-img bridal">
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <div class="img-selector">
+                                <div class="img-selected"></div>
+                            </div>
+                            <img src="{{ home_bridal_section.bridal_image3 if home_bridal_section and home_bridal_section.bridal_image3 else '../static/assets/homebridal3.jpg' }}" class="gallery-img bridal">
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <div class="img-selector">
+                                <div class="img-selected"></div>
+                            </div>
+                            <img src="{{ home_bridal_section.bridal_image4 if home_bridal_section and home_bridal_section.bridal_image4 else '../static/assets/homebridal4.jpg' }}" class="gallery-img bridal">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script type="module" src="../static/dashboard/scripts/menu.js"></script>
+        <script type="module" src="../static/dashboard/scripts/pages/home.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const buttons = Array.from(document.querySelectorAll(".save-changes"));
+                if (buttons.length === 0) return;
+
+                const setButtonState = (btn, enabled) => {
+                    btn.classList.toggle("enabled", enabled);
+                    btn.classList.toggle("disabled", !enabled);
+                };
+
+                buttons.forEach((button) => {
+                    const scope = button.closest(".container-vertical") || document;
+                    const block = scope.querySelector(".edit-text-block");
+                    if (!block) return;
+
+                    const headingEl = block.querySelector("h1");
+                    const paraEl = block.querySelector("p");
+                    if (!headingEl || !paraEl) return;
+
+                    const initialHeading = headingEl.textContent;
+                    const initialText = paraEl.textContent;
+
+                    const updateState = () => {
+                        const headingChanged = headingEl.textContent !== initialHeading;
+                        const textChanged = paraEl.textContent !== initialText;
+                        setButtonState(button, headingChanged || textChanged);
+                    };
+
+                    // Initialize as disabled
+                    setButtonState(button, false);
+
+                    [headingEl, paraEl].forEach((el) => {
+                        el.addEventListener("input", updateState);
+                        el.addEventListener("blur", updateState);
+                        el.addEventListener("keyup", updateState);
+                    });
+
+                    button.addEventListener(
+                        "click",
+                        (event) => {
+                            const isEnabled = button.classList.contains("enabled");
+                            if (!isEnabled) {
+                                event.preventDefault();
+                                event.stopImmediatePropagation();
+                                return;
+                            }
+                            // After a successful click, disable until further edits
+                            setButtonState(button, false);
+                        },
+                        true
+                    );
+                });
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+            const lazyImages = document.querySelectorAll(".lazy");
+
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const placeholder = img.previousElementSibling;
+
+                    // Load the real image
+                    img.src = img.getAttribute("data-src");
+                    img.onload = () => {
+                    img.classList.add("loaded");
+                    placeholder.classList.add("fade-out");
+                    };
+
+                    observer.unobserve(img);
+                }
+                });
+            }, {
+                rootMargin: "100px 0px",
+                threshold: 0.1
+            });
+
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+            });
+        </script>
+    </body>
+</html>

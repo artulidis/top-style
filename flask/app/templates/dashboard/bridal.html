@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>Bridal - TopStyle Dashboard</title>
+		<link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+		<link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="../static/dashboard/styles/shared.css" />
+		<link rel="stylesheet" href="../static/dashboard/styles/services.css" />
+	</head>
+
+	<body>
+		<div class="dashboard-alert">
+			<p>Dashboard alert...</p>
+		</div>
+
+		<header id="header">
+			<img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
+
+			<nav>
+				<a href="{{ url_for('main.dashboard') }}" class="nav-link">Main</a>
+				<div class="pages-menu-container">
+					<h3 id="pagesMenuToggle" class="nav-link">Pages</h3>
+					<div id="pagesMenu">
+						<li><a href="{{ url_for('main.dashboard_home') }}">Home</a></li>
+						<li><a href="{{ url_for('main.dashboard_services') }}">Services</a></li>
+						<li><a href="{{ url_for('main.dashboard_stylists') }}">Our Team</a></li>
+						<li><a href="{{ url_for('main.dashboard_bridal') }}">Bridal</a></li>
+					</div>
+				</div>
+				<h3>{{ current_user.name }} - {{ current_user.role|capitalize }}</h3>
+			</nav>
+		</header>
+
+		<section class="services-section">
+			{% set bridal_defaults = [
+				{"name": "Bridal Hair", "price": "$200", "details": ""},
+				{"name": "Bridal Hair (Non-refundable Salon Trial)", "price": "$150", "details": ""},
+				{"name": "Airbrush Makeup (Bride)", "price": "$220", "details": ""},
+				{"name": "Bridal Airbrush Makeup (Non-refundable Salon Trial)", "price": "$170", "details": ""},
+				{"name": "Airbrush Makeup (Bridal Party)", "price": "$165", "details": ""},
+				{"name": "Friends/Family Makeup", "price": "$145", "details": "Contact us for any inquiries"},
+				{"name": "Bridal Traditional Makeup", "price": "$200", "details": "Contact us for any inquiries"},
+				{"name": "Bridal Makeup (Non-refundable Salon Trial)", "price": "$150", "details": "Contact us for any inquiries"},
+				{"name": "Flower Girl Hair", "price": "$65, $100", "details": "Contact us for any inquiries"}
+			] %}
+			{% set bridal_services = services_by_category_order.get('bridal', {}) if services_by_category_order is defined else {} %}
+
+			<div class="services-container">
+				<h1 class="italiana-regular service-heading">Bridal Services</h1>
+				{% for fallback in bridal_defaults %}
+					{% set slot = loop.index %}
+					{% set service = bridal_services.get(slot) %}
+					<div class="service">
+						<div class="edit-caption hidden">
+							<img src="../static/assets/dashboard/pencil-icon.png" alt="Pencil icon" class="content-icon small">
+							<h4 class="edit-caption-text">Edit service</h4>
+						</div>
+						<div class="service-flex" data-service-id="{{ service.id if service else '' }}" data-category="bridal" data-service-order="{{ service.order if service else slot }}">
+							<p class="service-name">{{ service.name if service else fallback.name }}</p>
+							<div class="service-price">{{ service.price if service else fallback.price }}</div>
+						</div>
+						<div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
+						<div class="pink-button save-changes disabled">Save changes</div>
+					</div>
+				{% endfor %}
+			</div>
+
+			<div class="category-image-container">
+				<div class="edit-caption">
+					<img src="../static/assets/dashboard/image-icon.png" alt="Image icon" class="content-icon">
+					<h4 class="edit-caption-text actionable" id="replaceBridalServicesPhotoButton">Replace photo</h4>
+				</div>
+				<form id="bridalServicesPhotoUploadForm" action="#" method="POST" enctype="multipart/form-data" data-category="bridal">
+					<input id="bridalServicesPhotoUploadInput" name="images" type="file" accept="image/*" hidden>
+					<img id="bridalServicesPhoto" src="{{ images_by_category.get('bridal') if images_by_category is defined and images_by_category.get('bridal') else '../static/assets/BridalPhoto.jpg' }}" class="category-image" alt="Bridal services photo"></img>
+				</form>
+			</div>
+		</section>
+
+		<script type="module" src="../static/dashboard/scripts/menu.js"></script>
+		<script type="module" src="../static/dashboard/scripts/pages/services.js"></script>
+	</body>
+</html>

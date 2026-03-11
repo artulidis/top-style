@@ -1,0 +1,145 @@
+#addStylistForm {
+    display: flex;
+    align-items: start;
+    margin-top: 15px;
+}
+
+#addStylistForm input, textarea {
+    height: 35px;
+    width: 95%;
+    font-size: 1.25rem;
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    padding: 5px;
+}
+
+#addStylistForm textarea {
+    border: 1px solid black;
+    margin: 20px 0 100px 0;
+    height: 100px;
+}
+
+#stylistFormInputs {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+
+#addStylistButton {
+    visibility: hidden;
+}
+
+#addStylistButton img {
+    visibility: visible;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    border-radius: 100%;
+    transition: 0.35s;
+    padding: 5px;
+    border: 1px solid #929292;
+}
+
+#addStylistButton img:hover {
+    border: 1px solid black;
+}
+
+.container-horizontal {
+    width: 90%;
+    margin-left: -45%;
+    position: relative;
+    top: 50px;
+    left: 50%;
+    margin-bottom: 100px;
+}
+
+.stylist {
+    display: flex;
+    align-items: start;
+    margin-bottom: 100px;
+}
+
+.edit-caption {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.content-icon { width: 22px; }
+
+.edit-caption-text {
+    font-size: 1rem;
+    font-family: var(--font-family-regular);
+    font-weight: 100;
+    color: var(--text-color-light);
+    margin-left: 7px;
+}
+
+.actionable { cursor: pointer; text-decoration: underline; }
+.actionable:active { color: var(--brown); }
+
+.stylist:hover .stylist-bio {
+    outline: 1px dashed var(--text-color-light);
+}
+
+.stylist-bio:focus-within { outline: 1px dashed var(--text-color-light); }
+
+.stylist:hover .remove-stylist {
+    display: block;
+}
+
+.stylist-image {
+    width: 200px;
+}
+
+.stylist-name-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.remove-stylist {
+    display: none;
+    width: 20px;
+    margin-left: 50px;
+    cursor: pointer;
+    transition: 0.15s;
+    opacity: 0.5;
+}
+
+.remove-stylist:hover { opacity: 1; }
+
+.remove-stylist:hover + h4 {
+    text-decoration: line-through;
+    text-decoration-color: var(--text-color-light);
+    text-decoration-thickness: 2px;
+}
+
+.stylist-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+}
+
+.stylist-bio {
+    font-size: 1.35rem;
+    font-family: var(--font-family-regular);
+    color: var(--text-color-light);
+    padding: 10px;
+}
+
+.pink-button.save-changes {
+  width: 8rem;
+  border-radius: 2px;
+  padding: 6px 0 6px 0;
+  font-size: 1rem;
+  margin-top: 15px;
+}
+
+.pink-button.save-changes.enabled { display: block; }
+.pink-button.save-changes.disabled { display: none; }

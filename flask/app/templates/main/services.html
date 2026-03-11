@@ -30,7 +30,7 @@
 
                 <!-- Desktop Menu -->
                 <nav id="desktopMenu">
-                    <a href="/" class="desktop-menu-link">About Us</a>              
+                    <a href="/" class="desktop-menu-link">Home</a>              
                     <a href="/services" class="desktop-menu-link">Services</a>      
                     <a href="/stylists" class="desktop-menu-link">Our Team</a>      
                     <a href="/bridal" class="desktop-menu-link">Bridal</a>
@@ -44,7 +44,7 @@
             <nav id="mobileMenu">
                 <img src="../static/assets/CloseIcon.png" class="close-icon" id="menuClose" alt="Close menu" />
                 <ul>
-                    <li><a href="/">About Us</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/services">Services</a></li>
                     <li><a href="/stylists">Our Team</a></li>
                     <li><a href="/bridal">Bridal</a></li>
@@ -55,6 +55,15 @@
             </nav>
 
             <section id="popularSection">
+                {% set popular_defaults = [
+                    {"name": "Base Color Retouch & Haircut", "price": "$165+", "details": ""},
+                    {"name": "Partial Highlights Retouch & Haircut", "price": "$210+", "details": "not including glaze"},
+                    {"name": "Partial Balayage Retouch & Haircut", "price": "$210+", "details": "not including glaze"},
+                    {"name": "Base Color Retouch + Partial Highlights Retouch & Haircut", "price": "$295+", "details": "not including glaze"},
+                    {"name": "Full Balayage & Haircut", "price": "$245+", "details": "not including glaze"},
+                    {"name": "Gloss / Toner & Haircut", "price": "$120+", "details": ""}
+                ] %}
+                {% set popular_by_order = services_by_category_order.get('popular', {}) if services_by_category_order is defined else {} %}
                 <h1 class="italiana-regular" id="pricingNoteHeading">Pricing Note</h1>
                 <p id="pricingNote">All prices listed are starting rates. Because we work with a level-based stylist system, 
                     final pricing may vary depending on your stylist’s experience level, hair length, texture, density, and the 
@@ -62,56 +71,24 @@
                     stylist for a personalized quote during your consultation.</p>
                 
                 <div class="desktop-container-horizontal">
-                    <img src="../static/assets/PopularServicesPhoto.jpg" class="services-photo" />
+                    <img src="{{ images_by_category.get('popular') if images_by_category is defined and images_by_category.get('popular') else '../static/assets/PopularServicesPhoto.jpg' }}" class="services-photo" />
                     
                     <div class="desktop-container-vertical">
                         <h1 class="italiana-regular" id="mostPopularHeading">Popular Services</h1>
                         <div class="services-menu-container">
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Base Color Retouch & Haircut</p>
-                                    <div class="service-price">$165+</div>
+                            {% for fallback in popular_defaults %}
+                                {% set slot = loop.index %}
+                                {% set service = popular_by_order.get(slot) %}
+                                <div class="service">
+                                    <div class="service-flex">
+                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
+                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
+                                    </div>
+                                    {% if (service and service.details) or fallback.details %}
+                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
+                                    {% endif %}
                                 </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Partial Highlights Retouch & Haircut</p>
-                                    <div class="service-price">$210+</div>
-                                </div>
-                                <div class="service-details">not including glaze</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Partial Balayage Retouch & Haircut</p>
-                                    <div class="service-price">$210+</div>
-                                </div>
-                                <div class="service-details">not including glaze</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Base Color Retouch + Partial Highlights Retouch & Haircut</p>
-                                    <div class="service-price">$295+</div>
-                                </div>
-                                <div class="service-details">not including glaze</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Full Balayage & Haircut</p>
-                                    <div class="service-price">$245+</div>
-                                </div>
-                                <div class="service-details">not including glaze</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Gloss / Toner & Haircut</p>
-                                    <div class="service-price">$120+</div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -119,81 +96,38 @@
 
 
             <section id="cuttingSection">
+                {% set cutting_defaults = [
+                    {"name": "Cut & Style", "price": "$80+", "details": "includes shampoo & blow-dry"},
+                    {"name": "Barber / Men’s Haircut", "price": "$50+", "details": "includes shampoo & blow-dry"},
+                    {"name": "Child’s Haircut", "price": "$50, $74", "details": "For ages 10 and under"},
+                    {"name": "Beard Trim", "price": "$20+", "details": ""},
+                    {"name": "Bang Trim", "price": "$20+", "details": ""},
+                    {"name": "Shampoo & Blow-Dry", "price": "$50+, $74+", "details": "wash, blow-dry & heat styling; excludes cut or color"},
+                    {"name": "Luxury Blow-Out", "price": "$60+, $84+", "details": ""},
+                    {"name": "Special Occasion Up-Do", "price": "price varies", "details": "please ask"},
+                    {"name": "Bridal Hair", "price": "price varies", "details": "consultation required"}
+                ] %}
+                {% set cutting_by_order = services_by_category_order.get('cutting', {}) if services_by_category_order is defined else {} %}
                 
                 <div class="desktop-container-horizontal">
-                    <img src="../static/assets/CuttingPhoto.jpg" class="services-photo" />
+                    <img src="{{ images_by_category.get('cutting') if images_by_category is defined and images_by_category.get('cutting') else '../static/assets/CuttingPhoto.jpg' }}" class="services-photo" />
                     
                     <div class="desktop-container-vertical">
                         <h1 class="italiana-regular" id="cuttingHeading">Haircuts & Styling</h1>
                         <div class="services-menu-container">
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Cut & Style</p>
-                                    <div class="service-price">$80+</div>
+                            {% for fallback in cutting_defaults %}
+                                {% set slot = loop.index %}
+                                {% set service = cutting_by_order.get(slot) %}
+                                <div class="service">
+                                    <div class="service-flex">
+                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
+                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
+                                    </div>
+                                    {% if (service and service.details) or fallback.details %}
+                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
+                                    {% endif %}
                                 </div>
-                                <div class="service-details">includes shampoo & blow-dry</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Barber / Men’s Haircut</p>
-                                    <div class="service-price">$50+</div>
-                                </div>
-                                <div class="service-details">includes shampoo & blow-dry</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Child’s Haircut</p>
-                                    <div class="service-price">$50 <span>|</span> $74</div>
-                                </div>
-                                <div class="service-details">For ages 10 and under</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Beard Trim</p>
-                                    <div class="service-price">$20+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Bang Trim</p>
-                                    <div class="service-price">$20+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Shampoo & Blow-Dry</p>
-                                    <div class="service-price">$50+ <span>|</span> $74+</div>
-                                </div>
-                                <div class="service-details">wash, blow-dry & heat styling; excludes cut or color</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Luxury Blow-Out</p>
-                                    <div class="service-price">$60+ <span>|</span> $84+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Special Occasion Up-Do</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">please ask</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Bridal Hair</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">consultation required</div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -201,117 +135,43 @@
 
 
             <section id="coloringSection">
+                {% set coloring_defaults = [
+                    {"name": "Base Touch-Up", "price": "$85+, $109+", "details": "not including blowdry"},
+                    {"name": "Base Touch-Up & Blow-Dry", "price": "$125+, $149+", "details": ""},
+                    {"name": "Additional Color", "price": "$30+", "details": ""},
+                    {"name": "Partial Highlights Retouch", "price": "$130+, $162+", "details": ""},
+                    {"name": "Partial Highlights (New)", "price": "$130+, $162+", "details": ""},
+                    {"name": "Full Highlights Retouch", "price": "$155+, $187+", "details": ""},
+                    {"name": "Full Highlights (New)", "price": "$155+, $187+", "details": ""},
+                    {"name": "Partial Balayage Retouch", "price": "$130+, $162+", "details": ""},
+                    {"name": "Partial Balayage (New)", "price": "$130+, $162+", "details": ""},
+                    {"name": "Full Balayage Retouch", "price": "$159, $175", "details": ""},
+                    {"name": "Full Balayage (New)", "price": "$159+, $175+", "details": ""},
+                    {"name": "Face-Framing Balayage", "price": "$100, $132", "details": ""},
+                    {"name": "Ombré / Balayage Ombré", "price": "$165, $197", "details": ""},
+                    {"name": "Glaze (Add-On Service)", "price": "$40+", "details": ""},
+                    {"name": "Men’s Gray Blending", "price": "price upon request", "details": ""}
+                ] %}
+                {% set coloring_by_order = services_by_category_order.get('coloring', {}) if services_by_category_order is defined else {} %}
                 <div class="desktop-container-horizontal">
-                    <img src="../static/assets/ColoringPhoto.jpg" class="services-photo" />
+                    <img src="{{ images_by_category.get('coloring') if images_by_category is defined and images_by_category.get('coloring') else '../static/assets/ColoringPhoto.jpg' }}" class="services-photo" />
                     
                     <div class="desktop-container-vertical">
                         <h1 class="italiana-regular" id="colorHeading">Color Services</h1>
                         <div class="services-menu-container">
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Base Touch-Up</p>
-                                    <div class="service-price">$85+ <span>|</span> $109+</div>
+                            {% for fallback in coloring_defaults %}
+                                {% set slot = loop.index %}
+                                {% set service = coloring_by_order.get(slot) %}
+                                <div class="service">
+                                    <div class="service-flex">
+                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
+                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
+                                    </div>
+                                    {% if (service and service.details) or fallback.details %}
+                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
+                                    {% endif %}
                                 </div>
-                                <div class="service-details">not including blowdry</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Base Touch-Up & Blow-Dry</p>
-                                    <div class="service-price">$125+ <span>|</span> $149+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Additional Color</p>
-                                    <div class="service-price">$30+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Partial Highlights Retouch</p>
-                                    <div class="service-price">$130+ <span>|</span> $162+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Partial Highlights (New)</p>
-                                    <div class="service-price">$130+ <span>|</span> $162+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Full Highlights Retouch</p>
-                                    <div class="service-price">$155+ <span>|</span> $187+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Full Highlights (New)</p>
-                                    <div class="service-price">$155+ <span>|</span> $187+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Partial Balayage Retouch</p>
-                                    <div class="service-price">$130+ <span>|</span> $162+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Partial Balayage (New)</p>
-                                    <div class="service-price">$130+ <span>|</span> $162+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Full Balayage Retouch</p>
-                                    <div class="service-price">$159 <span>|</span> $175</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Full Balayage (New)</p>
-                                    <div class="service-price">$159+ <span>|</span> $175+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Face-Framing Balayage</p>
-                                    <div class="service-price">$100 <span>|</span> $132</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Ombré / Balayage Ombré</p>
-                                    <div class="service-price">$165 <span>|</span> $197</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Glaze (Add-On Service)</p>
-                                    <div class="service-price">$40+</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Men’s Gray Blending</p>
-                                    <div class="service-price">price upon request</div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -319,58 +179,34 @@
 
 
             <section id="extrasSection">
+                {% set extras_defaults = [
+                    {"name": "Brazilian Blowout", "price": "$359, $376", "details": ""},
+                    {"name": "Cezanne Keratin Smoothing Treatment", "price": "price varies", "details": "please ask"},
+                    {"name": "Surface Smoothing Treatment", "price": "price varies", "details": "please ask"},
+                    {"name": "Demi-Permanent Healing Treatment & Mask", "price": "price varies", "details": "please ask"},
+                    {"name": "Express Hair-Hydrate Treatment", "price": "price varies", "details": "please ask"},
+                    {"name": "Luxury Hair Treatment", "price": "price varies", "details": "please ask"}
+                ] %}
+                {% set extras_by_order = services_by_category_order.get('extras', {}) if services_by_category_order is defined else {} %}
                 <div class="desktop-container-horizontal">
-                    <img src="../static/assets/ExtrasPhoto.jpg" class="services-photo" />
+                    <img src="{{ images_by_category.get('extras') if images_by_category is defined and images_by_category.get('extras') else '../static/assets/ExtrasPhoto.jpg' }}" class="services-photo" />
                     
                     <div class="desktop-container-vertical">
                         <h1 class="italiana-regular" id="smoothingHeading">Treatments</h1>
                         <div class="services-menu-container">
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Brazilian Blowout</p>
-                                    <div class="service-price">$359 <span>|</span> $376</div>
+                            {% for fallback in extras_defaults %}
+                                {% set slot = loop.index %}
+                                {% set service = extras_by_order.get(slot) %}
+                                <div class="service">
+                                    <div class="service-flex">
+                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
+                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
+                                    </div>
+                                    {% if (service and service.details) or fallback.details %}
+                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
+                                    {% endif %}
                                 </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Cezanne Keratin Smoothing Treatment</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">please ask</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Surface Smoothing Treatment</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">please ask</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Demi-Permanent Healing Treatment & Mask</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">please ask</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Express Hair-Hydrate Treatment</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">please ask</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Luxury Hair Treatment</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">please ask</div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -378,59 +214,34 @@
 
 
             <section id="beautySection">
+                {% set beauty_defaults = [
+                    {"name": "Makeup Application (1 hr)", "price": "price varies", "details": "please ask"},
+                    {"name": "Special Occasion Makeup – Traditional or Airbrush", "price": "price varies", "details": "please ask"},
+                    {"name": "Makeup Lesson", "price": "price varies", "details": "please ask"},
+                    {"name": "Wax", "price": "price varies", "details": "please ask"},
+                    {"name": "Hair Extensions", "price": "price varies", "details": "consultation required"},
+                    {"name": "Full Perm", "price": "price varies", "details": "31+ rods; consultation required"}
+                ] %}
+                {% set beauty_by_order = services_by_category_order.get('beauty', {}) if services_by_category_order is defined else {} %}
                 <div class="desktop-container-horizontal">
-                    <img src="../static/assets/BeautyPhoto.jpg" class="services-photo" />
+                    <img src="{{ images_by_category.get('beauty') if images_by_category is defined and images_by_category.get('beauty') else '../static/assets/BeautyPhoto.jpg' }}" class="services-photo" />
                     
                     <div class="desktop-container-vertical">
                         <h1 class="italiana-regular" id="beautyHeading">Makeup & Beauty</h1>
                         <div class="services-menu-container">
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Makeup Application (1 hr)</p>
-                                    <div class="service-price">price varies</div>
+                            {% for fallback in beauty_defaults %}
+                                {% set slot = loop.index %}
+                                {% set service = beauty_by_order.get(slot) %}
+                                <div class="service">
+                                    <div class="service-flex">
+                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
+                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
+                                    </div>
+                                    {% if (service and service.details) or fallback.details %}
+                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
+                                    {% endif %}
                                 </div>
-                                <div class="service-details">please ask</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Special Occasion Makeup – Traditional or Airbrush</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">please ask</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Makeup Lesson</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">please ask</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Wax</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">please ask</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Hair Extensions</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">consultation required</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Full Perm</p>
-                                    <div class="service-price">price varies</div>
-                                </div>
-                                <div class="service-details">31+ rods; consultation required</div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

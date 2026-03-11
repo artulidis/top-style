@@ -31,7 +31,7 @@
 
                 <!-- Desktop Menu -->
                 <nav id="desktopMenu">
-                    <a href="/" class="desktop-menu-link">About Us</a>              
+                    <a href="/" class="desktop-menu-link">Home</a>              
                     <a href="/services" class="desktop-menu-link">Services</a>      
                     <a href="/stylists" class="desktop-menu-link">Our Team</a>      
                     <a href="/bridal" class="desktop-menu-link">Bridal</a>
@@ -45,7 +45,7 @@
             <nav id="mobileMenu">
                 <img src="../static/assets/CloseIcon.png" class="close-icon" id="menuClose" alt="Close menu" />
                 <ul>
-                    <li><a href="/">About Us</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/services">Services</a></li>
                     <li><a href="/stylists">Our Team</a></li>
                     <li><a href="/bridal">Bridal</a></li>
@@ -56,88 +56,38 @@
             </nav>
 
             <section id="bridalSection">
+                {% set bridal_defaults = [
+                    {"name": "Bridal Hair", "price": "$200", "details": ""},
+                    {"name": "Bridal Hair (Non-refundable Salon Trial)", "price": "$150", "details": ""},
+                    {"name": "Airbrush Makeup (Bride)", "price": "$220", "details": ""},
+                    {"name": "Bridal Airbrush Makeup (Non-refundable Salon Trial)", "price": "$170", "details": ""},
+                    {"name": "Airbrush Makeup (Bridal Party)", "price": "$165", "details": ""},
+                    {"name": "Friends/Family Makeup", "price": "$145", "details": "Contact us for any inquiries"},
+                    {"name": "Bridal Traditional Makeup", "price": "$200", "details": "Contact us for any inquiries"},
+                    {"name": "Bridal Makeup (Non-refundable Salon Trial)", "price": "$150", "details": "Contact us for any inquiries"},
+                    {"name": "Flower Girl Hair", "price": "$65, $100", "details": "Contact us for any inquiries"}
+                ] %}
+                {% set bridal_by_order = services_by_category_order.get('bridal', {}) if services_by_category_order is defined else {} %}
                 <h1 class="italiana-regular" id="bridalHeading">Bridal Services <br /> (Please call for inquiries)</h1>
                 
                 <div class="desktop-container-horizontal">
-                    <img src="../static/assets/BridalPhoto.jpg" id="bridalPhoto" />
+                    <img src="{{ images_by_category.get('bridal') if images_by_category is defined and images_by_category.get('bridal') else '../static/assets/BridalPhoto.jpg' }}" id="bridalPhoto" />
                     
                     <div class="desktop-container-vertical">
                         <div class="services-menu-container">
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Bridal Hair</p>
-                                    <div class="service-price">$200</div>
+                            {% for fallback in bridal_defaults %}
+                                {% set slot = loop.index %}
+                                {% set service = bridal_by_order.get(slot) %}
+                                <div class="service">
+                                    <div class="service-flex">
+                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
+                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
+                                    </div>
+                                    {% if (service and service.details) or fallback.details %}
+                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
+                                    {% endif %}
                                 </div>
-                                <div class="service-details">Done by Master Stylist on wedding day</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Bridal Hair (Non-refundable Salon Trial)</p>
-                                    <div class="service-price">$150</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Airbrush Makeup (Bride)</p>
-                                    <div class="service-price">$220</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Bridal Airbrush Makeup (Non-refundable Salon Trial)</p>
-                                    <div class="service-price">$170</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Airbrush Makeup (Bridal Party)</p>
-                                    <div class="service-price">$165</div>
-                                </div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Friends/Family Hair</p>
-                                    <div class="service-price">$145</div>
-                                </div>
-                                <div class="service-details">Contact us for any inquiries</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Friends/Family Makeup</p>
-                                    <div class="service-price">$145</div>
-                                </div>
-                                <div class="service-details">Contact us for any inquiries</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Bridal Traditional Makeup</p>
-                                    <div class="service-price">$200</div>
-                                </div>
-                                <div class="service-details">Contact us for any inquiries</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Bridal Makeup (Non-refundable Salon Trial)</p>
-                                    <div class="service-price">$150</div>
-                                </div>
-                                <div class="service-details">Contact us for any inquiries</div>
-                            </div>
-
-                            <div class="service">
-                                <div class="service-flex">
-                                    <p class="service-name">Flower Girl Hair</p>
-                                    <div class="service-price">$65 <span>|</span> $100</div>
-                                </div>
-                                <div class="service-details">Contact us for any inquiries</div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
