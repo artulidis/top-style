@@ -1,0 +1,24 @@
+/* Shared Service Table Component */
+
+.service {
+  height: 10rem;
+}
+
+.service span {
+  color: var(--pink);
+}
+
+.service-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.service-name {
+  display: block;
+  color: var(--text-color-regular);
+}
+
+.service-details {
+  color: var(--text-color-light);
+}

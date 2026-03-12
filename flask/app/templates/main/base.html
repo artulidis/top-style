@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="TopStyle by Kate Noda – Professional hair salon offering premium styling, coloring, and treatments in Reston, VA. Book your appointment today!" />
+    {% block meta %}{% endblock %}
+
+    <title>{% block title %}TopStyle by Kate Noda{% endblock %}</title>
+    <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/shared/styles.css" />
+    {% block styles %}{% endblock %}
+
+    <meta property="og:title" content="TopStyle by Kate Noda - Hair Salon" />
+    <meta property="og:description"
+        content="Premium salon services tailored to your style. Book online with Kate Noda today." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://topstylebykatenoda.com/" />
+    <meta property="og:image" content="https://topstylebykatenoda.com/static/assets/SalonImage.jpg" />
+</head>
+
+<body>
+    <div id="app">
+        <header id="header">
+            <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
+
+            <!-- Desktop Menu -->
+            <nav id="desktopMenu">
+                <a href="/" class="desktop-menu-link">Home</a>
+                <a href="/services" class="desktop-menu-link">Services</a>
+                <a href="/stylists" class="desktop-menu-link">Our Team</a>
+                <a href="/bridal" class="desktop-menu-link">Bridal</a>
+                <a href="/#contact" class="desktop-menu-link">Contact</a>
+
+                <a href="https://na2.meevo.com/OnlineBookingApp/login?tenantId=500778&locationId=500950"
+                    class="pink-button" id="desktopMenuButton">Book Appointment</a>
+            </nav>
+
+            <img src="../static/assets/HamburgerMenu.png" id="hamburgerMenu" alt="Menu icon" />
+        </header>
+
+        <nav id="mobileMenu">
+            <img src="../static/assets/CloseIcon.png" class="close-icon" id="menuClose" alt="Close menu" />
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/stylists">Our Team</a></li>
+                <li><a href="/bridal">Bridal</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+
+            <a href="https://na2.meevo.com/OnlineBookingApp/login?tenantId=500778&locationId=500950" class="pink-button"
+                id="mobileMenuButton">Book Appointment</a>
+        </nav>
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="../static/shared/mobile-menu.js" defer></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

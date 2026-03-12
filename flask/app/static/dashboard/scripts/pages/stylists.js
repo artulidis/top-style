@@ -1,68 +1,25 @@
-import { showDashboardAlert } from "../alert.js";
+﻿import { showDashboardAlert } from "../alert.js";
+import { validateImageMeta } from "../lib/validation.js";
+import { readImageFile } from "../lib/media.js";
+import { makeEditable, trackChanges } from "../lib/editor.js";
+import { cmsRequest, cmsUpload } from "../lib/api.js";
 
-const MAX_IMAGE_BYTES = 1 * 1024 * 1024;
+// ---------------------------------------------------------------------------
+// Stylist CRUD helpers
+// ---------------------------------------------------------------------------
+async function addStylist(name, bio, file) {
+	const formData = new FormData();
+	formData.append("name", name);
+	formData.append("bio", bio);
+	formData.append("file", file);
 
-function checkSquare(meta) {
-	if (!meta?.width || !meta?.height) {
-		return null;
-	}
-	return meta.width === meta.height;
-}
-
-function checkSize(meta, maxBytes) {
-	if (!meta || typeof meta.size_bytes !== "number") {
-		return null;
-	}
-	return meta.size_bytes <= maxBytes;
-}
-
-function validateImageMeta(meta) {
-	const sizeOk = checkSize(meta, MAX_IMAGE_BYTES);
-	if (sizeOk === false) {
-		return "Image should not exceed 1MB.";
-	}
-
-	const squareOk = checkSquare(meta);
-	if (squareOk === false) {
-		return "Image should be square.";
-	}
-
-	return null;
-}
-
-function setButtonState(button, isEnabled) {
-	button.classList.toggle("enabled", isEnabled);
-	button.classList.toggle("disabled", !isEnabled);
-}
-
-async function addStylist(name, bio, image) {
-	try {
-		const response = await fetch("/cms/stylists/add", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				name,
-				bio,
-				image
-			})
-		});
-
-		const data = await response.json().catch(() => ({}));
-		showDashboardAlert(data.message || "Unable to add stylist.");
-
-		return response.ok;
-	} catch (error) {
-		showDashboardAlert("Unable to add stylist.");
-		return false;
-	}
+	const { ok } = await cmsUpload("/cms/stylists", formData, "Unable to add stylist.");
+	return ok;
 }
 
 async function sendSingleStylistUpdate(stylistCard, fallbackMessage) {
 	const name = stylistCard.querySelector(".stylist-name")?.textContent?.trim() || "";
 	const bio = stylistCard.querySelector(".stylist-bio")?.textContent?.trim() || "";
-	const image = stylistCard.querySelector(".stylist-image-preview")?.getAttribute("src") || "";
 	const rawId = stylistCard.dataset.stylistId;
 	const rawOrder = stylistCard.dataset.stylistOrder;
 	const parsedOrder = Number(rawOrder);
@@ -77,7 +34,7 @@ async function sendSingleStylistUpdate(stylistCard, fallbackMessage) {
 		return null;
 	}
 
-	const payload = { name, bio, image, order: parsedOrder };
+	const payload = { name, bio, order: parsedOrder };
 	if (rawId) {
 		const parsedId = Number(rawId);
 		if (!Number.isNaN(parsedId)) {
@@ -85,110 +42,43 @@ async function sendSingleStylistUpdate(stylistCard, fallbackMessage) {
 		}
 	}
 
-	try {
-		const response = await fetch("/cms/stylists", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(payload)
-		});
+	const { ok, data } = await cmsRequest("/cms/stylists", payload, fallbackMessage);
+	if (!ok) return null;
 
-		const data = await response.json().catch(() => ({}));
-		if (!response.ok) {
-			showDashboardAlert(data.message || fallbackMessage);
-			return null;
-		}
-
-		if (data?.stylist?.id) {
-			stylistCard.dataset.stylistId = String(data.stylist.id);
-		}
-		if (data?.stylist?.order !== undefined && data?.stylist?.order !== null) {
-			stylistCard.dataset.stylistOrder = String(data.stylist.order);
-		}
-
-		showDashboardAlert(data.message || "Stylist successfully updated.");
-		return {
-			name,
-			bio,
-			image,
-			order: parsedOrder
-		};
-	} catch (error) {
-		showDashboardAlert(fallbackMessage);
-		return null;
+	if (data?.stylist?.id) {
+		stylistCard.dataset.stylistId = String(data.stylist.id);
 	}
+	if (data?.stylist?.order !== undefined && data?.stylist?.order !== null) {
+		stylistCard.dataset.stylistOrder = String(data.stylist.order);
+	}
+
+	return { name, bio };
 }
 
 async function removeSingleStylist(stylistCard) {
 	if (!stylistCard) return;
 
 	const idRaw = stylistCard.dataset.stylistId;
-	const orderRaw = stylistCard.dataset.stylistOrder;
-	const name = stylistCard.querySelector(".stylist-name")?.textContent?.trim() || "";
-
-	const payload = {
-		name,
-		order: orderRaw ? Number(orderRaw) : null
-	};
-
-	if (idRaw) {
-		const parsedId = Number(idRaw);
-		if (!Number.isNaN(parsedId)) {
-			payload.id = parsedId;
-		}
+	if (!idRaw) {
+		showDashboardAlert("Stylist id is missing.");
+		return;
 	}
 
-	try {
-		const response = await fetch("/cms/stylists/remove", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(payload)
-		});
+	const parsedId = Number(idRaw);
+	if (Number.isNaN(parsedId)) {
+		showDashboardAlert("Stylist id is invalid.");
+		return;
+	}
 
-		const data = await response.json().catch(() => ({}));
-		if (!response.ok) {
-			showDashboardAlert(data.message || "Unable to remove stylist.");
-			return;
-		}
-
+	const { ok } = await cmsRequest("/cms/stylists/remove", { id: parsedId }, "Unable to remove stylist.");
+	if (ok) {
 		stylistCard.remove();
-		showDashboardAlert(data.message || "Stylist successfully removed.");
-	} catch (error) {
-		showDashboardAlert("Unable to remove stylist.");
 	}
 }
 
-function readImageFile(file) {
-	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-
-		reader.onload = () => {
-			const dataUrl = reader.result;
-			const img = new Image();
-
-			img.onload = () => {
-				resolve({
-					dataUrl,
-					meta: {
-						size_bytes: file.size,
-						width: img.width,
-						height: img.height
-					}
-				});
-			};
-
-			img.onerror = () => reject(new Error("Unable to read image."));
-			img.src = dataUrl;
-		};
-
-		reader.onerror = () => reject(new Error("Unable to read image."));
-		reader.readAsDataURL(file);
-	});
-}
-
+// ---------------------------------------------------------------------------
+// Stylist photo replacement
+// ---------------------------------------------------------------------------
 async function replaceStylistPhoto(stylistId, file, stylistCard) {
 	if (!file || !stylistCard) return;
 
@@ -199,41 +89,37 @@ async function replaceStylistPhoto(stylistId, file, stylistCard) {
 	}
 
 	try {
-		const { dataUrl, meta } = await readImageFile(file);
+		const { previewUrl, meta } = await readImageFile(file);
 		const violation = validateImageMeta(meta);
 		if (violation) {
 			showDashboardAlert(violation);
 			return;
 		}
 
-		const response = await fetch("/cms/stylists/image", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				id: parsedId,
-				image: dataUrl
-			})
-		});
+		const formData = new FormData();
+		formData.append("id", String(parsedId));
+		formData.append("file", file);
 
-		const data = await response.json().catch(() => ({}));
-		if (!response.ok) {
-			showDashboardAlert(data.message || "Unable to save stylist photo.");
-			return;
+		const { ok, data } = await cmsUpload(
+			"/cms/stylists/image",
+			formData,
+			"Unable to save stylist photo."
+		);
+
+		if (ok) {
+			const imageEl = stylistCard.querySelector(".stylist-image-preview");
+			if (imageEl) {
+				imageEl.src = data?.stylist?.image || previewUrl;
+			}
 		}
-
-		const imageEl = stylistCard.querySelector(".stylist-image-preview");
-		if (imageEl) {
-			imageEl.src = data?.stylist?.image || dataUrl;
-		}
-
-		showDashboardAlert(data.message || "Stylist photo successfully updated.");
-	} catch (error) {
+	} catch (err) {
 		showDashboardAlert("Unable to process image.");
 	}
 }
 
+// ---------------------------------------------------------------------------
+// Add stylist form (two-phase: validate text -> pick image -> submit)
+// ---------------------------------------------------------------------------
 const addStylistForm = document.querySelector("#addStylistForm");
 const addStylistButton = document.querySelector("#addStylistButton");
 const stylistNameInput = document.querySelector("#stylistName");
@@ -249,7 +135,6 @@ if (addStylistForm && addStylistButton && stylistNameInput && stylistBioInput) {
 
 	addStylistButton.addEventListener("click", (event) => {
 		event.preventDefault();
-
 		const name = stylistNameInput.value.trim();
 		const bio = stylistBioInput.value.trim();
 
@@ -257,7 +142,6 @@ if (addStylistForm && addStylistButton && stylistNameInput && stylistBioInput) {
 			showDashboardAlert("Stylist name is required.");
 			return;
 		}
-
 		if (!bio) {
 			showDashboardAlert("Stylist bio is required.");
 			return;
@@ -269,12 +153,10 @@ if (addStylistForm && addStylistButton && stylistNameInput && stylistBioInput) {
 
 	addStylistPhotoInput.addEventListener("change", async () => {
 		const file = (addStylistPhotoInput.files || [])[0];
-		if (!file) {
-			return;
-		}
+		if (!file) return;
 
 		try {
-			const { dataUrl, meta } = await readImageFile(file);
+			const { previewUrl, meta } = await readImageFile(file);
 			const violation = validateImageMeta(meta);
 			if (violation) {
 				showDashboardAlert(violation);
@@ -284,19 +166,22 @@ if (addStylistForm && addStylistButton && stylistNameInput && stylistBioInput) {
 			const created = await addStylist(
 				stylistNameInput.value.trim(),
 				stylistBioInput.value.trim(),
-				dataUrl
+				file
 			);
 
 			if (created) {
 				stylistNameInput.value = "";
 				stylistBioInput.value = "";
 			}
-		} catch (error) {
+		} catch (err) {
 			showDashboardAlert("Unable to process image.");
 		}
 	});
 }
 
+// ---------------------------------------------------------------------------
+// Existing stylist editors - change tracking + save + remove + photo replace
+// ---------------------------------------------------------------------------
 document.querySelectorAll(".stylist-editor").forEach((stylistCard) => {
 	const saveButton = stylistCard.querySelector(".save-changes");
 	const nameEl = stylistCard.querySelector(".stylist-name");
@@ -306,56 +191,33 @@ document.querySelectorAll(".stylist-editor").forEach((stylistCard) => {
 	const replacePhotoButton = stylistCard.querySelector(".replace-stylist-photo-button");
 	const photoInput = stylistCard.querySelector(".stylist-photo-input");
 
-	if (!saveButton || !nameEl || !bioEl || !imageEl) {
-		return;
-	}
+	if (!saveButton || !nameEl || !bioEl || !imageEl) return;
 
-	bioEl.setAttribute("contenteditable", "true");
+	// Make bio editable
+	makeEditable(".stylist-bio", stylistCard);
 
-	const initialState = {
-		bio: bioEl.textContent
-	};
-
-	const updateState = () => {
-		const changed = bioEl.textContent !== initialState.bio;
-
-		setButtonState(saveButton, changed);
-	};
-
-	[bioEl].forEach((el) => {
-		["input", "blur", "keyup"].forEach((evt) => {
-			el.addEventListener(evt, updateState);
-		});
+	// Track changes on bio (and name if it's contenteditable)
+	trackChanges({
+		container: stylistCard,
+		saveButton,
+		elements: [bioEl],
+		getStateFn: () => ({ bio: bioEl.textContent }),
+		onSave: async () => {
+			const saved = await sendSingleStylistUpdate(stylistCard, "Unable to save stylist changes.");
+			return saved ? { bio: saved.bio } : null;
+		}
 	});
 
-	setButtonState(saveButton, false);
-
-	saveButton.addEventListener("click", async (event) => {
-		const isEnabled = saveButton.classList.contains("enabled");
-		if (!isEnabled) {
-			event.preventDefault();
-			return;
-		}
-
-		const saved = await sendSingleStylistUpdate(stylistCard, "Unable to save stylist changes.");
-		if (!saved) {
-			return;
-		}
-
-		initialState.bio = saved.bio;
-		setButtonState(saveButton, false);
-	});
-
+	// Remove button
 	if (removeButton) {
 		removeButton.addEventListener("click", async () => {
 			await removeSingleStylist(stylistCard);
 		});
 	}
 
+	// Replace photo button
 	if (replacePhotoButton && photoInput) {
-		replacePhotoButton.addEventListener("click", () => {
-			photoInput.click();
-		});
+		replacePhotoButton.addEventListener("click", () => photoInput.click());
 
 		photoInput.addEventListener("change", async () => {
 			const file = (photoInput.files || [])[0];

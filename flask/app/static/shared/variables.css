@@ -1,0 +1,13 @@
+:root {
+  --background-color: #FFFCF4;
+  --brown: #D1C6B7;
+  --pink: #F4C9CD;
+  --light-pink: #F9E1DF;
+
+  --text-color-bold: #000000;
+  --text-color-regular: #424242;
+  --text-color-light: #929292;
+
+  --font-family-bold: "Italiana", sans-serif;
+  --font-family-regular: "Montserrat", sans-serif;
+}

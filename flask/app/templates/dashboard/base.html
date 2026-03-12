@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>{% block title %}TopStyle Dashboard{% endblock %}</title>
+        <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+        <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../static/dashboard/styles/shared.css" />
+        {% block styles %}{% endblock %}
+    </head>
+
+    <body>
+        <div class="dashboard-alert">
+            <p>Dashboard alert...</p>
+        </div>
+
+        <header id="header">
+            <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
+
+            <nav>
+                <a href="{{ url_for('main.dashboard') }}" class="nav-link">Main</a>
+                <div class="pages-menu-container">
+                    <h3 id="pagesMenuToggle" class="nav-link">Pages</h3>
+                    <div id="pagesMenu">
+                        <li><a href="{{ url_for('main.dashboard_home') }}">Home</a></li>
+                        <li><a href="{{ url_for('main.dashboard_services') }}">Services</a></li>
+                        <li><a href="{{ url_for('main.dashboard_stylists') }}">Our Team</a></li>
+                        <li><a href="{{ url_for('main.dashboard_bridal') }}">Bridal</a></li>
+                    </div>
+                </div>
+                <h3>{{ current_user.name }} - {{ current_user.role|capitalize }}</h3>
+            </nav>
+        </header>
+
+        {% block content %}{% endblock %}
+
+        <script type="module" src="../static/dashboard/scripts/menu.js"></script>
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

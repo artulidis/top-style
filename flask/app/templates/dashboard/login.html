@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <title>Login - TopStyle Dashboard</title>        
-        <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
-        <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../static/dashboard/styles/shared.css" />
-        <link rel="stylesheet" href="../static/dashboard/styles/login.css" />
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <body>
-        <header id="header">
-            <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
-        </header> 
-       
-        <div class="dashboard-alert">
-            <p>Dashboard alert...</p>
-        </div>
-        
-        <h1 class="italiana-heading">TopStyle Dashboard Login</h1>
-        <form id="loginForm" method="POST" action="/dashboard/login-session">
-            <div class="container-vertical">
-                <input id="email" class="login-input" type="email" name="email" placeholder="Email:" autofocus="" required>
-                <input id="password" class="login-input" type="password" name="password" placeholder="Password:" required>
-            
-                <div class="container-horizontal">
-                    <button type="submit" class="pink-button">Login</button>
-                    <div id="remember">
-                        <label>
-                            Remember Me
-                        </label>
-                        <input type="checkbox" name="remember">
-                   </div> 
+    <title>Login - TopStyle Dashboard</title>
+    <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/dashboard/styles/shared.css" />
+    <link rel="stylesheet" href="../static/dashboard/styles/login.css" />
+</head>
+
+<body>
+    <header id="header">
+        <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
+    </header>
+
+    <div class="dashboard-alert">
+        <p>Dashboard alert...</p>
+    </div>
+
+    <h1 class="italiana-heading">TopStyle Dashboard Login</h1>
+    <form id="loginForm" method="POST" action="/dashboard/login-session">
+        <div class="container-vertical">
+            <input id="email" class="login-input" type="email" name="email" placeholder="Email:" autofocus="" required>
+            <input id="password" class="login-input" type="password" name="password" placeholder="Password:" required>
+
+            <div class="container-horizontal">
+                <button type="submit" class="pink-button">Login</button>
+                <div id="remember">
+                    <label>
+                        Remember Me
+                    </label>
+                    <input type="checkbox" name="remember">
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 
-        <script type="module" src="../static/dashboard/scripts/pages/login.js"></script>
-    </body>
+    <script type="module" src="../static/dashboard/scripts/pages/login.js"></script>
+</body>
+
 </html>

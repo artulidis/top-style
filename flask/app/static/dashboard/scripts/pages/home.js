@@ -1,427 +1,276 @@
-import { showDashboardAlert } from "../alert.js";
+﻿import { showDashboardAlert } from "../alert.js";
+import { validateMeta, MAX_IMAGE_BYTES, MAX_VIDEO_BYTES, ASPECT_TOLERANCE } from "../lib/validation.js";
+import { readImageFile, readMediaFile } from "../lib/media.js";
+import { makeEditable, trackChanges } from "../lib/editor.js";
+import { cmsRequest, sendTextUpdate, cmsUpload } from "../lib/api.js";
+import { initLazyLoad } from "../lib/lazy-load.js";
 
-const replaceAboutImagesButton = document.getElementById("replaceAboutImagesButton");
-const replaceVideoButton = document.getElementById("replaceVideoButton");
-const replaceTeamPhotoButton = document.getElementById("replaceTeamPhotoButton");
-const replaceBridalImagesButton = document.getElementById("replaceBridalImagesButton");
-
-const aboutGalleryUploadInput = document.getElementById("aboutGalleryUploadInput");
-const salonVideoInput = document.getElementById("salonVideoInput");
-const teamPhotoUploadInput = document.getElementById("teamPhotoUploadInput");
-const bridalGalleryUploadInput = document.getElementById("bridalGalleryUploadInput");
-
+// ---------------------------------------------------------------------------
+// DOM references
+// ---------------------------------------------------------------------------
 const aboutGalleryContainer = document.getElementById("galleryImgs");
 const bridalGalleryContainer = document.getElementById("bridalImageGrid");
 
-
-
-const MAX_IMAGE_BYTES = 1 * 1024 * 1024;
-const MAX_VIDEO_BYTES = 75 * 1024 * 1024;
-const ASPECT_TOLERANCE = 0.02;
-
-
-function checkSquare(meta) {
-    if (!meta?.width || !meta?.height) {
-        return null;
-    }
-    return meta.width === meta.height;
-}
-
-function checkSize(meta, maxBytes) {
-    if (!meta || typeof meta.size_bytes !== "number") {
-        return null;
-    }
-    return meta.size_bytes <= maxBytes;
-}
-
-function checkAspectRatio(meta, targetRatio, tolerance = ASPECT_TOLERANCE) {
-    if (!meta?.width || !meta?.height) {
-        return null;
-    }
-    const ratio = meta.height ? meta.width / meta.height : 0;
-    return Math.abs(ratio - targetRatio) <= tolerance;
-}
-
-function validateMeta(meta, config) {
-    if (!config || !meta) {
-        return null;
-    }
-    if (config.maxBytes) {
-        const sizeOk = checkSize(meta, config.maxBytes);
-        if (sizeOk === false) {
-            return config.messages?.size || "File is too large.";
-        }
-    }
-    if (config.aspectRatio) {
-        const ratioOk = checkAspectRatio(meta, config.aspectRatio, config.aspectTolerance);
-        if (ratioOk === false) {
-            return config.messages?.ratio || "File has an invalid aspect ratio.";
-        }
-    }
-    if (config.requireSquare) {
-        const squareOk = checkSquare(meta);
-        if (squareOk === false) {
-            return config.messages?.square || "File must be square.";
-        }
-    }
-    return null;
-}
-
+// ---------------------------------------------------------------------------
+// Gallery selection (toggle checkmark overlay on gallery items)
+// ---------------------------------------------------------------------------
 function handleGallerySelection(container) {
-    if (!container) return;
-    container.querySelectorAll(".gallery-item").forEach((item) => {
-        item.addEventListener("click", () => {
-            const marker = item.querySelector(".img-selected");
-            if (!marker) return;
-            const isShown = getComputedStyle(marker).display === "block";
-            if (isShown) {
-                marker.style.display = "none";
-            } else {
-                marker.style.display = "block";
-            }
-        });
-    });
+	if (!container) return;
+
+	container.querySelectorAll(".gallery-item").forEach((item) => {
+		item.addEventListener("click", () => {
+			const marker = item.querySelector(".img-selected");
+			if (!marker) return;
+
+			const isShown = getComputedStyle(marker).display === "block";
+			marker.style.display = isShown ? "none" : "block";
+		});
+	});
 }
 
-function sendTextUpdate(endpoint, block, messageFallback) {
-    return async () => {
-        const heading = block?.querySelector("h1")?.textContent || "";
-        const text = block?.querySelector("p")?.textContent || "";
-
-        try {
-            const response = await fetch(endpoint, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    heading,
-                    text
-                })
-            });
-
-            const data = await response.json().catch(() => ({}));
-            if (!response.ok) {
-                showDashboardAlert(data.message || messageFallback);
-                return;
-            }
-
-            showDashboardAlert(data.message || messageFallback);
-        } catch (error) {
-            showDashboardAlert(messageFallback);
-        }
-    };
-}
-
-function sendStaticUpdate(endpoint, payload, messageFallback, onSuccess) {
-    return fetch(endpoint, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            ...payload
-        })
-    })
-        .then(async (response) => {
-            const data = await response.json().catch(() => ({}));
-            if (!response.ok) {
-                showDashboardAlert(data.message || messageFallback);
-                return;
-            }
-            if (onSuccess) {
-                onSuccess();
-            }
-            showDashboardAlert(data.message || messageFallback);
-        })
-        .catch(() => {
-            showDashboardAlert(messageFallback);
-        });
-}
-
+// ---------------------------------------------------------------------------
+// Gallery replacement (multi-image: about gallery, bridal gallery)
+// ---------------------------------------------------------------------------
 function handleGalleryReplacement(options) {
-    const {
-        button,
-        input,
-        container,
-        endpoint,
-        maxCount,
-        onSuccess,
-        warningsConfig
-    } = options;
+	const { button, input, container, endpoint, maxCount, warningsConfig } = options;
+	if (!button || !input || !container) return;
 
-    if (!button || !input || !container) return;
+	button.addEventListener("click", () => {
+		const selectedItems = getSelectedGalleryItems(container);
+		if (selectedItems.length === 0) return;
 
-    button.addEventListener("click", () => {
-        const selectedItems = Array.from(container.querySelectorAll(".img-selected"))
-            .filter((marker) => getComputedStyle(marker).display === "block")
-            .map((marker) => marker.closest(".gallery-item"))
-            .filter(Boolean);
+		input.dataset.replaceCount = String(selectedItems.length);
+		input.click();
+	});
 
-        if (selectedItems.length === 0) {
-            return;
-        }
+	input.addEventListener("change", async () => {
+		const files = Array.from(input.files || []);
+		if (files.length === 0) return;
 
-        input.dataset.replaceCount = String(selectedItems.length);
-        input.click();
-    });
+		const selectedItems = getSelectedGalleryItems(container);
+		const limitedItems = selectedItems.slice(0, maxCount || files.length);
+		const validFiles = [];
+		const indices = [];
 
-        input.addEventListener("change", () => {
-        const files = Array.from(input.files || []);
-        if (files.length === 0) {
-            return;
-        }
+		for (let i = 0; i < limitedItems.length; i++) {
+			const item = limitedItems[i];
+			const file = files[i];
+			const img = item?.querySelector(".gallery-img");
+			if (!img || !file) continue;
 
-        const selectedItems = Array.from(container.querySelectorAll(".img-selected"))
-            .filter((marker) => getComputedStyle(marker).display === "block")
-            .map((marker) => marker.closest(".gallery-item"))
-            .filter(Boolean);
+			try {
+				const { previewUrl, meta } = await readImageFile(file);
+				const violation = validateMeta(meta, warningsConfig);
+				if (violation) {
+					showDashboardAlert(violation);
+					return;
+				}
 
-        const limitedItems = selectedItems.slice(0, maxCount || files.length);
-        const updates = [];
-        let hasInvalidFiles = false;
-        let warningMessage = "";
+				const placeholder = item.querySelector(".img-placeholder");
+				img.src = previewUrl;
+				img.removeAttribute("data-src");
+				img.classList.add("loaded");
+				if (placeholder) {
+					placeholder.classList.add("fade-out");
+				}
 
-        Promise.all(
-            limitedItems.map((item, index) => {
-                const img = item?.querySelector(".gallery-img");
-                const placeholder = item?.querySelector(".img-placeholder");
-                const file = files[index];
-                if (!img || !file) {
-                    return null;
-                }
+				const allItems = Array.from(container.querySelectorAll(".gallery-item"));
+				const itemIndex = allItems.indexOf(item);
+				if (itemIndex >= 0) {
+					validFiles.push(file);
+					indices.push(itemIndex + 1);
+				}
+			} catch (err) {
+				showDashboardAlert("Unable to process image.");
+				return;
+			}
+		}
 
-                const reader = new FileReader();
-                const image = new Image();
+		if (validFiles.length === 0) return;
 
-                return new Promise((resolve) => {
-                    reader.onload = () => {
-                        const dataUrl = reader.result;
-                        image.onload = () => {
-                            const meta = {
-                                size_bytes: file.size,
-                                width: image.width,
-                                height: image.height
-                            };
-                            const violation = validateMeta(meta, warningsConfig);
-                            if (violation) {
-                                hasInvalidFiles = true;
-                                warningMessage = violation;
-                                resolve();
-                                return;
-                            }
+		const formData = new FormData();
+		validFiles.forEach((file) => formData.append("files", file));
+		formData.append("indices", JSON.stringify(indices));
 
-                            img.src = dataUrl;
-                            img.removeAttribute("data-src");
-                            img.classList.add("loaded");
-                            if (placeholder) {
-                                placeholder.classList.add("fade-out");
-                            }
-
-                            const allItems = Array.from(container.querySelectorAll(".gallery-item"));
-                            const itemIndex = allItems.indexOf(item);
-                            if (itemIndex >= 0) {
-                                updates.push({
-                                    index: itemIndex + 1,
-                                    data: dataUrl,
-                                    ...meta
-                                });
-                            }
-                            resolve();
-                        };
-                        image.src = dataUrl;
-                    };
-
-                    reader.readAsDataURL(file);
-                });
-            })
-        ).then(() => {
-            if (hasInvalidFiles) {
-                showDashboardAlert(warningMessage || "Image formatting is not supported.");
-                return;
-            }
-            if (updates.length === 0) {
-                return;
-            }
-
-            sendStaticUpdate(
-                endpoint,
-                { gallery_images: updates },
-                "Unable to save images.",
-                () => {
-                    limitedItems.forEach((item) => {
-                        const marker = item?.querySelector(".img-selected");
-                        const img = item?.querySelector(".gallery-img");
-                        if (marker) {
-                            marker.style.display = "none";
-                        }
-                        if (img) {
-                            img.style.opacity = "1";
-                        }
-                    });
-                    if (onSuccess) {
-                        onSuccess();
-                    }
-                }
-            );
-        });
-    });
+		const { ok } = await cmsUpload(endpoint, formData, "Unable to save images.");
+		if (ok) {
+			limitedItems.forEach((item) => {
+				const marker = item?.querySelector(".img-selected");
+				const img = item?.querySelector(".gallery-img");
+				if (marker) {
+					marker.style.display = "none";
+				}
+				if (img) {
+					img.style.opacity = "1";
+				}
+			});
+		}
+	});
 }
 
+function getSelectedGalleryItems(container) {
+	return Array.from(container.querySelectorAll(".img-selected"))
+		.filter((marker) => getComputedStyle(marker).display === "block")
+		.map((marker) => marker.closest(".gallery-item"))
+		.filter(Boolean);
+}
+
+// ---------------------------------------------------------------------------
+// Single media replacement (image or video)
+// ---------------------------------------------------------------------------
 function handleSingleMediaReplacement(options) {
-    const { button, input, previewSelector, endpoint, mediaType, warningsConfig } = options;
-    if (!button || !input) return;
+	const { button, input, previewSelector, endpoint, mediaType, warningsConfig } = options;
+	if (!button || !input) return;
 
-    button.addEventListener("click", () => {
-        input.click();
-    });
+	button.addEventListener("click", () => input.click());
 
-    input.addEventListener("change", () => {
-        const file = (input.files || [])[0];
-        if (!file) return;
+	input.addEventListener("change", async () => {
+		const file = (input.files || [])[0];
+		if (!file) return;
 
-        const reader = new FileReader();
-        const previewEl = previewSelector ? document.querySelector(previewSelector) : null;
+		try {
+			const { previewUrl, meta } = await readMediaFile(file, mediaType);
+			const violation = validateMeta(meta, warningsConfig);
+			if (violation) {
+				showDashboardAlert(violation);
+				return;
+			}
 
-        reader.onload = () => {
-            const dataUrl = reader.result;
-            const meta = { data: dataUrl, size_bytes: file.size };
+			const previewEl = previewSelector ? document.querySelector(previewSelector) : null;
+			if (previewEl && (previewEl.tagName === "IMG" || previewEl.tagName === "VIDEO")) {
+				previewEl.src = previewUrl;
+			}
 
-            if (mediaType === "image") {
-                const img = new Image();
-                img.onload = () => {
-                    meta.width = img.width;
-                    meta.height = img.height;
-                    const violation = validateMeta(meta, warningsConfig);
-                    if (violation) {
-                        showDashboardAlert(violation);
-                        return;
-                    }
-                    if (previewEl && previewEl.tagName === "IMG") {
-                        previewEl.src = dataUrl;
-                    }
-                    sendStaticUpdate(
-                        endpoint,
-                        { static_content: meta },
-                        "Unable to save image.",
-                        null
-                    );
-                };
-                img.src = dataUrl;
-            } else if (mediaType === "video") {
-                const video = document.createElement("video");
-                video.onloadedmetadata = () => {
-                    meta.width = video.videoWidth;
-                    meta.height = video.videoHeight;
-                    const violation = validateMeta(meta, warningsConfig);
-                    if (violation) {
-                        showDashboardAlert(violation);
-                        return;
-                    }
-                    if (previewEl && previewEl.tagName === "VIDEO") {
-                        previewEl.src = dataUrl;
-                    }
-                    sendStaticUpdate(
-                        endpoint,
-                        { static_content: meta },
-                        "Unable to save video.",
-                        null
-                    );
-                };
-                video.src = dataUrl;
-            }
-        };
+			const formData = new FormData();
+			formData.append("file", file);
 
-        reader.readAsDataURL(file);
-    });
+			await cmsUpload(endpoint, formData, `Unable to save ${mediaType}.`);
+		} catch (err) {
+			showDashboardAlert(`Unable to process ${mediaType}.`);
+		}
+	});
 }
-document.querySelectorAll(".edit-text-block").forEach((block) => {
-    block.querySelectorAll("h1, p").forEach((el) => {
-        el.setAttribute("contenteditable", "true");
-    });
-});
 
-[aboutGalleryContainer, bridalGalleryContainer].forEach((container) => {
-    if (container) handleGallerySelection(container);
-});
+// ---------------------------------------------------------------------------
+// Initialization
+// ---------------------------------------------------------------------------
 
+// Make all text blocks editable
+makeEditable("h1, p", document.querySelector("body"));
+
+// Enable gallery selection
+[aboutGalleryContainer, bridalGalleryContainer].forEach((container) => handleGallerySelection(container));
+
+// Text save buttons - bind each to its CMS endpoint
 const textEndpoints = {
-    saveMissionStatement: "/cms/home/about",
-    saveServicesStatement: "/cms/home/services",
-    saveStylistsStatement: "/cms/home/stylists",
-    saveBridalStatement: "/cms/home/bridal"
+	saveMissionStatement: "/cms/home/about",
+	saveServicesStatement: "/cms/home/services",
+	saveStylistsStatement: "/cms/home/stylists",
+	saveBridalStatement: "/cms/home/bridal"
 };
 
 document.querySelectorAll(".save-changes").forEach((button) => {
-    const endpoint = textEndpoints[button.id];
-    if (!endpoint) return;
+	const endpoint = textEndpoints[button.id];
+	if (!endpoint) return;
 
-    const block = button.closest(".container-vertical")?.querySelector(".edit-text-block");
-    if (!block) return;
+	const scope = button.closest(".container-vertical") || document;
+	const block = scope.querySelector(".edit-text-block");
+	if (!block) return;
 
-    button.addEventListener("click", sendTextUpdate(endpoint, block, "Unable to save changes."));
+	// Click handler that POSTs heading + paragraph
+	button.addEventListener("click", sendTextUpdate(endpoint, block, "Unable to save changes."));
+
+	// Change tracking: enable/disable button based on edits
+	const headingEl = block.querySelector("h1");
+	const paraEl = block.querySelector("p");
+	if (!headingEl || !paraEl) return;
+
+	trackChanges({
+		container: scope,
+		saveButton: button,
+		elements: [headingEl, paraEl],
+		getStateFn: () => ({
+			heading: headingEl.textContent,
+			text: paraEl.textContent
+		}),
+		onSave: async () => {
+			// The actual POST is handled by the click handler above.
+			// Return the current state so trackChanges resets its baseline.
+			return {
+				heading: headingEl.textContent,
+				text: paraEl.textContent
+			};
+		}
+	});
 });
 
+// Gallery replacement - About (9 images, square)
 handleGalleryReplacement({
-    button: replaceAboutImagesButton,
-    input: aboutGalleryUploadInput,
-    container: aboutGalleryContainer,
-    endpoint: "/cms/home/about",
-    maxCount: 9,
-    warningsConfig: {
-        maxBytes: MAX_IMAGE_BYTES,
-        requireSquare: true,
-        messages: {
-            size: "Images should not exceed 1MB.",
-            square: "Images should be square."
-        }
-    }
+	button: document.getElementById("replaceAboutImagesButton"),
+	input: document.getElementById("aboutGalleryUploadInput"),
+	container: aboutGalleryContainer,
+	endpoint: "/cms/home/about",
+	maxCount: 9,
+	warningsConfig: {
+		maxBytes: MAX_IMAGE_BYTES,
+		requireSquare: true,
+		messages: {
+			size: "Images should not exceed 1MB.",
+			square: "Images should be square."
+		}
+	}
 });
 
+// Single media - Salon video (vertical, <= 75 MB)
 handleSingleMediaReplacement({
-    button: replaceVideoButton,
-    input: salonVideoInput,
-    previewSelector: "#salonVideo",
-    endpoint: "/cms/home/services",
-    mediaType: "video",
-    warningsConfig: {
-        maxBytes: MAX_VIDEO_BYTES,
-        aspectRatio: 9 / 16,
-        aspectTolerance: ASPECT_TOLERANCE,
-        messages: {
-            size: "Salon video should not exceed 75MB.",
-            ratio: "Salon video should be vertical (9:16 aspect ratio)."
-        }
-    }
+	button: document.getElementById("replaceVideoButton"),
+	input: document.getElementById("salonVideoInput"),
+	previewSelector: "#salonVideo",
+	endpoint: "/cms/home/services",
+	mediaType: "video",
+	warningsConfig: {
+		maxBytes: MAX_VIDEO_BYTES,
+		aspectRatio: 9 / 16,
+		aspectTolerance: ASPECT_TOLERANCE,
+		messages: {
+			size: "Salon video should not exceed 75MB.",
+			ratio: "Salon video should be vertical (9:16 aspect ratio)."
+		}
+	}
 });
 
+// Single media - Team photo (any aspect ratio, <= 1 MB)
 handleSingleMediaReplacement({
-    button: replaceTeamPhotoButton,
-    input: teamPhotoUploadInput,
-    previewSelector: "#teamPhoto",
-    endpoint: "/cms/home/stylists",
-    mediaType: "image",
-    warningsConfig: {
-        maxBytes: MAX_IMAGE_BYTES,
-        requireSquare: false,
-        messages: {
-            size: "Image should not exceed 1MB."
-        }
-    }
+	button: document.getElementById("replaceTeamPhotoButton"),
+	input: document.getElementById("teamPhotoUploadInput"),
+	previewSelector: "#teamPhoto",
+	endpoint: "/cms/home/stylists",
+	mediaType: "image",
+	warningsConfig: {
+		maxBytes: MAX_IMAGE_BYTES,
+		requireSquare: false,
+		messages: {
+			size: "Image should not exceed 1MB."
+		}
+	}
 });
 
+// Gallery replacement - Bridal (4 images, square)
 handleGalleryReplacement({
-    button: replaceBridalImagesButton,
-    input: bridalGalleryUploadInput,
-    container: bridalGalleryContainer,
-    endpoint: "/cms/home/bridal",
-    maxCount: 9,
-    warningsConfig: {
-        maxBytes: MAX_IMAGE_BYTES,
-        requireSquare: true,
-        messages: {
-            size: "Images should not exceed 1MB.",
-            square: "Images should be square."
-        }
-    }
+	button: document.getElementById("replaceBridalImagesButton"),
+	input: document.getElementById("bridalGalleryUploadInput"),
+	container: bridalGalleryContainer,
+	endpoint: "/cms/home/bridal",
+	maxCount: 9,
+	warningsConfig: {
+		maxBytes: MAX_IMAGE_BYTES,
+		requireSquare: true,
+		messages: {
+			size: "Images should not exceed 1MB.",
+			square: "Images should be square."
+		}
+	}
 });
+
+// Lazy-load gallery images
+initLazyLoad();

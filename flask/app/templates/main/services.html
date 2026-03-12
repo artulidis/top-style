@@ -1,253 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="TopStyle by Kate Noda – Professional hair salon offering premium styling, coloring, and treatments in Reston, VA. Book your appointment today!" />
+﻿{% extends "main/base.html" %}
 
-        <title>Services - TopStyle by Kate Noda</title>        
-        <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+{% block title %}Services - TopStyle by Kate Noda{% endblock %}
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
-        
-        <link rel="stylesheet" href="../static/shared/styles.css" />
-        <link rel="stylesheet" href="../static/main/services.css" />
+{% block styles %}
+<link rel="stylesheet" href="../static/main/services.css" />
+{% endblock %}
 
-        <meta property="og:title" content="TopStyle by Kate Noda - Hair Salon" />
-        <meta property="og:description" content="Premium salon services tailored to your style. Book online with Kate Noda today." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://topstylebykatenoda.com/" />
-        <meta property="og:image" content="https://topstylebykatenoda.com/static/assets/SalonImage.jpg" />
+{% block content %}
+{% set categories = [
+{"key": "popular", "section_id": "popularSection", "heading_id": "mostPopularHeading", "title": "Popular Services",
+"show_pricing_note": true},
+{"key": "cutting", "section_id": "cuttingSection", "heading_id": "cuttingHeading", "title": "Haircuts & Styling",
+"show_pricing_note": false},
+{"key": "coloring", "section_id": "coloringSection", "heading_id": "colorHeading", "title": "Color Services",
+"show_pricing_note": false},
+{"key": "extras", "section_id": "extrasSection", "heading_id": "smoothingHeading", "title": "Treatments",
+"show_pricing_note": false},
+{"key": "beauty", "section_id": "beautySection", "heading_id": "beautyHeading", "title": "Makeup & Beauty",
+"show_pricing_note": false}
+] %}
 
-    </head>
+{% for cat in categories %}
+<section id="{{ cat.section_id }}">
+    {% if cat.show_pricing_note %}
+    <h1 class="italiana-regular" id="pricingNoteHeading">Pricing Note</h1>
+    <p id="pricingNote">All prices listed are starting rates. Because we work with a level-based stylist system,
+        final pricing may vary depending on your stylist's experience level, hair length, texture, density, and the
+        amount of product or time required. We want you to feel fully informed and comfortable — please ask your
+        stylist for a personalized quote during your consultation.</p>
+    {% endif %}
 
-    <body>
-        <div id="app">
-            <header id="header">
-                <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
+    <div class="desktop-container-horizontal">
+        <img src="{{ images_by_category.get(cat.key, '') }}" class="services-photo" />
 
-                <!-- Desktop Menu -->
-                <nav id="desktopMenu">
-                    <a href="/" class="desktop-menu-link">Home</a>              
-                    <a href="/services" class="desktop-menu-link">Services</a>      
-                    <a href="/stylists" class="desktop-menu-link">Our Team</a>      
-                    <a href="/bridal" class="desktop-menu-link">Bridal</a>
-                    <a href="/#contact" class="desktop-menu-link">Contact</a>
-                    <a href="https://na2.meevo.com/OnlineBookingApp/login?tenantId=500778&locationId=500950" class="pink-button" id="desktopMenuButton">Book Appointment</a>
-                </nav>
-
-                <img src="../static/assets/HamburgerMenu.png" id="hamburgerMenu" alt="Menu icon" />
-            </header>
-
-            <nav id="mobileMenu">
-                <img src="../static/assets/CloseIcon.png" class="close-icon" id="menuClose" alt="Close menu" />
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/stylists">Our Team</a></li>
-                    <li><a href="/bridal">Bridal</a></li>
-                    <li><a href="/#contact">Contact</a></li>
-                </ul>
-
-                <a href="https://na2.meevo.com/OnlineBookingApp/login?tenantId=500778&locationId=500950" class="pink-button" id="mobileMenuButton">Book Appointment</a>
-            </nav>
-
-            <section id="popularSection">
-                {% set popular_defaults = [
-                    {"name": "Base Color Retouch & Haircut", "price": "$165+", "details": ""},
-                    {"name": "Partial Highlights Retouch & Haircut", "price": "$210+", "details": "not including glaze"},
-                    {"name": "Partial Balayage Retouch & Haircut", "price": "$210+", "details": "not including glaze"},
-                    {"name": "Base Color Retouch + Partial Highlights Retouch & Haircut", "price": "$295+", "details": "not including glaze"},
-                    {"name": "Full Balayage & Haircut", "price": "$245+", "details": "not including glaze"},
-                    {"name": "Gloss / Toner & Haircut", "price": "$120+", "details": ""}
-                ] %}
-                {% set popular_by_order = services_by_category_order.get('popular', {}) if services_by_category_order is defined else {} %}
-                <h1 class="italiana-regular" id="pricingNoteHeading">Pricing Note</h1>
-                <p id="pricingNote">All prices listed are starting rates. Because we work with a level-based stylist system, 
-                    final pricing may vary depending on your stylist’s experience level, hair length, texture, density, and the 
-                    amount of product or time required. We want you to feel fully informed and comfortable — please ask your 
-                    stylist for a personalized quote during your consultation.</p>
-                
-                <div class="desktop-container-horizontal">
-                    <img src="{{ images_by_category.get('popular') if images_by_category is defined and images_by_category.get('popular') else '../static/assets/PopularServicesPhoto.jpg' }}" class="services-photo" />
-                    
-                    <div class="desktop-container-vertical">
-                        <h1 class="italiana-regular" id="mostPopularHeading">Popular Services</h1>
-                        <div class="services-menu-container">
-                            {% for fallback in popular_defaults %}
-                                {% set slot = loop.index %}
-                                {% set service = popular_by_order.get(slot) %}
-                                <div class="service">
-                                    <div class="service-flex">
-                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
-                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
-                                    </div>
-                                    {% if (service and service.details) or fallback.details %}
-                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        </div>
+        <div class="desktop-container-vertical">
+            <h1 class="italiana-regular" id="{{ cat.heading_id }}">{{ cat.title }}</h1>
+            <div class="services-menu-container">
+                {% for service in services_by_category.get(cat.key, []) %}
+                <div class="service">
+                    <div class="service-flex">
+                        <p class="service-name">{{ service.name }}</p>
+                        <div class="service-price">{{ service.price }}</div>
                     </div>
+                    {% if service.details %}
+                    <div class="service-details">{{ service.details }}</div>
+                    {% endif %}
                 </div>
-            </section>
-
-
-            <section id="cuttingSection">
-                {% set cutting_defaults = [
-                    {"name": "Cut & Style", "price": "$80+", "details": "includes shampoo & blow-dry"},
-                    {"name": "Barber / Men’s Haircut", "price": "$50+", "details": "includes shampoo & blow-dry"},
-                    {"name": "Child’s Haircut", "price": "$50, $74", "details": "For ages 10 and under"},
-                    {"name": "Beard Trim", "price": "$20+", "details": ""},
-                    {"name": "Bang Trim", "price": "$20+", "details": ""},
-                    {"name": "Shampoo & Blow-Dry", "price": "$50+, $74+", "details": "wash, blow-dry & heat styling; excludes cut or color"},
-                    {"name": "Luxury Blow-Out", "price": "$60+, $84+", "details": ""},
-                    {"name": "Special Occasion Up-Do", "price": "price varies", "details": "please ask"},
-                    {"name": "Bridal Hair", "price": "price varies", "details": "consultation required"}
-                ] %}
-                {% set cutting_by_order = services_by_category_order.get('cutting', {}) if services_by_category_order is defined else {} %}
-                
-                <div class="desktop-container-horizontal">
-                    <img src="{{ images_by_category.get('cutting') if images_by_category is defined and images_by_category.get('cutting') else '../static/assets/CuttingPhoto.jpg' }}" class="services-photo" />
-                    
-                    <div class="desktop-container-vertical">
-                        <h1 class="italiana-regular" id="cuttingHeading">Haircuts & Styling</h1>
-                        <div class="services-menu-container">
-                            {% for fallback in cutting_defaults %}
-                                {% set slot = loop.index %}
-                                {% set service = cutting_by_order.get(slot) %}
-                                <div class="service">
-                                    <div class="service-flex">
-                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
-                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
-                                    </div>
-                                    {% if (service and service.details) or fallback.details %}
-                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            <section id="coloringSection">
-                {% set coloring_defaults = [
-                    {"name": "Base Touch-Up", "price": "$85+, $109+", "details": "not including blowdry"},
-                    {"name": "Base Touch-Up & Blow-Dry", "price": "$125+, $149+", "details": ""},
-                    {"name": "Additional Color", "price": "$30+", "details": ""},
-                    {"name": "Partial Highlights Retouch", "price": "$130+, $162+", "details": ""},
-                    {"name": "Partial Highlights (New)", "price": "$130+, $162+", "details": ""},
-                    {"name": "Full Highlights Retouch", "price": "$155+, $187+", "details": ""},
-                    {"name": "Full Highlights (New)", "price": "$155+, $187+", "details": ""},
-                    {"name": "Partial Balayage Retouch", "price": "$130+, $162+", "details": ""},
-                    {"name": "Partial Balayage (New)", "price": "$130+, $162+", "details": ""},
-                    {"name": "Full Balayage Retouch", "price": "$159, $175", "details": ""},
-                    {"name": "Full Balayage (New)", "price": "$159+, $175+", "details": ""},
-                    {"name": "Face-Framing Balayage", "price": "$100, $132", "details": ""},
-                    {"name": "Ombré / Balayage Ombré", "price": "$165, $197", "details": ""},
-                    {"name": "Glaze (Add-On Service)", "price": "$40+", "details": ""},
-                    {"name": "Men’s Gray Blending", "price": "price upon request", "details": ""}
-                ] %}
-                {% set coloring_by_order = services_by_category_order.get('coloring', {}) if services_by_category_order is defined else {} %}
-                <div class="desktop-container-horizontal">
-                    <img src="{{ images_by_category.get('coloring') if images_by_category is defined and images_by_category.get('coloring') else '../static/assets/ColoringPhoto.jpg' }}" class="services-photo" />
-                    
-                    <div class="desktop-container-vertical">
-                        <h1 class="italiana-regular" id="colorHeading">Color Services</h1>
-                        <div class="services-menu-container">
-                            {% for fallback in coloring_defaults %}
-                                {% set slot = loop.index %}
-                                {% set service = coloring_by_order.get(slot) %}
-                                <div class="service">
-                                    <div class="service-flex">
-                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
-                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
-                                    </div>
-                                    {% if (service and service.details) or fallback.details %}
-                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            <section id="extrasSection">
-                {% set extras_defaults = [
-                    {"name": "Brazilian Blowout", "price": "$359, $376", "details": ""},
-                    {"name": "Cezanne Keratin Smoothing Treatment", "price": "price varies", "details": "please ask"},
-                    {"name": "Surface Smoothing Treatment", "price": "price varies", "details": "please ask"},
-                    {"name": "Demi-Permanent Healing Treatment & Mask", "price": "price varies", "details": "please ask"},
-                    {"name": "Express Hair-Hydrate Treatment", "price": "price varies", "details": "please ask"},
-                    {"name": "Luxury Hair Treatment", "price": "price varies", "details": "please ask"}
-                ] %}
-                {% set extras_by_order = services_by_category_order.get('extras', {}) if services_by_category_order is defined else {} %}
-                <div class="desktop-container-horizontal">
-                    <img src="{{ images_by_category.get('extras') if images_by_category is defined and images_by_category.get('extras') else '../static/assets/ExtrasPhoto.jpg' }}" class="services-photo" />
-                    
-                    <div class="desktop-container-vertical">
-                        <h1 class="italiana-regular" id="smoothingHeading">Treatments</h1>
-                        <div class="services-menu-container">
-                            {% for fallback in extras_defaults %}
-                                {% set slot = loop.index %}
-                                {% set service = extras_by_order.get(slot) %}
-                                <div class="service">
-                                    <div class="service-flex">
-                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
-                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
-                                    </div>
-                                    {% if (service and service.details) or fallback.details %}
-                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            <section id="beautySection">
-                {% set beauty_defaults = [
-                    {"name": "Makeup Application (1 hr)", "price": "price varies", "details": "please ask"},
-                    {"name": "Special Occasion Makeup – Traditional or Airbrush", "price": "price varies", "details": "please ask"},
-                    {"name": "Makeup Lesson", "price": "price varies", "details": "please ask"},
-                    {"name": "Wax", "price": "price varies", "details": "please ask"},
-                    {"name": "Hair Extensions", "price": "price varies", "details": "consultation required"},
-                    {"name": "Full Perm", "price": "price varies", "details": "31+ rods; consultation required"}
-                ] %}
-                {% set beauty_by_order = services_by_category_order.get('beauty', {}) if services_by_category_order is defined else {} %}
-                <div class="desktop-container-horizontal">
-                    <img src="{{ images_by_category.get('beauty') if images_by_category is defined and images_by_category.get('beauty') else '../static/assets/BeautyPhoto.jpg' }}" class="services-photo" />
-                    
-                    <div class="desktop-container-vertical">
-                        <h1 class="italiana-regular" id="beautyHeading">Makeup & Beauty</h1>
-                        <div class="services-menu-container">
-                            {% for fallback in beauty_defaults %}
-                                {% set slot = loop.index %}
-                                {% set service = beauty_by_order.get(slot) %}
-                                <div class="service">
-                                    <div class="service-flex">
-                                        <p class="service-name">{{ service.name if service else fallback.name }}</p>
-                                        <div class="service-price">{{ service.price if service else fallback.price }}</div>
-                                    </div>
-                                    {% if (service and service.details) or fallback.details %}
-                                    <div class="service-details">{{ service.details if service and service.details is not none else fallback.details }}</div>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-        <script src="../static/shared/mobile-menu.js" defer></script>
-    </body>
-</html>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+{% endblock %}

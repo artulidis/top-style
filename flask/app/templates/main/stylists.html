@@ -1,78 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="TopStyle by Kate Noda – Professional hair salon offering premium styling, coloring, and treatments in Reston, VA. Book your appointment today!" />
+{% extends "main/base.html" %}
 
-        <title>Stylists - TopStyle by Kate Noda</title>        
-        <link rel="icon" href="../static/assets/icons/TopStyleLogo.ico" type="image/x-icon" />
+{% block title %}Stylists - TopStyle by Kate Noda{% endblock %}
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
-        
-        <link rel="stylesheet" href="../static/shared/styles.css" />
-        <link rel="stylesheet" href="./static/main/stylists.css" />
+{% block styles %}
+<link rel="stylesheet" href="../static/main/stylists.css" />
+{% endblock %}
 
-        <meta property="og:title" content="TopStyle by Kate Noda - Hair Salon" />
-        <meta property="og:description" content="Premium salon services tailored to your style. Book online with Kate Noda today." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://topstylebykatenoda.com/" />
-        <meta property="og:image" content="https://topstylebykatenoda.com/static/assets/SalonImage.jpg" />
+{% block content %}
+{% if stylists is defined and stylists %}
+{% for stylist in stylists %}
+<section class="stylist">
+    <div class="desktop-container-horizontal">
+        <h1 class="italiana-regular stylist-name-mobile">{{ stylist.name }}</h1>
+        <img src="{{ stylist.image }}" class="stylist-image" />
 
-    </head>
-
-    <body>
-        <div id="app">
-            <header id="header">
-                <img src="../static/assets/TopStyleLogo.png" class="top-style-logo" alt="TopStyle salon logo" />
-
-                <!-- Desktop Menu -->
-                <nav id="desktopMenu">
-                    <a href="/" class="desktop-menu-link">Home</a>              
-                    <a href="/services" class="desktop-menu-link">Services</a>      
-                    <a href="/stylists" class="desktop-menu-link">Our Team</a>      
-                    <a href="/bridal" class="desktop-menu-link">Bridal</a>
-                    <a href="/#contact" class="desktop-menu-link">Contact</a>
-                    <a href="https://na2.meevo.com/OnlineBookingApp/login?tenantId=500778&locationId=500950" class="pink-button" id="desktopMenuButton">Book Appointment</a>
-                </nav>
-
-                <img src="../static/assets/HamburgerMenu.png" id="hamburgerMenu" alt="Menu icon" />
-            </header>
-
-            <nav id="mobileMenu">
-                <img src="../static/assets/CloseIcon.png" class="close-icon" id="menuClose" alt="Close menu" />
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/stylists">Our Team</a></li>
-                    <li><a href="/bridal">Bridal</a></li>
-                    <li><a href="/#contact">Contact</a></li>
-                </ul>
-
-                <a href="https://na2.meevo.com/OnlineBookingApp/login?tenantId=500778&locationId=500950" class="pink-button" id="mobileMenuButton">Book Appointment</a>
-            </nav>
-
-            {% if stylists is defined and stylists %}
-                {% for stylist in stylists %}
-                <section class="stylist">
-                    <div class="desktop-container-horizontal">
-                        <h1 class="italiana-regular stylist-name-mobile">{{ stylist.name }}</h1>
-                        <img src="{{ stylist.image }}" class="stylist-image" />
-
-                        <div class="desktop-container-vertical">
-                            <h1 class="italiana-regular stylist-name-desktop">{{ stylist.name }}</h1>
-                            <p class="paragraph-text stylist-bio">{{ stylist.bio if stylist.bio else '' }}</p>
-                        </div>
-                    </div>
-                </section>
-                {% endfor %}
-            {% endif %}
+        <div class="desktop-container-vertical">
+            <h1 class="italiana-regular stylist-name-desktop">{{ stylist.name }}</h1>
+            <p class="paragraph-text stylist-bio">{{ stylist.bio if stylist.bio else '' }}</p>
         </div>
-
-
-
-        <script src="../static/shared/mobile-menu.js" defer></script>
-    </body>
-</html>
+    </div>
+</section>
+{% endfor %}
+{% endif %}
+{% endblock %}

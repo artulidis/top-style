@@ -1,18 +1,4 @@
-/* Root Variables */
-
-:root {
-    --background-color: #FFFCF4;
-    --brown: #D1C6B7;
-    --pink: #F4C9CD;
-    --light-pink: #F9E1DF;
-  
-    --text-color-bold: #000000;
-    --text-color-regular: #424242;
-    --text-color-light: #929292;
-
-    --font-family-bold: "Italiana", sans-serif;
-    --font-family-regular: "Montserrat", sans-serif;
-}
+@import url('../../shared/variables.css');
 
 html { font-size: 10px; }
 
@@ -170,3 +156,44 @@ nav > h3:last-child { padding-left: 50px; }
 .pink-button:hover {
     opacity: 0.8;
 }
+
+
+/* Shared Dashboard Component Styles */
+
+.edit-caption {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.edit-caption.hidden { visibility: hidden; }
+
+.content-icon { width: 22px; }
+.content-icon.small { width: 15px; }
+
+.edit-caption-text {
+    font-size: 1rem;
+    font-family: var(--font-family-regular);
+    font-weight: 100;
+    color: var(--text-color-light);
+    margin-left: 7px;
+}
+
+.actionable {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.actionable:active {
+    color: var(--brown);
+}
+
+.pink-button.save-changes {
+    width: 8rem;
+    border-radius: 2px;
+    padding: 6px 0 6px 0;
+    font-size: 1rem;
+}
+
+.pink-button.save-changes.enabled { display: block; }
+.pink-button.save-changes.disabled { display: none; }

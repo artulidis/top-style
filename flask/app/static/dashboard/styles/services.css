@@ -1,3 +1,5 @@
+@import url('../../shared/services.css');
+
 .services-section {
     width: 90%;
     margin-left: -45%;
@@ -17,42 +19,24 @@
   display: block;
 }
 
-.actionable { cursor: pointer; text-decoration: underline; }
-.actionable:active { color: var(--brown); }
-
 .category-image {
   width: 300px;
 }
 
 .service-heading { margin-bottom: 50px; }
 
-.service {
-  height: 10rem;
-}
-
-.service span {
-  color: var(--pink);
-}
-
-.service-flex {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  color: var(--font-family-regular)
-}
+/* Service table overrides (base in shared/services.css) */
+.service-flex { color: var(--font-family-regular) }
 
 .service-name {
     width: 75%;
     cursor: text;
-    display: block;
-    color: var(--text-color-regular);
     font-size: 1.35rem;
 }
 
 .service-price { font-size: 1.35rem; cursor: text; }
 
 .service-details {
-  color: var(--text-color-light);
   font-size: 1.35rem;
   cursor: text;
   display: inline-block;
@@ -71,35 +55,9 @@
     outline: 1px dashed var(--text-color-light);
 }
 
-.edit-caption {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.edit-caption.hidden { visibility: hidden; }
-
-.content-icon { width: 22px; }
-.content-icon.small { width: 15px; }
-
-.edit-caption-text {
-    font-size: 1rem;
-    font-family: var(--font-family-regular);
-    font-weight: 100;
-    color: var(--text-color-light);
-    margin-left: 7px;
-}
-
 .pink-button.save-changes {
-  width: 8rem;
-  border-radius: 2px;
-  padding: 6px 0 6px 0;
-  font-size: 1rem;
   margin: 0;
   margin-top: 10px;
 }
-
-.pink-button.save-changes.enabled { display: block; }
-.pink-button.save-changes.disabled { display: none; }
 
 .service:hover > .edit-caption { visibility: visible; }

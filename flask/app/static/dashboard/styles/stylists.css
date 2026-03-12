@@ -63,24 +63,7 @@
     margin-bottom: 100px;
 }
 
-.edit-caption {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
 
-.content-icon { width: 22px; }
-
-.edit-caption-text {
-    font-size: 1rem;
-    font-family: var(--font-family-regular);
-    font-weight: 100;
-    color: var(--text-color-light);
-    margin-left: 7px;
-}
-
-.actionable { cursor: pointer; text-decoration: underline; }
-.actionable:active { color: var(--brown); }
 
 .stylist:hover .stylist-bio {
     outline: 1px dashed var(--text-color-light);
@@ -134,12 +117,5 @@
 }
 
 .pink-button.save-changes {
-  width: 8rem;
-  border-radius: 2px;
-  padding: 6px 0 6px 0;
-  font-size: 1rem;
   margin-top: 15px;
 }
-
-.pink-button.save-changes.enabled { display: block; }
-.pink-button.save-changes.disabled { display: none; }

@@ -12,19 +12,13 @@ def _get_services_page_context():
     images = ServicesImage.query.order_by(ServicesImage.category.asc(), ServicesImage.id.asc()).all()
 
     services_by_category = {}
-    services_by_category_order = {}
-
     for service in services:
         services_by_category.setdefault(service.category, []).append(service)
-        services_by_category_order.setdefault(service.category, {})[service.order] = service
 
     images_by_category = {image.category: image.uri for image in images}
 
     return {
-        "services": services,
-        "images": images,
         "services_by_category": services_by_category,
-        "services_by_category_order": services_by_category_order,
         "images_by_category": images_by_category,
     }
 
@@ -75,7 +69,6 @@ def dashboard():
 
 
 @main.route("/dashboard/home")
-@login_required
 def dashboard_home():
     home_about_section = HomeAboutSection.query.first()
     home_services_section = HomeServicesSection.query.first()
