@@ -4,6 +4,10 @@ services:
     container_name: flask_app
     expose:
       - "5000"
+    env_file:
+      - .env
+    volumes:
+      - ./flask/app/static/uploads:/app/app/static/uploads
 
   nginx:
     image: nginx:latest
