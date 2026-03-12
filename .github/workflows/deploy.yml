@@ -41,9 +41,6 @@ jobs:
             cd ~/topstyle
             tar -xzf repo.tar.gz -C ~/topstyle
             
-            # ensure correct ownership
-            chown -R $USER:$USER ~/topstyle
-            
             docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml pull || true
             docker compose -f docker-compose.prod.yml build --no-cache

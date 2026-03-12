@@ -69,6 +69,7 @@ def dashboard():
 
 
 @main.route("/dashboard/home")
+@login_required
 def dashboard_home():
     home_about_section = HomeAboutSection.query.first()
     home_services_section = HomeServicesSection.query.first()
