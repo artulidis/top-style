@@ -60,23 +60,33 @@ body {
     height: 10rem;
 }
 
-nav {
+.dashboard-nav {
     display: flex;
+    align-items: center;
     margin-right: 30px;
 }
 
-nav a, h3 {
-    font-size: 2rem;
+.nav-link, .dashboard-nav h3 {
+    font-size: 1.6rem;
     color: var(--text-color-light);
     font-weight: normal;
-    margin-right: 30px;
+    margin-right: 4rem;
+    transition: 0.35s;
     text-decoration: none;
 }
 
-.nav-link { transition: 0.35s; }
 .nav-link:hover { color: var(--brown); }
 
-nav > h3:last-child { padding-left: 50px; }
+.dashboard-nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-nav-admin > .dashboard-user-label { padding-left: 50px; }
+.dashboard-nav-editor > .dashboard-user-label {
+    margin-right: 0;
+    padding-left: 20px;
+}
 
 .pages-menu-container {
     position: relative;
@@ -114,8 +124,9 @@ nav > h3:last-child { padding-left: 50px; }
 
 #pagesMenu li a {
     font-family: var(--font-family-regular);
-    font-size: 1.5rem;
-    color: var(--text-color-light)
+    font-size: 1.25rem;
+    color: var(--text-color-light);
+    text-decoration: none;
 }
 
 #pagesMenu li a::after {

@@ -256,7 +256,7 @@ section {
   .desktop-menu-link {
     color: var(--text-color-light);
     margin: 0 2rem 0 2rem;
-    transition: 0.4s;
+    transition: 0.35s;
     font-size: 1.6rem;
   }
 

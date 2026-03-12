@@ -5,6 +5,9 @@ from firebase_admin import auth as firebase_auth
 from flask import Blueprint, render_template, request, jsonify, url_for, redirect
 from flask_login import login_user, login_required, logout_user, current_user
 from .models import User
+from .utils.auth import admin_required
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 auth = Blueprint("auth", __name__)
 
@@ -41,9 +44,12 @@ def login_session():
 
     login_user(user, remember=remember)
 
+    redirect_url = url_for("main.dashboard_main") if user.role == "admin" else url_for("main.dashboard_home")
+
     return jsonify({
         "name": user.name,
-        "role": user.role
+        "role": user.role,
+        "redirectUrl": redirect_url,
     }), 200
 
 
@@ -67,6 +73,7 @@ def login_fallback():
 
 
 @auth.route("/dashboard/invite", methods=["POST"])
+@admin_required
 def invite_user():
     data = request.get_json()
 
@@ -118,32 +125,36 @@ def invite_user():
 
 
 def send_invite_email(to_email, name, reset_link):
-    EMAIL_ADDRESS = os.getenv("ADMIN_EMAIL")
-    GOOGLE_APP_PASSWORD = os.getenv("GOOGLE_APP_PASSWORD")
+    EMAIL_ADDRESS = "artulidis@gmail.com"
+    SEND_GRID_PASSWORD = os.getenv("SEND_GRID_PASSWORD")
 
-    msg = EmailMessage()
-    msg["Subject"] = "You're invited to the Dashboard"
-    msg["From"] = EMAIL_ADDRESS
-    msg["To"] = to_email
+    html_content = f"""
+    <html>
+      <body>
+        <p>Hello {name},</p>
+        <p>You have been invited to access the dashboard.</p>
+        <p>Click the following <a href="{reset_link}">link</a> to create your password.</p>
+        <p>If you did not expect this email, ignore it.</p>
+      </body>
+    </html>
+    """
 
-    msg.set_content(f"""\
-<html>
-  <body>
-    <p>Hello {name},</p>
-    <p>You have been invited to access the dashboard.</p>
-    <p>Click the following <a href="{reset_link}">link</a> to create your password.</p>
-    <p>If you did not expect this email, ignore it.</p>
-  </body>
-</html>
-""", subtype="html")
+    message = Mail(
+        from_email=EMAIL_ADDRESS,
+        to_emails=to_email,
+        subject="You're invited to the Dashboard",
+        html_content=html_content
+    )
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-        smtp.login(EMAIL_ADDRESS, GOOGLE_APP_PASSWORD)
-        smtp.send_message(msg)
+    try:
+        sg = SendGridAPIClient(SEND_GRID_PASSWORD)
+        sg.send(message)
+    except Exception as e:
+        print(e)
 
 
 @auth.route("/dashboard/users/<int:user_id>", methods=["DELETE"])
-@login_required
+@admin_required
 def delete_user(user_id):
     user_to_delete = User.query.get(user_id)
 

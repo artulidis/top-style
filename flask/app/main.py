@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template
-from flask import redirect, request
-from flask_login import login_required
+from flask import redirect, request, url_for
+from flask_login import current_user, login_required
 from .models import User, HomeAboutSection, HomeServicesSection, HomeStylistsSection, HomeBridalSection, Service, ServicesImage, Stylist
 from .stats import increment_stat, get_website_stats
+from .utils.auth import admin_required
 
 main = Blueprint("main", __name__)
 
@@ -55,6 +56,15 @@ def index():
 @main.route("/dashboard")
 @login_required
 def dashboard():
+    if current_user.role == "admin":
+        return redirect(url_for("main.dashboard_main"))
+
+    return redirect(url_for("main.dashboard_home"))
+
+
+@main.route("/dashboard/main")
+@admin_required
+def dashboard_main():
     permitted_users = User.query.order_by(User.id.asc()).all()
     seeded_admin = User.query.filter_by(role="admin").order_by(User.id.asc()).first()
     seeded_admin_id = seeded_admin.id if seeded_admin else None

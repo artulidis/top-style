@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 import { showDashboardAlert } from "../alert.js";
-            
+
 const firebaseConfig = {
     apiKey: "AIzaSyAp5Ct2eXlUQZbS9rENOEuL4LhSlSVQQ4Q",
     authDomain: "topstyle-28cb7.firebaseapp.com",
@@ -16,13 +16,14 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
 const loginForm = document.getElementById("loginForm");
+const rememberCheckbox = document.querySelector("#remember input[name='remember']");
 
 loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const email = document.getElementById("email").value.trim().toLowerCase();
     const password = document.getElementById("password").value;
-    const remember = document.getElementById("remember").checked;
+    const remember = rememberCheckbox?.checked ?? false;
 
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -44,7 +45,8 @@ loginForm.addEventListener("submit", async (e) => {
             return;
         }
 
-        window.location.href = "/dashboard";
+        const redirectUrl = responseData.redirectUrl || (responseData.role === "admin" ? "/dashboard/main" : "/dashboard/home");
+        window.location.href = redirectUrl;
 
     } catch (error) {
         try {
