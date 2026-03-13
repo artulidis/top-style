@@ -88,6 +88,10 @@ body {
     padding-left: 20px;
 }
 
+@media(min-width: 1000px) {
+    .dashboard-nav-admin > .dashboard-user-label { padding-left: 15px; }
+}
+
 .pages-menu-container {
     position: relative;
 }
