@@ -88,7 +88,8 @@ body {
     padding-left: 20px;
 }
 
-@media(min-width: 1000px) {
+@media(max-width: 1000px) {
+    .nav-link { display: none; }
     .dashboard-nav-admin > .dashboard-user-label { padding-left: 15px; }
 }
 
